@@ -10,7 +10,6 @@ public class Square implements ISquare {
 		this.position = position;
 		this.game = game;
 	}
-	
 
 	@Override
 	public boolean isFirstSquare() {
