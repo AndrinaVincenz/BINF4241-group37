@@ -1,0 +1,34 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+	
+	Scanner in = new Scanner(System.in);
+	
+	public static void main(String[] args){
+		
+		
+
+		int numOfPlayers;
+		List<Player> players = new ArrayList<Player>();
+		
+		createPlayers(players);
+		
+		Game game = new Game(players, numberOfSquares(), );
+		
+		
+		
+		
+		// die test
+		Die die = new Die();
+		for (int i = 0; i < 1000; i++){
+		System.out.println(die.roll());
+		}
+	
+		
+		
+	}
+	
+	
+}

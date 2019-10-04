@@ -4,23 +4,20 @@ public class Square implements ISquare {
 	
 	int position;
 	
-	Game game;
-	
-	public Square(int position, Game game) {
+	public Square(int position) {
 		this.position = position;
-		this.game = game;
 	}
 	
 
 	@Override
 	public boolean isFirstSquare() {
-		// TODO Auto-generated method stub
+		// return false normally, override at FirstSquare class
 		return false;
 	}
 
 	@Override
 	public boolean isLastSquare() {
-		// TODO Auto-generated method stub
+		// return false normally, override at LastSquare class
 		return false;
 	}
 

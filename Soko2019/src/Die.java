@@ -1,7 +1,9 @@
+import java.util.Random;
 
 public class Die {
 
 	int roll(){
-		return 0;
+		Random rn = new Random();
+		return rn.nextInt(6) + 1;
 	}
 }

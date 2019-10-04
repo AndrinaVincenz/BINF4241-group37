@@ -1,0 +1,82 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Game {
+
+	public Game(ArrayList<Player> players, int numberOfSquares, ArrayList<Square> ladders, ArrayList<Square> snakes){
+		this.players = players;
+		this.numberOfSquares = numberOfSquares;
+		this.ladders = ladders;
+		this.snakes = snakes;
+	}
+	
+	ArrayList<Player> players;
+	
+	ArrayList<Square> ladders;
+	
+	ArrayList<Square> snakes;
+	
+	int numberOfSquares;
+	
+	Scanner in = new Scanner(System.in);
+	
+	Player winner;
+		
+	Square[] squaresArray = new Square[numberOfSquares-1];
+
+	
+	public void createPlayers(ArrayList<Player> players) {
+		int numOfPlayers;
+		// ask user how many players are intened to play
+		System.out.println("How many players wanna play?");
+		numOfPlayers = in.nextInt();
+		while (numOfPlayers < 2 || numOfPlayers > 4) {
+			System.out.println("Amount of players must be between 2 & 4");
+			numOfPlayers = in.nextInt();
+		}
+		System.out.println(numOfPlayers + " Players are playing.");
+
+		// collect the names for the players
+		for (int i = 1; i <= numOfPlayers; i++) {
+			System.out.println("What's the name of Player " + i);
+			players.add(new Player(in.next()));
+			System.out.println("The name of Player " + i + " is " + players.get(i - 1));
+		}
+	}
+	
+	int numberOfSquares(){
+		int numOfSquares;
+		// ask user for numberOfSquares
+		System.out.println("How is the size of the board?");
+		numOfSquares = in.nextInt();
+		System.out.println(numOfSquares);	
+		return numOfSquares;
+	}
+	
+	
+	void createGame(/*to do*/){
+		
+	}
+	
+	Player currentPlayer(){
+		return null;
+	}
+	
+	boolean notOver() {
+		return false;
+	}
+	
+	void movePlayer(int player) {
+	}
+	
+	void play() {
+	}
+	
+	ISquare findSquare(int square) {
+		return null;
+	}
+	
+	ISquare findLastSquare(){
+		return null;	
+	}
+}

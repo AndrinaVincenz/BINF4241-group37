@@ -1,9 +1,8 @@
 
 public class FirstSquare extends Square {
 
-	public FirstSquare(int position, Game game) {
-		super(position, game);
-		// TODO Auto-generated constructor stub
+	public FirstSquare(int position) {
+		super(position);
 	}
 
 	public void enter(Player player){

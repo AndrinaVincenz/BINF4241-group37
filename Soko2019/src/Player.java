@@ -7,6 +7,10 @@ public class Player {
 
 	private String name;
 	
+	String getName(){
+		return name;
+	}
+	
 	int moveForward() {
 		return 0;
 	}
