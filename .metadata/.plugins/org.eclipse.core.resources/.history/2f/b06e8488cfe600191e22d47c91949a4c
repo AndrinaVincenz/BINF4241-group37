@@ -20,16 +20,12 @@ public class Main {
 	
 		System.out.println("How many players wanna play?");
 		numOfPlayers = in.nextInt();
-		while (numOfPlayers < 2 || numOfPlayers > 4){
-			System.out.println("Amount of players must be between 2 & 4");
-			numOfPlayers = in.nextInt();
-		}
-		System.out.println(numOfPlayers + " Players are playing.");
+		System.out.println(numOfPlayers);
 		
-		for (int i = 1; i <= numOfPlayers; i++){
+		for (int i = 1; i < numOfPlayers; i++){
 		System.out.println("What's the name of Player " + i);
-		nameOfPlayer.add(in.next());
-		System.out.println("The name of Player " + i +" is " + nameOfPlayer.get(i-1));
+		nameOfPlayer.add(in.toString());
+		System.out.println(nameOfPlayer.get(i));
 		}
 	
 		

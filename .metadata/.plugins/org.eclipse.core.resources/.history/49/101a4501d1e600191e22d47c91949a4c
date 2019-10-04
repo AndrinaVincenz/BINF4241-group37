@@ -10,7 +10,7 @@ public class Main {
 		Scanner in = new Scanner(System.in);
 
 		int numOfSquares;
-		int numOfPlayers;
+		int numOfPlayers = 0;
 		List<String> nameOfPlayer = new ArrayList<>();
 		
 		//
@@ -24,12 +24,12 @@ public class Main {
 			System.out.println("Amount of players must be between 2 & 4");
 			numOfPlayers = in.nextInt();
 		}
-		System.out.println(numOfPlayers + " Players are playing.");
+		System.out.println(numOfPlayers);
 		
 		for (int i = 1; i <= numOfPlayers; i++){
 		System.out.println("What's the name of Player " + i);
 		nameOfPlayer.add(in.next());
-		System.out.println("The name of Player " + i +" is " + nameOfPlayer.get(i-1));
+		System.out.println(nameOfPlayer.get(i-1));
 		}
 	
 		
