@@ -25,28 +25,11 @@ public class CreateService {
 		while(i > 0){
 			int startPosition = createRandomPosition();
 			int endPosition = createRandomPosition();
-			while (endPosition <= startPosition){
+			while (endPosition < startPosition){
 				startPosition = createRandomPosition();
 				endPosition = createRandomPosition();
 			}
 			result.add(new Ladder(startPosition, endPosition));
-			i--;
-		}
-		return result;
-	}
-	
-	ArrayList<Snake> createSnakeList(){
-		int numberOfSnakes = (int)((new Random().nextInt(numOfSquares)+2)/1.5);
-		int i = numberOfSnakes;
-		ArrayList<Snake> result = new ArrayList<Snake>();
-		while(i > 0){
-			int startPosition = createRandomPosition();
-			int endPosition = createRandomPosition();
-			while (endPosition >= startPosition){
-				startPosition = createRandomPosition();
-				endPosition = createRandomPosition();
-			}
-			result.add(new Snake(startPosition, endPosition));
 			i--;
 		}
 		return result;

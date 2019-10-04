@@ -38,19 +38,9 @@ public class Main {
 		CreateService service = new CreateService(numOfSquares);
 		
 		ladderList = service.createLadderList();
-		snakeList = service.createSnakeList();
-		
-		for (int i=0; i < ladderList.size(); i++){
-		System.out.println(ladderList.get(i));
-		System.out.println(ladderList.get(i).position + " index:" + i + "<-- position");
-		System.out.println(ladderList.get(i).transport + " index:" + i +"<-- transport");
-		}
-		
-		for (int i=0; i < snakeList.size(); i++){
-			System.out.println(snakeList.get(i));
-			System.out.println(snakeList.get(i).position + " index:" + i + "<-- position");
-			System.out.println(snakeList.get(i).transport + " index:" + i +"<-- transport");
-			}
+		System.out.println(ladderList.get(1));
+		System.out.println(ladderList.get(1).position + "<-- position");
+		System.out.println(ladderList.get(1).transport + "<-- transport");
 		
 		Game game = new Game(players, numOfSquares,ladderList, snakeList);
 		
@@ -58,10 +48,10 @@ public class Main {
 		
 		
 		// die test
-		/*Die die = new Die();
+		Die die = new Die();
 		for (int i = 0; i < 1000; i++){
 		System.out.println(die.roll());
-		}*/
+		}
 	
 		
 		

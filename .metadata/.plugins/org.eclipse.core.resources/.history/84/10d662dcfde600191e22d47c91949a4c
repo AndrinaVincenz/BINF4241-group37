@@ -25,7 +25,7 @@ public class CreateService {
 		while(i > 0){
 			int startPosition = createRandomPosition();
 			int endPosition = createRandomPosition();
-			while (endPosition <= startPosition){
+			while (endPosition < startPosition){
 				startPosition = createRandomPosition();
 				endPosition = createRandomPosition();
 			}
@@ -42,7 +42,7 @@ public class CreateService {
 		while(i > 0){
 			int startPosition = createRandomPosition();
 			int endPosition = createRandomPosition();
-			while (endPosition >= startPosition){
+			while (endPosition > startPosition){
 				startPosition = createRandomPosition();
 				endPosition = createRandomPosition();
 			}
