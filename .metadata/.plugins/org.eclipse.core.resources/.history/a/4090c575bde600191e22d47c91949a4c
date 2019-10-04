@@ -1,0 +1,11 @@
+public class LastSquare extends Square {
+
+	public LastSquare(int Game) {
+		super(game);
+		// TODO Auto-generated constructor stub
+	}
+
+	public boolean isLastSquare() {
+		return false;
+	}
+}

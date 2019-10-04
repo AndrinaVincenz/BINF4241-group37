@@ -1,0 +1,9 @@
+public class Snake extends Square {
+	
+	public Snake(int position, Game game) {
+		super(position, game);
+		// TODO Auto-generated constructor stub
+	}
+
+	int transport;
+}

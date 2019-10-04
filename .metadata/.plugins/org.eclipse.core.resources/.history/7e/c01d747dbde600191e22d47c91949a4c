@@ -1,0 +1,21 @@
+
+public class FirstSquare extends Square {
+
+	public FirstSquare() {
+		super(game);
+		// TODO Auto-generated constructor stub
+	}
+
+	public void enter(Player player){
+		
+	}
+	
+	public boolean isOccupied() {
+		return false;
+	}
+	
+	public void leave(Player player) {
+		
+	}
+	
+}
