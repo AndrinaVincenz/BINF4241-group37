@@ -58,7 +58,6 @@ public class CreateService {
 		result.add(new FirstSquare(i));
 		i++;
 		while (i < numOfSquares){
-			System.out.println(i);
 			if( i == numOfSquares){
 				result.add(new LastSquare(i));
 				i++;

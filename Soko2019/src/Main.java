@@ -26,13 +26,13 @@ public class Main {
 			players.add(new Player(in.next()));
 			System.out.println("The name of Player " + i + " is " + players.get(i - 1).getName());
 		}
-		
+
 		int numOfSquares;
 		// ask user for numberOfSquares
 		System.out.println("How is the size of the board?");
 		numOfSquares = in.nextInt();
 		System.out.println(numOfSquares);
-		
+
 		ArrayList<Ladder> ladderList = new ArrayList<Ladder>();
 		ArrayList<Snake> snakeList = new ArrayList<Snake>();
 		ArrayList<Square> squareList = new ArrayList<>();
@@ -41,6 +41,11 @@ public class Main {
 		ladderList = service.createLadderList();
 		snakeList = service.createSnakeList();
 		squareList = service.createSquares();
+
+		//for(int i= 0; i < players.size(); i++){
+		//	squareList.get(0).player += players.get(i);
+		//}
+		System.out.println(players);
 
 		for (int i=0; i < squareList.size(); i++){
 			System.out.println(squareList.get(i).position);
