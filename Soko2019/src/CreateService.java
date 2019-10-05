@@ -52,4 +52,24 @@ public class CreateService {
 		return result;
 	}
 
+	ArrayList<Square> createSquares(){
+		int i = 1;
+		ArrayList<Square> result = new ArrayList<>();
+		result.add(new FirstSquare(i));
+		i++;
+		while (i < numOfSquares){
+			System.out.println(i);
+			if( i == numOfSquares){
+				result.add(new LastSquare(i));
+				i++;
+			}
+			else{
+				result.add(new Square(i));
+				i++;
+			}
+		}
+		result.add(new LastSquare(i));
+		return result;
+	}
+
 }

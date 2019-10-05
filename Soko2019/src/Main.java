@@ -35,10 +35,16 @@ public class Main {
 		
 		ArrayList<Ladder> ladderList = new ArrayList<Ladder>();
 		ArrayList<Snake> snakeList = new ArrayList<Snake>();
+		ArrayList<Square> squareList = new ArrayList<>();
 		CreateService service = new CreateService(numOfSquares);
 		
 		ladderList = service.createLadderList();
 		snakeList = service.createSnakeList();
+		squareList = service.createSquares();
+
+		for (int i=0; i < squareList.size(); i++){
+			System.out.println(squareList.get(i).position);
+		}
 		
 		for (int i=0; i < ladderList.size(); i++){
 		System.out.println(ladderList.get(i));
@@ -53,7 +59,8 @@ public class Main {
 			}
 		
 		Game game = new Game(players, numOfSquares,ladderList, snakeList);
-		
+		System.out.print(game);
+
 		
 		
 		
