@@ -46,9 +46,14 @@ public class Main {
 		//	squareList.get(0).player += players.get(i);
 		//}
 		System.out.println(players);
+		for (int i=0; i < players.size(); i++){
+			System.out.println(players.get(i));
+			(players.get(i));
+			System.out.println(squareList.get(0).player);
+		}
 
 		for (int i=0; i < squareList.size(); i++){
-			System.out.println(squareList.get(i).position);
+			System.out.println(squareList.get(i).player);
 		}
 		
 		for (int i=0; i < ladderList.size(); i++){
