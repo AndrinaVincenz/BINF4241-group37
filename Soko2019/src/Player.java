@@ -1,4 +1,5 @@
 public class Player {
+	private Square s;
 	
 	public Player(String name) {
 		super();
@@ -11,7 +12,7 @@ public class Player {
 		return name;
 	}
 	
-	int moveForward() {
+	public void moveForward(int moves) {
 		return 0;
 	}
 
@@ -22,4 +23,10 @@ public class Player {
 	boolean wins(){
 		return false;
 	};
+	public Square getSquare() {
+		return sqaure;
+	}
+	public void setSquare(Square s) {
+		this.square = s;
+	}
 }

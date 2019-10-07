@@ -1,42 +1,51 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.LinkedList;
+
 
 public class Game {
-
-	public Game(ArrayList<Player> players, int numberOfSquares, ArrayList<Ladder> ladders, ArrayList<Snake> snakes){
-		this.players = players;
+	private LinkedList<Player> players = new LinkedList <Player>();
+	private CreateService board;
+	private int numberOfSquares;
+	private Player winner;
+	
+	
+	public Game(LinkedList<Player> player, int numberOfSquares){
+		this.players = player;
 		this.numberOfSquares = numberOfSquares;
-		this.ladders = ladders;
-		this.snakes = snakes;
+		board = new CreateService(numberOfSquares);
+		
 	}
+	 public void startGame() {
+		 for (Player p: players) {
+			 board.firstSquare().enter(p);
+		 }
+	 }
 	
-	ArrayList<Player> players;
+
+
 	
-	ArrayList<Square> board;
-	
-	ArrayList<Ladder> ladders;
-	
-	ArrayList<Snake> snakes;
-	
-	int numberOfSquares;
-	
-	Scanner in = new Scanner(System.in);
-	
-	Player winner;
-	
+
 	void createGame(){
 		
 	}
 	
 	Player currentPlayer(){
-		return null;
+		// player not empty, return head (first element)
+		assert players.size()>0;
+		return players.peek();
+		
 	}
 	
 	boolean notOver() {
 		return false;
 	}
 	
-	void movePlayer(int player) {
+	void movePlayer(int roll) {
+		// player is removed from the head
+		Player currentp = players.remove();
+		
+		
 	}
 	
 	void play() {

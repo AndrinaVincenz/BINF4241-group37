@@ -2,9 +2,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CreateService {
-
-	CreateService(int numOfSquares){
+	ArrayList<Square> square = new ArrayList<>();
+	
+	
+	public CreateService(int numOfSquares){
 		this.numOfSquares = numOfSquares;
+		createSquares(numOfSquares);¨
+		createLadderList();
+		createSnakeList();
 	}
 	
 	int numOfSquares;
@@ -18,10 +23,10 @@ public class CreateService {
 		return position;
 	}
 	
-	ArrayList<Ladder> createLadderList(){
+	private void createLadderList(){
 		int numberOfLadders = (int)((new Random().nextInt(numOfSquares)+2)/1.5);
 		int i = numberOfLadders;
-		ArrayList<Ladder> result = new ArrayList<Ladder>();
+		
 		while(i > 0){
 			int startPosition = createRandomPosition();
 			int endPosition = createRandomPosition();
@@ -29,16 +34,16 @@ public class CreateService {
 				startPosition = createRandomPosition();
 				endPosition = createRandomPosition();
 			}
-			result.add(new Ladder(startPosition, endPosition));
+			square.add(new Ladder(startPosition, endPosition));
 			i--;
 		}
-		return result;
+		return
 	}
 	
-	ArrayList<Snake> createSnakeList(){
+	private void createSnakeList(){
 		int numberOfSnakes = (int)((new Random().nextInt(numOfSquares)+2)/1.5);
 		int i = numberOfSnakes;
-		ArrayList<Snake> result = new ArrayList<Snake>();
+		
 		while(i > 0){
 			int startPosition = createRandomPosition();
 			int endPosition = createRandomPosition();
@@ -46,29 +51,33 @@ public class CreateService {
 				startPosition = createRandomPosition();
 				endPosition = createRandomPosition();
 			}
-			result.add(new Snake(startPosition, endPosition));
+			square.add(new Snake(startPosition, endPosition));
 			i--;
 		}
-		return result;
+	
 	}
 
-	ArrayList<Square> createSquares(){
-		int i = 1;
-		ArrayList<Square> result = new ArrayList<>();
-		result.add(new FirstSquare(i));
+	private void createSquares(int numOfSquares){
+		int i = 0;
+		
+		square.add(new FirstSquare(i,this));
 		i++;
 		while (i < numOfSquares){
 			if( i == numOfSquares){
-				result.add(new LastSquare(i));
+				square.add(new LastSquare(i,this));
 				i++;
 			}
 			else{
-				result.add(new Square(i));
+				square.add(new Square(i,this));
 				i++;
 			}
 		}
-		result.add(new LastSquare(i));
-		return result;
+		square.add(new LastSquare(i,this));
+	
 	}
+	public Square firstSquare() {
+		return square.get(0);
+	}
+
 
 }

@@ -1,11 +1,12 @@
 public class Square implements ISquare {
 
 	Player player;
-	
+	private CreateService board;
 	int position;
 	
-	public Square(int position) {
+	public Square(int position, CreateService b) {
 		this.position = position;
+		board = b;
 	}
 	
 
@@ -22,43 +23,55 @@ public class Square implements ISquare {
 	}
 
 	@Override
-	public void enter(Player player) {
-		// TODO Auto-generated method stub
+	public void enter(Player p) {
+		player = p;
+		player.setSquare(this);
 		
 	}
 
 	@Override
 	public void leave(Player player) {
-		// TODO Auto-generated method stub
+		player = null;
 		
 	}
 
 	@Override
 	public boolean isOccupied() {
-		// TODO Auto-generated method stub
-		return false;
+		square.getPlayer != null;
 	}
 
 	@Override
 	public int getPosition() {
-		// TODO Auto-generated method stub
-		return 0;
+		return position;
 	}
 
 	@Override
-	public ISquare moveAndLand(int square) {
-		// TODO Auto-generated method stub
-		return null;
+	public Square moveAndLand(int roll) {
+		// it is checked if player is over winning field, if yes how far back he has to go
+		int lastsquare = board.findlastSquare().getPosition();
+		int currentposition = square.getPosition();
+		if (currentposition + roll > lastsquare) {
+			int newposition = lastsquare - (currentposition + roll - lastsquare);
+			return board.findSquare(newposition).landHereOrGoHome();
+		}
 	}
 
 	@Override
-	public ISquare landHereOrGoHome() {
-		// TODO Auto-generated method stub
-		return null;
+	public Square landHereOrGoHome() {
+		// Checks if the position is empty and if so sets player to start
+		if (square.isOccupied()) {
+			return board.findfirstSquare();
+		} else {
+			return square;
+		}
+		
 	}
 	
 	Player getPlayer(){
 		return player;
+	}
+	public Square findrelativeSquare(int move) {
+		return board.findSquare(position + moves);
 	}
 
 }

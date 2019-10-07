@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Scanner;
-
+import java.util.LinkedList;
 public class Main {
 	
 	public static void main(String[] args){
@@ -9,7 +10,7 @@ public class Main {
 		Scanner in = new Scanner(System.in);
 
 		int numOfPlayers;
-		ArrayList<Player> players = new ArrayList<Player>();
+		LinkedList<Player> players = new LinkedList<Player>();
 		
 		// ask user how many players are intened to play
 		System.out.println("How many players wanna play?");
@@ -33,14 +34,9 @@ public class Main {
 		numOfSquares = in.nextInt();
 		System.out.println(numOfSquares);
 
-		ArrayList<Ladder> ladderList = new ArrayList<Ladder>();
-		ArrayList<Snake> snakeList = new ArrayList<Snake>();
-		ArrayList<Square> squareList = new ArrayList<>();
-		CreateService service = new CreateService(numOfSquares);
+	
+	
 		
-		ladderList = service.createLadderList();
-		snakeList = service.createSnakeList();
-		squareList = service.createSquares();
 
 		//for(int i= 0; i < players.size(); i++){
 		//	squareList.get(0).player += players.get(i);
