@@ -2,10 +2,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Snake extends Square {
-	int transport;
-	public Snake(int position, int transport){
-		super(position);
-		this.transport = transport;
+	int transport = -5;
+	public Snake(int position, CreateService b){
+		super(position,b);
 	}
 	@Override
 	public Square landHereOrGoHome() {
@@ -13,7 +12,7 @@ public class Snake extends Square {
 		
 	}
 	private Square placeToGo() {
-		return square.findrelativeSquare(transport);
+		return findrelativeSquare(transport);
 	}
 	
 	
