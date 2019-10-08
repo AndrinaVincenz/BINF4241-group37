@@ -11,9 +11,6 @@ public class Main {
 
 		int numOfPlayers;
 		
-		Board test = new Board(25);
-		test.createBoard();
-
 		// ask user how many players are intended to play
 		System.out.println("How many players wanna play?");
 		numOfPlayers = in.nextInt();
@@ -36,7 +33,8 @@ public class Main {
 		numOfSquares = in.nextInt();
 		System.out.println(numOfSquares);
 
-		
+		Board board = new Board(numOfSquares);
+		System.out.print("hello");
 		Game game = new Game(playernames, numOfSquares);
 		
 

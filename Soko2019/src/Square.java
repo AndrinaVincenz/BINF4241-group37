@@ -41,6 +41,7 @@ public class Square implements ISquare {
 	public boolean isOccupied() {
 		return this.player != null;
 	}
+	
 	public int getPosition() {
 		return position;
 	}
