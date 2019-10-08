@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.LinkedList;
 
@@ -10,7 +11,7 @@ public class Game {
 	private Player winner;
 	
 	
-	public Game(String[]playernames, int numberOfSquares){
+	public Game(List<String>playernames, int numberOfSquares){
 		for(String s: playernames) {
 			Player p = new Player(s);
 			players.add(p);
