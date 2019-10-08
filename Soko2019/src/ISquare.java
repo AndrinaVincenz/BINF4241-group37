@@ -12,9 +12,7 @@ public interface ISquare {
 	
 	int getPosition();
 	
-	ISquare moveAndLand(int square);
-	
-	ISquare landHereOrGoHome();
-	
+	ISquare moveAndLand(int square, Player player);
+		
 
 }

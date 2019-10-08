@@ -36,11 +36,6 @@ public class Main {
 		Board board = new Board(numOfSquares);
 		
 		Game game = new Game(playernames, board);
-		
-		while (game.notOver() == false){
-			//game logic
-			
-		}
 
 		game.play();
 		

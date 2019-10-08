@@ -13,7 +13,7 @@ public class Game {
 	
 	public Game(List<String>playernames, Board board){
 		for(String s: playernames) {
-			Player p = new Player(s);
+			Player p = new Player(s, board.firstSquare());
 			players.add(p);
 			this.board = board;
 		}
@@ -21,7 +21,7 @@ public class Game {
 	}
 	 public void startGame() {
 		 for (Player p: players) {
-			 System.out.println(board.findSquare(0));
+			 System.out.println(board.findSquare(0).getClass().getName());
 			 board.firstSquare().enter(p);
 		 } winner = null;
 
@@ -57,11 +57,11 @@ public class Game {
 		Die die = new Die();
 		startGame();
 		
-		System.out.println("State: " + this);
-		while (notOver()) {
+		//System.out.println("State: " + this);
+		while (notOver() == false) {
 			int roll = die.roll();
 			movePlayer(roll);
-			System.out.println("State: " + this);
+			//System.out.println("State: " + this);
 		}
 		System.out.println("Winner: " + winner);
 	}

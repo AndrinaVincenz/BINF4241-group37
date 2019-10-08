@@ -47,26 +47,21 @@ public class Square implements ISquare {
 	}
 
 
-	public Square moveAndLand(int roll) {
+	public Square moveAndLand(int roll, Player player) {
 		// it is checked if player is over winning field, if yes how far back he has to go
 		int lastsquare = board.lastSquare().getPosition();
 		int currentposition = getPosition();
 		if (currentposition + roll > lastsquare) {
 			int newposition = lastsquare - (currentposition + roll - lastsquare);
-			return board.findSquare(newposition).landHereOrGoHome();
+			return board.findSquare(newposition);
 		} else {
-		return findrelativeSquare(roll).landHereOrGoHome();
-	}
-	}
-
-	public Square landHereOrGoHome() {
-		// Checks if the position is empty and if so sets player to start
-		if (isOccupied()) {
-			return board.firstSquare();
-		} else {
-			return square;
+			if (isOccupied()) {
+				return board.firstSquare();
+			} else {
+				System.out.println("New Position: " + currentposition + roll + ">> Playername: " + player.getName());
+				return board.findSquare(currentposition + roll);
+			}
 		}
-		
 	}
 	
 	Player getPlayer(){

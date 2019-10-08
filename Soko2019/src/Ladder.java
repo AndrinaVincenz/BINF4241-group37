@@ -11,11 +11,7 @@ public class Ladder extends Square {
 		this.endPosition = endPosition;
 	}
 	
-	@Override
-	public Square landHereOrGoHome() {
-		return placeToGo().landHereOrGoHome();
-		
-	}
+	
 	private Square placeToGo() {
 		return findrelativeSquare(transport);
 	}
