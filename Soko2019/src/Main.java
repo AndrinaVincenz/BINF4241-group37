@@ -20,12 +20,12 @@ public class Main {
 			numOfPlayers = in.nextInt();
 		}
 		System.out.println(numOfPlayers + " Players are playing.");
-		String[] playernames = new String[numOfPlayers];
+		List<String> playernames= new ArrayList<>();
 		// collect the names for the players
 		for (int i = 0; i < numOfPlayers; i++) {
 			System.out.println("What's the name of Player " + i);
-			playernames[i] = in.next();
-			System.out.println("The name of Player " + i++ + " is " + playernames[i]);
+			playernames.add(in.next());
+			System.out.println("The name of Player " + i + " is " + playernames.get(i));
 		}
 
 		int numOfSquares;
