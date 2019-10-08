@@ -9,7 +9,7 @@ public class Board {
 	
 	public Board(int numOfSquares){
 		this.numOfSquares = numOfSquares;
-		//square = createBoard(numOfSquares);
+		square = createBoard();
 	}
 	
 	

@@ -22,8 +22,10 @@ public class Game {
 	}
 	 public void startGame() {
 		 for (Player p: players) {
+			 System.out.println(board.findSquare(0));
 			 board.firstSquare().enter(p);
 		 } winner = null;
+
 	 }
 	
 
