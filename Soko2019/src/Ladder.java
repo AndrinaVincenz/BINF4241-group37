@@ -2,9 +2,10 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Ladder extends Square {
-	int transport = 5;
-	public Ladder(int position, CreateService b) {
-		super(position,b);
+	int transport;
+	public Ladder(int position, int transport) {
+		super(position);
+		this.transport = transport;
 	}
 	@Override
 	public Square landHereOrGoHome() {
@@ -12,7 +13,7 @@ public class Ladder extends Square {
 		
 	}
 	private Square placeToGo() {
-		return findrelativeSquare(transport);
+		return square.findrelativeSquare(transport);
 	}
 	
 	

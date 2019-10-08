@@ -1,30 +1,30 @@
 public class Player {
-	private Square square;
-	private String name;
+	private Square s;
 	
 	public Player(String name) {
+		super();
 		this.name = name;
 	}
+
+	private String name;
 	
 	String getName(){
 		return name;
 	}
 	
 	public void moveForward(int moves) {
-		square.leave(this);
-		square = square.moveAndLand(moves);
-		square.enter(this);
+		return 0;
 	}
 
-	public int position() {
-		return square.getPosition();
+	int position() {
+		return 0;
 	}
 	
 	boolean wins(){
-		return square.isLastSquare();
+		return false;
 	};
 	public Square getSquare() {
-		return square;
+		return sqaure;
 	}
 	public void setSquare(Square s) {
 		this.square = s;

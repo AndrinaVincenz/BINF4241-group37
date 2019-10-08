@@ -10,9 +10,9 @@ public class Main {
 		Scanner in = new Scanner(System.in);
 
 		int numOfPlayers;
+		LinkedList<Player> players = new LinkedList<Player>();
 		
-
-		// ask user how many players are intended to play
+		// ask user how many players are intened to play
 		System.out.println("How many players wanna play?");
 		numOfPlayers = in.nextInt();
 		while (numOfPlayers < 2 || numOfPlayers > 4) {
@@ -20,12 +20,12 @@ public class Main {
 			numOfPlayers = in.nextInt();
 		}
 		System.out.println(numOfPlayers + " Players are playing.");
-		String[] playernames = new String[numOfPlayers];
+
 		// collect the names for the players
-		for (int i = 0; i < numOfPlayers; i++) {
+		for (int i = 1; i <= numOfPlayers; i++) {
 			System.out.println("What's the name of Player " + i);
-			playernames[i] = in.next();
-			System.out.println("The name of Player " + i++ + " is " + playernames[i]);
+			players.add(new Player(in.next()));
+			System.out.println("The name of Player " + i + " is " + players.get(i - 1).getName());
 		}
 
 		int numOfSquares;
@@ -38,17 +38,6 @@ public class Main {
 	
 		
 
-		
-		Game game = new Game(playernames, numOfSquares);
-		
-
-		game.play();
-		
-		
-		// die test
-		/*Die die = new Die();
-		for (int i = 0; i < 1000; i++){
-		System.out.println(die.roll());
 		//for(int i= 0; i < players.size(); i++){
 		//	squareList.get(0).player += players.get(i);
 		//}
@@ -74,6 +63,17 @@ public class Main {
 			System.out.println(snakeList.get(i).position + " index:" + i + "<-- position");
 			System.out.println(snakeList.get(i).transport + " index:" + i +"<-- transport");
 			}
+		
+		Game game = new Game(players, numOfSquares,ladderList, snakeList);
+		System.out.print(game);
+
+		
+		
+		
+		// die test
+		/*Die die = new Die();
+		for (int i = 0; i < 1000; i++){
+		System.out.println(die.roll());
 		}*/
 	
 		

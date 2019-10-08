@@ -10,11 +10,8 @@ public class Game {
 	private Player winner;
 	
 	
-	public Game(String[]playernames, int numberOfSquares){
-		for(String s: playernames) {
-			Player p = new Player(s);
-			players.add(p);
-		}
+	public Game(LinkedList<Player> player, int numberOfSquares){
+		this.players = player;
 		this.numberOfSquares = numberOfSquares;
 		board = new CreateService(numberOfSquares);
 		
@@ -22,14 +19,16 @@ public class Game {
 	 public void startGame() {
 		 for (Player p: players) {
 			 board.firstSquare().enter(p);
-		 } winner = null;
+		 }
 	 }
 	
 
 
 	
 
-
+	void createGame(){
+		
+	}
 	
 	Player currentPlayer(){
 		// player not empty, return head (first element)
@@ -38,32 +37,25 @@ public class Game {
 		
 	}
 	
-	private boolean notOver() {
-		return winner == null;
+	boolean notOver() {
+		return false;
 	}
 	
-	private void movePlayer(int roll) {
-		// player is removed from the head, he plays one round and put to the tail
+	void movePlayer(int roll) {
+		// player is removed from the head
 		Player currentp = players.remove();
-		currentp.moveForward(roll);
-		players.add(currentp);
-		if (currentp.wins()) {
-			winner = currentp;
-		}
+		
 		
 	}
 	
 	void play() {
-		Die die = new Die();
-		startGame();
-		
-		System.out.println("State: " + this);
-		while (notOver()) {
-			int roll = die.roll();
-			movePlayer(roll);
-			System.out.println("State: " + this);
-		}
-		System.out.println("Winner: " + winner);
 	}
 	
+	ISquare findSquare(int square) {
+		return null;
+	}
+	
+	ISquare findLastSquare(){
+		return null;	
+	}
 }
