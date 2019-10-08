@@ -2,17 +2,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CreateService {
-	private ArrayList<Square> square = new ArrayList<>();
-	private int numOfSquares;
+	ArrayList<Square> square = new ArrayList<>();
+	
 	
 	public CreateService(int numOfSquares){
 		this.numOfSquares = numOfSquares;
-		createSquares(numOfSquares);
+		createSquares(numOfSquares);¨
 		createLadderList();
 		createSnakeList();
 	}
 	
-	
+	int numOfSquares;
 	
 	int createRandomPosition(){		
 		// We don't wanna have a random Number in the List as First or Last Square.
@@ -34,10 +34,10 @@ public class CreateService {
 				startPosition = createRandomPosition();
 				endPosition = createRandomPosition();
 			}
-			square.add(new Ladder(startPosition,this));
+			square.add(new Ladder(startPosition, endPosition));
 			i--;
 		}
-	
+		return
 	}
 	
 	private void createSnakeList(){
@@ -51,7 +51,7 @@ public class CreateService {
 				startPosition = createRandomPosition();
 				endPosition = createRandomPosition();
 			}
-			square.add(new Snake(startPosition, this));
+			square.add(new Snake(startPosition, endPosition));
 			i--;
 		}
 	
@@ -64,8 +64,7 @@ public class CreateService {
 		i++;
 		while (i < numOfSquares){
 			if( i == numOfSquares){
-				square.add(new LastSquare(i, this));
-
+				square.add(new LastSquare(i,this));
 				i++;
 			}
 			else{
@@ -73,20 +72,12 @@ public class CreateService {
 				i++;
 			}
 		}
-	// square.add(new LastSquare(i,this));
-	
-	}
-	public Square findSquare(int position) {
-		return square.get(position);
+		square.add(new LastSquare(i,this));
 	
 	}
 	public Square firstSquare() {
 		return square.get(0);
 	}
-	public Square lastSquare() {
-		return square.get(square.size()-1);
-	}
 
-	
 
 }

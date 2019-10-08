@@ -1,17 +1,13 @@
 public class Square implements ISquare {
 
-	private Player player;
-	protected CreateService board;
-	protected int position;
-
-	private Square square;
+	Player player;
+	private CreateService board;
+	int position;
 	
-	
-	public Square(int p, CreateService b) {
-		position = p;
+	public Square(int position, CreateService b) {
+		this.position = position;
 		board = b;
 	}
-
 	
 
 	@Override
@@ -20,48 +16,51 @@ public class Square implements ISquare {
 		return false;
 	}
 
-	
+	@Override
 	public boolean isLastSquare() {
 		// return false normally, override at LastSquare class
 		return false;
 	}
 
+	@Override
 	public void enter(Player p) {
 		player = p;
 		player.setSquare(this);
 		
 	}
 
+	@Override
 	public void leave(Player player) {
 		player = null;
 		
 	}
 
-
+	@Override
 	public boolean isOccupied() {
-		return this.player != null;
+		square.getPlayer != null;
 	}
+
+	@Override
 	public int getPosition() {
 		return position;
 	}
 
-
+	@Override
 	public Square moveAndLand(int roll) {
 		// it is checked if player is over winning field, if yes how far back he has to go
-		int lastsquare = board.lastSquare().getPosition();
-		int currentposition = getPosition();
+		int lastsquare = board.findlastSquare().getPosition();
+		int currentposition = square.getPosition();
 		if (currentposition + roll > lastsquare) {
 			int newposition = lastsquare - (currentposition + roll - lastsquare);
 			return board.findSquare(newposition).landHereOrGoHome();
-		} else {
-		return findrelativeSquare(roll).landHereOrGoHome();
-	}
+		}
 	}
 
+	@Override
 	public Square landHereOrGoHome() {
 		// Checks if the position is empty and if so sets player to start
-		if (isOccupied()) {
-			return board.firstSquare();
+		if (square.isOccupied()) {
+			return board.findfirstSquare();
 		} else {
 			return square;
 		}
@@ -72,7 +71,7 @@ public class Square implements ISquare {
 		return player;
 	}
 	public Square findrelativeSquare(int move) {
-		return board.findSquare(position + move);
+		return board.findSquare(position + moves);
 	}
 
 }
