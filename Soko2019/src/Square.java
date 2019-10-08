@@ -1,13 +1,13 @@
 public class Square implements ISquare {
 
 	private Player player;
-	protected CreateService board;
+	protected Board board;
 	protected int position;
 
 	private Square square;
 	
 	
-	public Square(int p, CreateService b) {
+	public Square(int p, Board b) {
 		position = p;
 		board = b;
 	}

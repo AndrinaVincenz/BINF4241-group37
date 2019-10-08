@@ -5,7 +5,7 @@ public class FirstSquare extends Square {
 	
 	private ArrayList<Player> p = new ArrayList<Player>();
 	
-	public FirstSquare(int position, CreateService b) {
+	public FirstSquare(int position, Board b) {
 		super(position,b);	
 	}
 

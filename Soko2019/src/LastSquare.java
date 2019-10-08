@@ -2,7 +2,7 @@ public class LastSquare extends Square {
 	
 	
 
-	public LastSquare(int position, CreateService b) {
+	public LastSquare(int position, Board b) {
 		super(position,b);
 	}
 	

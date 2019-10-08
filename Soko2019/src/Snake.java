@@ -3,8 +3,12 @@ import java.util.Random;
 
 public class Snake extends Square {
 	int transport = -5;
-	public Snake(int position, CreateService b){
+	
+	int endPosition;
+
+	public Snake(int position, int endPosition, Board b){
 		super(position,b);
+		this.endPosition = endPosition;
 	}
 	@Override
 	public Square landHereOrGoHome() {
@@ -15,5 +19,8 @@ public class Snake extends Square {
 		return findrelativeSquare(transport);
 	}
 	
+	public int getEndPosition() {
+		return endPosition;
+	}
 	
 }

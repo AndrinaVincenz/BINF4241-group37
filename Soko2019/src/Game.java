@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class Game {
 	private LinkedList<Player> players = new LinkedList <Player>();
-	private CreateService board;
+	private Board board;
 	private int numberOfSquares;
 	private Player winner;
 	
@@ -16,7 +16,7 @@ public class Game {
 			players.add(p);
 		}
 		this.numberOfSquares = numberOfSquares;
-		board = new CreateService(numberOfSquares);
+		board = new Board(numberOfSquares);
 		
 	}
 	 public void startGame() {
