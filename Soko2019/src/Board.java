@@ -12,6 +12,10 @@ public class Board {
 		square = createBoard();
 	}
 	
+	public int getNumOfSquares(){
+		return numOfSquares;
+	}
+	
 	
 	
 	int createRandomPosition(){		

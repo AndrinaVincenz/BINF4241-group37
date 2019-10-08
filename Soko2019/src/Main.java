@@ -34,9 +34,13 @@ public class Main {
 		System.out.println(numOfSquares);
 
 		Board board = new Board(numOfSquares);
-		System.out.print("hello");
-		Game game = new Game(playernames, numOfSquares);
 		
+		Game game = new Game(playernames, board);
+		
+		while (game.notOver() == false){
+			//game logic
+			
+		}
 
 		game.play();
 		

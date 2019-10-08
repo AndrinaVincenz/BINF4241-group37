@@ -11,14 +11,13 @@ public class Game {
 	private Player winner;
 	
 	
-	public Game(List<String>playernames, int numberOfSquares){
+	public Game(List<String>playernames, Board board){
 		for(String s: playernames) {
 			Player p = new Player(s);
 			players.add(p);
+			this.board = board;
 		}
-		this.numberOfSquares = numberOfSquares;
-		board = new Board(numberOfSquares);
-		
+		numberOfSquares = board.getNumOfSquares();
 	}
 	 public void startGame() {
 		 for (Player p: players) {
@@ -28,12 +27,6 @@ public class Game {
 
 	 }
 	
-
-
-	
-
-
-	
 	Player currentPlayer(){
 		// player not empty, return head (first element)
 		assert players.size()>0;
@@ -41,8 +34,12 @@ public class Game {
 		
 	}
 	
-	private boolean notOver() {
-		return winner == null;
+	public boolean notOver() {
+		if (board.lastSquare().isOccupied()){
+			return true;
+		} else { 
+			return false;
+		}
 	}
 	
 	private void movePlayer(int roll) {
