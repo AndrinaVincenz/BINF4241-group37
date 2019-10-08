@@ -38,11 +38,11 @@ public class Main {
 		Game game = new Game(playernames, board);
 		
 		while (game.notOver() == false){
-			//game logic
+			game.play();
 			
 		}
 
-		game.play();
+
 		
 		
 		// die test
