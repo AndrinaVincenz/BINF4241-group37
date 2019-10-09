@@ -41,7 +41,8 @@ public class Square implements ISquare {
 
 	public boolean isOccupied(int position) {
 		if (board.findSquare(position).getPlayer() != null){
-		return true;
+			//TODO: regading a forum post in OLAT this is not necessary, therefore it needs to be tested before final implementation
+		return false;
 		} else {
 			return false;
 		}
@@ -59,7 +60,7 @@ public class Square implements ISquare {
 		int currentposition = position;
 		if (currentposition + roll > lastsquare) {
 			int newposition = lastsquare - (currentposition + roll - lastsquare);
-			System.out.println("Player: " + player.getName() + ", current:"+ currentposition + " ...you rolled: "+ roll + " -> new: " + newposition);
+			System.out.println("Player: " + player.getName() + ", current:"+ currentposition + " ...you rolled: "+ roll + " -> ... too high! new: " + newposition);
 			return board.findSquare(newposition);
 		} else {
 			if (isOccupied(currentposition + roll)) {
