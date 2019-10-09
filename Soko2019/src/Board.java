@@ -4,16 +4,20 @@ import java.util.Comparator;
 import java.util.Random;
 
 public class Board {
-	private ArrayList<Square> square = new ArrayList<>();
+	private ArrayList<Square> squaresList = new ArrayList<>();
 	private int numOfSquares;
 	
 	public Board(int numOfSquares){
 		this.numOfSquares = numOfSquares;
-		square = createBoard();
+		squaresList = createBoard();
 	}
 	
 	public int getNumOfSquares(){
 		return numOfSquares;
+	}
+	
+	public ArrayList<Square> getSquares(){
+		return squaresList;
 	}
 	
 	
@@ -130,14 +134,14 @@ public class Board {
 	
 	
 	public Square findSquare(int position) {
-		return square.get(position);
+		return squaresList.get(position+1);
 	
 	}
 	public Square firstSquare() {
-		return square.get(0);
+		return squaresList.get(0);
 	}
 	public Square lastSquare() {
-		return square.get(square.size()-1);
+		return squaresList.get(squaresList.size()-1);
 	}
 	
 

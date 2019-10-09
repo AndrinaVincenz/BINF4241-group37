@@ -36,42 +36,8 @@ public class Main {
 		Board board = new Board(numOfSquares);
 		
 		Game game = new Game(playernames, board);
-
-		game.play();
 		
-		
-		// die test
-		/*Die die = new Die();
-		for (int i = 0; i < 1000; i++){
-		System.out.println(die.roll());
-		//for(int i= 0; i < players.size(); i++){
-		//	squareList.get(0).player += players.get(i);
-		//}
-		System.out.println(players);
-		for (int i=0; i < players.size(); i++){
-			System.out.println(players.get(i));
-			(players.get(i));
-			System.out.println(squareList.get(0).player);
-		}
-
-		for (int i=0; i < squareList.size(); i++){
-			System.out.println(squareList.get(i).player);
-		}
-		
-		for (int i=0; i < ladderList.size(); i++){
-		System.out.println(ladderList.get(i));
-		System.out.println(ladderList.get(i).position + " index:" + i + "<-- position");
-		System.out.println(ladderList.get(i).transport + " index:" + i +"<-- transport");
-		}
-		
-		for (int i=0; i < snakeList.size(); i++){
-			System.out.println(snakeList.get(i));
-			System.out.println(snakeList.get(i).position + " index:" + i + "<-- position");
-			System.out.println(snakeList.get(i).transport + " index:" + i +"<-- transport");
-			}
-		}*/
-	
-		
+		game.play();	
 		
 	}
 	

@@ -58,7 +58,8 @@ public class Square implements ISquare {
 			if (isOccupied()) {
 				return board.firstSquare();
 			} else {
-				System.out.println("New Position: " + currentposition + roll + ">> Playername: " + player.getName());
+				int test = currentposition + roll;
+				System.out.println("New Position: " + test + " Playername: " + player.getName());
 				return board.findSquare(currentposition + roll);
 			}
 		}
@@ -70,5 +71,6 @@ public class Square implements ISquare {
 	public Square findrelativeSquare(int move) {
 		return board.findSquare(position + move);
 	}
+
 
 }

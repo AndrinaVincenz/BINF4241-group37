@@ -1,10 +1,10 @@
 public class Player {
-	private Square square;
+	Square square;
 	private String name;
+	Board myBoard;
 	
-	public Player(String name, Square square) {
+	public Player(String name) {
 		this.name = name;
-		this.square = square;
 	}
 	
 	String getName(){
@@ -13,7 +13,7 @@ public class Player {
 	
 	public void moveForward(int moves) {
 		square.leave(this);
-		square = square.moveAndLand(moves, this);;
+		square = square.moveAndLand(moves, this);
 		square.enter(this);
 	}
 
