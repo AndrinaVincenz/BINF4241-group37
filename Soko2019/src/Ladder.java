@@ -9,7 +9,6 @@ public class Ladder extends Square {
 		this.endPosition = endPosition;
 	}
 	
-	
 	public int getEndPosition() {
 		return endPosition;
 	}

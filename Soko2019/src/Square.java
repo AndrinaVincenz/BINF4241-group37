@@ -59,16 +59,29 @@ public class Square implements ISquare {
 		int currentposition = position;
 		if (currentposition + roll > lastsquare) {
 			int newposition = lastsquare - (currentposition + roll - lastsquare);
-			System.out.println("New Position: " + newposition + " Playername: " + player.getName());
+			System.out.println("Player: " + player.getName() + ", current:"+ currentposition + " ...you rolled: "+ roll + " -> new: " + newposition);
 			return board.findSquare(newposition);
 		} else {
 			if (isOccupied(currentposition + roll)) {
-				System.out.println("New Position: " + board.firstSquare().getPosition() + " Playername: " + player.getName());
+				System.out.println("Player: " + player.getName() + ", current:"+ currentposition  + " ...you rolled: "+ roll  + "... already Occupied!!! new Position: " + board.firstSquare().getPosition());
 				return board.firstSquare();
 			} else {
-				int newField2 = currentposition + roll;
-				System.out.println("New Position: " + newField2 + " Playername: " + player.getName());
-				return board.findSquare(currentposition + roll);
+				if (board.findSquare(currentposition + roll) instanceof Ladder){
+					Ladder tempLadder;
+					tempLadder = (Ladder) board.findSquare(currentposition + roll);
+					System.out.println("Player: " + player.getName() + ", current:"+ currentposition + " ...you rolled: "+ roll +"...LADDER!!! new Position: " + tempLadder.getEndPosition());
+					return board.findSquare(tempLadder.getEndPosition());
+				} else if (board.findSquare(currentposition + roll) instanceof Snake) {
+					Snake tempSnake;
+					tempSnake = (Snake) board.findSquare(currentposition + roll);
+					System.out.println("Player: " + player.getName() + ", current:"+ currentposition + " ...you rolled: "+ roll   + "...SNAKE!!! new Position: " + tempSnake.getEndPosition());
+					return board.findSquare(tempSnake.getEndPosition());
+				} else {
+					int newField2 = currentposition + roll;
+					System.out.println("Player: " + player.getName() + ", current:"+ currentposition + " ...you rolled: "+ roll  + " -> " + newField2);
+					return board.findSquare(currentposition + roll);
+				}
+				
 			}
 		}
 	}
