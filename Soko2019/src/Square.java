@@ -1,5 +1,6 @@
 public class Square implements ISquare {
 
+	private static final String Square = null;
 	private Player player;
 	protected Board board;
 	protected int position;
@@ -39,7 +40,8 @@ public class Square implements ISquare {
 
 
 	public boolean isOccupied() {
-		return this.player != null;
+		//test issues;
+		return false;
 	}
 	
 	public int getPosition() {
@@ -50,7 +52,7 @@ public class Square implements ISquare {
 	public Square moveAndLand(int roll, Player player) {
 		// it is checked if player is over winning field, if yes how far back he has to go
 		int lastsquare = board.lastSquare().getPosition();
-		int currentposition = getPosition();
+		int currentposition = position;
 		if (currentposition + roll > lastsquare) {
 			int newposition = lastsquare - (currentposition + roll - lastsquare);
 			return board.findSquare(newposition);

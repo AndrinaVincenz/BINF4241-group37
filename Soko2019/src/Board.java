@@ -134,7 +134,7 @@ public class Board {
 	
 	
 	public Square findSquare(int position) {
-		return squaresList.get(position+1);
+		return squaresList.get(position);
 	
 	}
 	public Square firstSquare() {
