@@ -16,10 +16,7 @@ public class FirstSquare extends Square {
 		p.add(player);
 		player.setSquare(board.firstSquare());
 	}
-	@Override
-	public boolean isOccupied() {
-		return false;
-	}
+
 	@Override
 	public void leave(Player player) {
 		p.remove(player);

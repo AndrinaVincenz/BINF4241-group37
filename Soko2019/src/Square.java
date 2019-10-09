@@ -39,9 +39,13 @@ public class Square implements ISquare {
 	}
 
 
-	public boolean isOccupied() {
-		//test issues;
-		return false;
+	public boolean isOccupied(int position) {
+		if (board.findSquare(position).getPlayer() != null){
+		return true;
+		} else {
+			return false;
+		}
+		
 	}
 	
 	public int getPosition() {
@@ -57,11 +61,12 @@ public class Square implements ISquare {
 			int newposition = lastsquare - (currentposition + roll - lastsquare);
 			return board.findSquare(newposition);
 		} else {
-			if (isOccupied()) {
+			if (isOccupied(currentposition + roll)) {
+				System.out.println("New Position: " + board.firstSquare().getPosition() + " Playername: " + player.getName());
 				return board.firstSquare();
 			} else {
-				int test = currentposition + roll;
-				System.out.println("New Position: " + test + " Playername: " + player.getName());
+				int newField2 = currentposition + roll;
+				System.out.println("New Position: " + newField2 + " Playername: " + player.getName());
 				return board.findSquare(currentposition + roll);
 			}
 		}
