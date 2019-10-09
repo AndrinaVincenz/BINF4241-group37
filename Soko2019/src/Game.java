@@ -22,7 +22,7 @@ public class Game {
 	}
 	 public void startGame() {
 		 for (Player p: players) {
-			 System.out.println(board.findSquare(0));
+			 System.out.println("Player " + p.getName() + "is set to " + board.findSquare(1));
 			 board.firstSquare().enter(p);
 		 } winner = null;
 
@@ -36,7 +36,7 @@ public class Game {
 	}
 	
 	public boolean notOver() {
-		if (board.lastSquare().isOccupied()){
+		if (board.lastSquare().getPlayer() != null){
 			return true;
 		} else { 
 			return false;
@@ -64,7 +64,7 @@ public class Game {
 			movePlayer(roll);
 		//	System.out.println("State: " + this);
 		}
-		System.out.println("Winner: " + winner);
+		System.out.println("Winner: " + winner.getName());
 	}
 	
 }
