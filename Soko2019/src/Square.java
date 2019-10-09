@@ -59,6 +59,7 @@ public class Square implements ISquare {
 		int currentposition = position;
 		if (currentposition + roll > lastsquare) {
 			int newposition = lastsquare - (currentposition + roll - lastsquare);
+			System.out.println("New Position: " + newposition + " Playername: " + player.getName());
 			return board.findSquare(newposition);
 		} else {
 			if (isOccupied(currentposition + roll)) {
