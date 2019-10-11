@@ -1,3 +1,4 @@
+package assignment1;
 public class Player {
 	Square square;
 	private String name;

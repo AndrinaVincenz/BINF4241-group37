@@ -1,3 +1,4 @@
+package assignment1;
 public class Square implements ISquare {
 
 	private static final String Square = null;
