@@ -1,8 +1,0 @@
-public class Snake extends Square {
-	
-	public Snake(int Game, int Square){
-		
-	}
-	
-	int transport;
-}
