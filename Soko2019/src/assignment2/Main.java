@@ -1,7 +1,5 @@
 package assignment2;
 
-import assignment2.Player;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,12 +16,14 @@ public class Main {
 		System.out.println("What's the name of Player " + (i+1) + "?");
 		playernames[i] = (in.next());
 		System.out.println("The name of Player " + (i+1) + " is " + playernames[i] + ".");
+		//System.out.println(getboard());  getBoard need to be implemented
 		}
 		
 		//Initialize players, second parameter set the color to white:true/black:false
 		Player player1 = new Player(playernames[0], true);
 		Player player2 = new Player(playernames[1], false);
-
+		Game Game1 = new Game();
+		Game1.initialize(player1, player2);
 	}	
 
 }
