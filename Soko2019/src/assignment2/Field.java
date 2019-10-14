@@ -9,7 +9,10 @@ public class Field {
 	        this.setPiece(piece); 
 	        this.setX(x); 
 	        this.setY(y); 
-	    } 
+	        if(piece != null) {
+	        piece.setField(this);
+	        }	  
+	        } 
 	  
 	    public Piece getPiece() 
 	    { 
@@ -19,6 +22,7 @@ public class Field {
 	    public void setPiece(Piece p) 
 	    { 
 	        this.piece = p; 
+	        
 	    } 
 	  
 	    public int getX() 

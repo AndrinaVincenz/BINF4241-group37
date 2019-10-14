@@ -3,9 +3,8 @@ package assignment2;
 public class Knight extends Piece { 
 	  private String name = "N";
 	
-    public Knight(boolean white) 
-    { 
-        super(white); 
+    public Knight(boolean white) {
+    	super(white);
     } 
   
     @Override

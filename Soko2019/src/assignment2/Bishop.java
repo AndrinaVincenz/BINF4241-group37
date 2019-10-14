@@ -4,7 +4,7 @@ public class Bishop extends Piece {
 	private String name = "B";
 	
     public Bishop(boolean white) {
-        super(white);
+    	super(white);
     }
 
     @Override

@@ -4,10 +4,12 @@ package assignment2;
 		String name = "";
 		private boolean killed = false; 
 		private boolean white = false; 
+		protected Field currentfield;
 
 		public Piece(boolean white) 
 		{ 
 			this.setWhite(white); 
+		
 		} 
 
 		public boolean isWhite() 
@@ -29,7 +31,16 @@ package assignment2;
 		{ 
 			this.killed = killed; 
 		} 
-				 
+		public void setField(Field field) {
+			this.currentfield = field;
+		}
+		
+		public Field getField() {
+			return this.currentfield;
+		}
+
+	     
+	    
 		 
 		public abstract boolean canMove(Board board, 
 									Field start, Field end);
@@ -37,6 +48,11 @@ package assignment2;
 		   public String getName() {
 		    	return this.name;
 		    }
+
+		public boolean[][] getpossibleDestination(Board b) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 
 		 
 	} 

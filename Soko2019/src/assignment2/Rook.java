@@ -4,7 +4,7 @@ public class Rook extends Piece {
 	private String name = "R";
 	
     public Rook(boolean white) {
-        super(white);
+    	super(white);
     }
 
     @Override
