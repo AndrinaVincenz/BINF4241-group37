@@ -1,7 +1,7 @@
 package assignment2;
 
 public class Game {
-    private Player[] players;
+    private Player[] players = new Player[2];
     private Board board;
     private Player currentTurn;
     private GameStatus status;
@@ -11,7 +11,6 @@ public class Game {
         players[0] = p1;
         players[1] = p2;
 
-        board.resetBoard();
 
         if (p1.isWhiteSide()) {
             this.currentTurn = p1;

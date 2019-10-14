@@ -1,7 +1,7 @@
 package assignment2;
 
 	public abstract class Piece { 
-
+		String name = "";
 		private boolean killed = false; 
 		private boolean white = false; 
 
@@ -29,9 +29,16 @@ package assignment2;
 		{ 
 			this.killed = killed; 
 		} 
-
+				 
+		 
 		public abstract boolean canMove(Board board, 
-									Field start, Field end); 
+									Field start, Field end);
+
+		   public String getName() {
+		    	return this.name;
+		    }
+
+		 
 	} 
 
 

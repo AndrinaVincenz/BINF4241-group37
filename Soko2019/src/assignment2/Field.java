@@ -40,5 +40,6 @@ public class Field {
 	    { 
 	        this.y = y; 
 	    } 
+	    
 	} 
 

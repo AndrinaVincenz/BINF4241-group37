@@ -16,8 +16,11 @@ public class Main {
 		System.out.println("What's the name of Player " + (i+1) + "?");
 		playernames[i] = (in.next());
 		System.out.println("The name of Player " + (i+1) + " is " + playernames[i] + ".");
-		//System.out.println(getboard());  getBoard need to be implemented
 		}
+		Board b = new Board();
+	
+		b.getBoard();
+		
 		
 		//Initialize players, second parameter set the color to white:true/black:false
 		Player player1 = new Player(playernames[0], true);

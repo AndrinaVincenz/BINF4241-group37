@@ -2,7 +2,7 @@ package assignment2;
 
 public class King extends Piece {
     private boolean castlingDone = false;
-
+    private String name = "K";
     public King(boolean white) {
         super(white);
     }
@@ -22,5 +22,9 @@ public class King extends Piece {
             return true;
         }
         return false;// not ended yet, return statement only here that we don't get and error
+    }
+    @Override
+    public String getName() {
+    	return this.name;
     }
 }
