@@ -7,11 +7,13 @@ package assignment2;
 		{ 
 			this.resetBoard(); 
 		} 
+		
+	
 
-		public Field getBox(int x, int y) throws Exception 
+		public Field getBox(int x, int y)
 		{ 
 			if (x < 0 || x > 7 || y < 0 || y > 7) { 
-				throw new Exception("Index out of bound"); 
+				return null;
 			} 
 
 			return boxes[x][y]; 
@@ -90,4 +92,5 @@ package assignment2;
 				return true;
 			}
 		 }
+		 
 	} 

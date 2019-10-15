@@ -53,6 +53,10 @@ public class King extends Piece {
 			// check if someone is on it!!!!
 			if (b.isValid(x, y)) {
 				possibleM[x][y] = true;
+				if (b.getBox(x,y).getPiece()!= null && b.getBox(x,y).getPiece().isWhite() == this.isWhite()) {
+					possibleM[x][y] = false;
+				}
+				
 			}
 		}
 		

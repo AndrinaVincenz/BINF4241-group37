@@ -24,16 +24,24 @@ public class Rook extends Piece {
  				possibleM[i][j] = false;
  			}
  		}
- 		possibleM[currentfield.getX()][currentfield.getY()] = true;
+ 		
  
 
  		for (int i = 0; i < 8; i++) {
  			// check if someone is on it!!!!
  			if (b.isValid(currentfield.getX(), i)) {
  				possibleM[currentfield.getX()][i] = true;
+ 				if (b.getBox(currentfield.getX(),i).getPiece()!= null && b.getBox(currentfield.getX(),i).getPiece().isWhite() == this.isWhite()) {
+					possibleM[currentfield.getX()][i] = false;
+					break;
+				}
  			} 
  			if (b.isValid(i, currentfield.getY())) {
- 				possibleM[i][currentfield.getY()] = true;
+ 				if (b.getBox(i, currentfield.getY()).getPiece()!= null && b.getBox(i, currentfield.getY()).getPiece().isWhite() == this.isWhite()) {
+ 					possibleM[i][currentfield.getY()] = true;
+					break;
+				}
+ 				
  		}
  		
  		}
@@ -43,7 +51,7 @@ public class Rook extends Piece {
  			}
  			System.out.print("\n");
  		}
-
+ 		possibleM[currentfield.getX()][currentfield.getY()] = true;
  		return possibleM;
  	}	
 }

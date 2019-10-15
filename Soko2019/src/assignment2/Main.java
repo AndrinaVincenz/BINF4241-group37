@@ -20,7 +20,8 @@ public class Main {
 		Board b = new Board();
 	
 		b.getBoard();
-	
+
+		
 		
 		//Initialize players, second parameter set the color to white:true/black:false
 		Player player1 = new Player(playernames[0], true);
