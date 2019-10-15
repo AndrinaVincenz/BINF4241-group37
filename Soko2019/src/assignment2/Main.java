@@ -1,6 +1,7 @@
 package assignment2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 public class Main {
@@ -18,16 +19,71 @@ public class Main {
 		System.out.println("The name of Player " + (i+1) + " is " + playernames[i] + ".");
 		}
 		Board b = new Board();
-	
-		b.getBoard();
-
-		
 		
 		//Initialize players, second parameter set the color to white:true/black:false
 		Player player1 = new Player(playernames[0], true);
 		Player player2 = new Player(playernames[1], false);
 		Game Game1 = new Game();
 		Game1.initialize(player1, player2);
+		
+		
+		while (Game1.getStatus() != GameStatus.BLACK_WIN || Game1.getStatus() != GameStatus.WHITE_WIN || Game1.getStatus() != GameStatus.STALEMATE){
+			String startField = null;
+			String endField = null;
+			if (Game1.getStatus() == GameStatus.WHITE_TURN){
+				b.getBoard();
+				System.out.println("It's your turn " + playernames[0] + "! (white player), which figure do you wanna move?");
+				startField = in.next();
+				while (checkValidityOfInput(startField) == false){
+					System.out.print("Invalid input! Try Again!");
+					startField = in.next();
+				}
+				//test print
+				System.out.println(startField);
+				System.out.println("Move to?");
+				endField = in.next();
+				while (checkValidityOfInput(endField) == false){
+					System.out.print("Invalid input! Try Again!");
+					endField = in.next();
+				}
+				//test print
+				System.out.println(endField);
+				// move function comes here
+				Game1.setStatus(GameStatus.BLACK_TURN);
+			} else if (Game1.getStatus() == GameStatus.BLACK_TURN){
+				b.getBoard();
+				System.out.println("It's your turn " + playernames[1] + "! (black player)");
+				startField = in.next();
+				while (checkValidityOfInput(startField) == false){
+					System.out.print("Invalid input! Try Again!");
+					startField = in.next();
+				}
+				//test print
+				System.out.println(startField);
+				System.out.println("Move to?");
+				endField = in.next();
+				while (checkValidityOfInput(endField) == false){
+					System.out.print("Invalid input! Try Again!");
+					endField = in.next();
+				}
+				//test print
+				System.out.println(endField);
+				// move function comes here
+				Game1.setStatus(GameStatus.WHITE_TURN);
+			}
+			
+		}
+		System.out.println(Game1.getStatus());		
 	}	
+	
+	static boolean checkValidityOfInput(String input){
+		List<String> validLetters = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h");
+		List<String> validNumbers = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8");
+		if (input.length() == 2 && (validLetters.contains(input.substring(0, 1)) && validNumbers.contains(input.substring(1, 2)))){
+			return true;
+		} else {
+			return false;
+		}
+	}			
 
 }

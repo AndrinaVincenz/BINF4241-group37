@@ -2,6 +2,9 @@ package assignment1;
 import java.util.ArrayList;
 import java.util.Random;
 
+import assignment1.Board;
+import assignment1.Square;
+
 public class Snake extends Square {
 	
 	int endPosition;

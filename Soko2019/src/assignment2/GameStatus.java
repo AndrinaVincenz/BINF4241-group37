@@ -1,10 +1,9 @@
 package assignment2;
 
     public enum GameStatus {
-        ACTIVE,
+        BLACK_TURN,
+        WHITE_TURN,
         BLACK_WIN,
         WHITE_WIN,
-        FORFEIT,
-        STALEMATE,
-        RESIGNATION
+        STALEMATE, //Patt
     }

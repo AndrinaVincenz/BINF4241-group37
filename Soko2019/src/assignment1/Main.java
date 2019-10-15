@@ -23,9 +23,9 @@ public class Main {
 		List<String> playernames= new ArrayList<>();
 		// collect the names for the players
 		for (int i = 0; i < numOfPlayers; i++) {
-			System.out.println("What's the name of Player " + i);
+			System.out.println("What's the name of Player " + (i+1));
 			playernames.add(in.next());
-			System.out.println("The name of Player " + i + " is " + playernames.get(i));
+			System.out.println("The name of Player " + (i+1) + " is " + playernames.get(i));
 		}
 
 		int numOfSquares;
