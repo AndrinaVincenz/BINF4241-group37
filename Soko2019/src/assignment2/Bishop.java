@@ -24,46 +24,58 @@ public class Bishop extends Piece {
  			}
  		}
 
- 		for (int i = 1; i <= 8; i++) {
- 			
+ 		
+ 		for (int i = 1; i <= 8; i++) {	
  			if (b.isValid(currentfield.getX()+i,currentfield.getY()+i)) {
  				possibleM[currentfield.getX()+i][currentfield.getY()+i] = true;
- 				if (b.getBox(currentfield.getX()+i,currentfield.getY()+i).getPiece()!= null && b.getBox(currentfield.getX()+i,currentfield.getY()+i).getPiece().isWhite() == this.isWhite()) {
+ 				if (checkIfSameColor(b,currentfield.getX()+i,currentfield.getY()+i) == 1) {
 					possibleM[currentfield.getX()+i][currentfield.getY()+i] = false;
+					break;
+				} else if (checkIfSameColor(b,currentfield.getX()+i,currentfield.getY()+i) == 2) {
+					possibleM[currentfield.getX()+i][currentfield.getY()+i] = true;
 					break;
 				}
  			} 
+ 		}
+ 		for (int i = 1; i <= 8; i++) {	
  			if (b.isValid(currentfield.getX()+i,currentfield.getY()-i)) {
  				possibleM[currentfield.getX()+i][currentfield.getY()-i] = true;
- 				if (b.getBox(currentfield.getX()+i,currentfield.getY()-i).getPiece()!= null && b.getBox(currentfield.getX()+i,currentfield.getY()-i).getPiece().isWhite() == this.isWhite()) {
+ 				if (checkIfSameColor(b,currentfield.getX()+i,currentfield.getY()-i) == 1) {
 					possibleM[currentfield.getX()+i][currentfield.getY()-i] = false;
 					break;
+				} else if (checkIfSameColor(b,currentfield.getX()+i,currentfield.getY()-i) == 2) {
+					possibleM[currentfield.getX()+i][currentfield.getY()-i] = true;
+					break;
 				}
- 			}
+ 			} 
+ 		}
+ 		for (int i = 1; i <= 8; i++) {	
  			if (b.isValid(currentfield.getX()-i,currentfield.getY()+i)) {
  				possibleM[currentfield.getX()-i][currentfield.getY()+i] = true;
- 				if (b.getBox(currentfield.getX()-i,currentfield.getY()+i).getPiece()!= null && b.getBox(currentfield.getX()-i,currentfield.getY()+i).getPiece().isWhite() == this.isWhite()) {
+ 				if (checkIfSameColor(b,currentfield.getX()-i,currentfield.getY()+i) == 1) {
 					possibleM[currentfield.getX()-i][currentfield.getY()+i] = false;
 					break;
-				}
- 			}
- 			if (b.isValid(currentfield.getX()-i,currentfield.getY()-i)) {
- 				possibleM[currentfield.getX()-i][currentfield.getY()-i] = true;
- 				if (b.getBox(currentfield.getX()-i,currentfield.getY()-i).getPiece()!= null && b.getBox(currentfield.getX()-i,currentfield.getY()-i).getPiece().isWhite() == this.isWhite()) {
-					possibleM[currentfield.getX()-i][currentfield.getY()-i] = false;
+				} else if (checkIfSameColor(b,currentfield.getX()-i,currentfield.getY()+i) == 2) {
+					possibleM[currentfield.getX()-i][currentfield.getY()+i] = true;
 					break;
 				}
- 			}
- 		
+ 			} 
  		}
- 		for (int i = 0; i < possibleM.length; ++i) {
- 			for (int j = 0; j < possibleM[i].length; ++j) {
- 				System.out.print(possibleM[i][j]);
- 			}
- 			System.out.print("\n");
+		for (int i = 1; i <= 8; i++) {	
+ 			if (b.isValid(currentfield.getX()-i,currentfield.getY()-i)) {
+ 				possibleM[currentfield.getX()-i][currentfield.getY()-i] = true;
+ 				if (checkIfSameColor(b,currentfield.getX()-i,currentfield.getY()-i) == 1) {
+					possibleM[currentfield.getX()-i][currentfield.getY()-i] = false;
+					break;
+				} else if (checkIfSameColor(b,currentfield.getX()-i,currentfield.getY()-i) == 2) {
+					possibleM[currentfield.getX()-i][currentfield.getY()-i] = true;
+					break;
+				}
+ 			} 
  		}
+ 
  		possibleM[currentfield.getX()][currentfield.getY()] = true;
  		return possibleM;
- 	}	
+ 	}
 
 }

@@ -20,10 +20,7 @@ public class Knight extends Piece {
         int y = Math.abs(start.getY() - end.getY()); 
         return x * y == 2; 
     } 
-    @Override
-    public String getName() {
-    	return this.name;
-    }
+   
     @Override
 	public boolean[][] getpossibleDestination(Board b) {
 		boolean[][] possibleM = new boolean[8][8];
@@ -41,23 +38,18 @@ public class Knight extends Piece {
 			x = x + (possibledirections[i][0]);
 
 			y = y + possibledirections[i][1];
-			// check if someone is on it!!!!
+			
 			if (b.isValid(x, y)) {
 				possibleM[x][y] = true;
-				if (b.getBox(x,y).getPiece()!= null && b.getBox(x,y).getPiece().isWhite() == this.isWhite()) {
+				if (checkIfSameColor(b,x,y) == 1) {
 					possibleM[x][y] = false;
+				} else if (checkIfSameColor(b,x,y) == 2) {
+					possibleM[x][y] = true;
 				}
 				
 			}
 		}
 		
-
-		for (int i = 0; i < possibleM.length; ++i) {
-			for (int j = 0; j < possibleM[i].length; ++j) {
-				System.out.print(possibleM[i][j]);
-			}
-			System.out.print("\n");
-		}
 		possibleM[currentfield.getX()][currentfield.getY()] = true;
 		return possibleM;
 	}
