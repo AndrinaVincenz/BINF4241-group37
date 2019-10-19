@@ -21,6 +21,11 @@ public class Game {
     	this.status = gameStatus;
     }
     
+    /**
+     * might be unused since we have a status to get the information directly
+     * @return
+     * @throws Exception
+     */
     public Player getCurrentPlayer() throws Exception {
     	if (status == GameStatus.BLACK_TURN){
     		return players[1];
