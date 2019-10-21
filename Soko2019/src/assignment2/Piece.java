@@ -55,9 +55,18 @@ public abstract class Piece {
 				res = true;
 			}
 		}
+		//sets firstMove Pawn to false and sets count = 1 to check in pawn class for en passant
+		if (this instanceof Pawn && res == true) {
+			this.SetCount(1);
+			if (this.GetFirstMove() == true) {		
+			this.SetFirstMove(false);
+		}
+		}
 		return res;
 		
 	}
+
+
 	public boolean canEat(Board board, Field end) {
 		int endx = end.getX();
 		int endy = end.getY();
@@ -85,6 +94,27 @@ public abstract class Piece {
 			k = 2;
 		}
 		return k;
+	}
+
+
+	public void SetFirstMove(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean GetFirstMove() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void SetCount(int b) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
 

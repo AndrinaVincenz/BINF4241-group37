@@ -11,20 +11,7 @@ public class Knight extends Piece {
 		return this.name;
 	}
 
-    @Override
-    public boolean canMove(Board board, Field start, Field end) 
-    { 
-        // we can't move the piece to a spot that has 
-        // a piece of the same colour 
-        if (end.getPiece().isWhite() == this.isWhite()) { 
-            return false; 
-        } 
   
-        int x = Math.abs(start.getX() - end.getX()); 
-        int y = Math.abs(start.getY() - end.getY()); 
-        return x * y == 2; 
-    } 
-   
     @Override
 	public boolean[][] getpossibleDestination(Board b) {
 		boolean[][] possibleM = new boolean[8][8];
