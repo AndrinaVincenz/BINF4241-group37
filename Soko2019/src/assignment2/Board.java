@@ -69,7 +69,7 @@ package assignment2;
 		public void getBoard(){
 			for (int i = 0; i < 8; i++) { 
 				for (int j = 0; j < 8; j++) { 
-					if (boxes[i][j].getPiece() != null) {
+					if (boxes[i][j].getPiece() != null && boxes[i][j].getPiece().isKilled() == false) {
 						if ((boxes[i][j].getPiece().isWhite())) {
 							String c = "W";
 							System.out.print("[" + c + boxes[i][j].getPiece().getName() + "]");
