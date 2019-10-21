@@ -44,12 +44,12 @@ public class Main {
 				
 				System.out.println("Move to?");
 				endField = in.next();
-				while (checkValidityOfInput(endField, Game1, b) == false){
+				while (checkValidityOfInput_moveto(endField, Game1, b) == false){
 					endField = in.next();
 				}
 				tempEndField = converted(endField);
 				System.out.println(endField);
-				// TODO: move function comes here, use tempStartField and tempEndField for that
+				System.out.println(b.getBox(tempStartField[0], tempStartField[1]).getPiece().canMove(b, b.getBox(tempStartField[0], tempStartField[1]), b.getBox(tempEndField[0], tempEndField[1])));
 				
 				// TODO: here comes a check if the game is over, if not status is set to Black_Turn
 				Game1.setStatus(GameStatus.BLACK_TURN);
@@ -65,14 +65,14 @@ public class Main {
 				System.out.println(startField);
 				System.out.println("Move to?");
 				endField = in.next();
-				while (checkValidityOfInput(endField, Game1, b) == false){
+				while (checkValidityOfInput_moveto(endField, Game1, b) == false){
 					endField = in.next();
 				}
 				tempEndField = converted(endField);
 				//test print
 				System.out.println(endField);
-				// TODO: move function comes here
-				
+				b.getBox(tempStartField[0], tempStartField[1]).getPiece().canMove(b, b.getBox(tempStartField[0], tempStartField[1]), b.getBox(tempEndField[0], tempEndField[1]));
+
 				// TODO: here comes a check if the game is over, if not status is set to White_Turn
 				Game1.setStatus(GameStatus.WHITE_TURN);
 			}
@@ -117,7 +117,40 @@ public class Main {
 		}
 		return (validString && validPiece);
 	}
-	
+
+	static boolean checkValidityOfInput_moveto(String input, Game game, Board b){
+		List<String> validLetters = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h");
+		List<String> validNumbers = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8");
+		boolean validString = false;
+		boolean validPiece = true;
+		if (input.length() == 2 && (validLetters.contains(input.substring(0, 1)) && validNumbers.contains(input.substring(1, 2)))){
+			validString = true;
+		} else {
+			System.out.print("Invalid input! Try Again!");
+			return false;
+		}
+		int tempField[] = converted(input);
+		if (GameStatus.WHITE_TURN == game.getStatus() && b.getBox(tempField[0],tempField[1]).getPiece() != null) {
+			if (b.getBox(tempField[0], tempField[1]).getPiece().isWhite() == true){
+				System.out.println("You have to choose a field with a white Piece! Try again!");
+				validPiece = false;
+			} else {
+				System.out.println("You did choose: " + b.getBox(tempField[0], tempField[1]).getPiece());
+			}
+		}
+		if (GameStatus.BLACK_TURN == game.getStatus() && b.getBox(tempField[0],tempField[1]).getPiece() != null ) {
+			if (b.getBox(tempField[0], tempField[1]).getPiece().isWhite() == false){
+				System.out.println("You have to choose a field with a black Piece! Try again!");
+				validPiece = false;
+			}
+			else {
+				System.out.println("You did choose: " + b.getBox(tempField[0], tempField[1]).getPiece());
+			}
+		}
+		return (validString && validPiece);
+	}
+
+
 	/**
 	 * @param input from the player e. g. "b1"
 	 * @return a int[] with 2 values, one for the row and one for the column of the matrix

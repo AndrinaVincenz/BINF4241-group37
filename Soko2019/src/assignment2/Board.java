@@ -37,7 +37,6 @@ package assignment2;
 			boxes[1][5] = new Field(1, 5, new Pawn(false));
 			boxes[1][6] = new Field(1, 6, new Pawn(false));
 			boxes[1][7] = new Field(1, 7, new Pawn(false));
-			//...
 
 
 			// initialize black pieces 
@@ -57,7 +56,6 @@ package assignment2;
 			boxes[6][5] = new Field(6, 5, new Pawn(true));
 			boxes[6][6] = new Field(6, 6, new Pawn(true));
 			boxes[6][7] = new Field(6, 7, new Pawn(true));
-			//... 
 
 			// initialize remaining boxes without any piece 
 			for (int i = 2; i < 6; i++) { 
@@ -66,6 +64,7 @@ package assignment2;
 				} 
 			} 
 		}
+
 
 		public void getBoard(){
 			for (int i = 0; i < 8; i++) { 
