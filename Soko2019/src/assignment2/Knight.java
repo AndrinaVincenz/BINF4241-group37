@@ -5,8 +5,12 @@ public class Knight extends Piece {
 	
     public Knight(boolean white) {
     	super(white);
-    } 
-  
+    }
+	@Override
+	public String getName() {
+		return this.name;
+	}
+
     @Override
     public boolean canMove(Board board, Field start, Field end) 
     { 

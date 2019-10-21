@@ -48,7 +48,8 @@ public abstract class Piece {
 				if(canEat(board,end)) {
 					board.getBox(endx,endy).getPiece().setKilled(true);
 					board.getBox(endx,endy).getPiece().setField(null);	
-				}	
+				}
+				start.setPiece(null);
 				this.currentfield = end;
 				board.getBox(endx,endy).setPiece(this);
 				res = true;
