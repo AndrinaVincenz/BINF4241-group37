@@ -156,7 +156,7 @@ public class Main {
 				return true;
 			}
 		} else if (possibleMovesStartPosition.size() == 1 && input.contains("x")) {
-			if (b.getBox(tempEndField[0], tempEndField[1]).getPiece() == null || b.getBox(tempEndField[0], tempEndField[1]).getPiece().isWhite() != color) {
+			if (b.getBox(tempEndField[0], tempEndField[1]).getPiece() == null || b.getBox(tempEndField[0], tempEndField[1]).getPiece().isWhite() == color) {
 				System.out.println("Can't eat on that position! Please try again!");
 				return false;
 			} else {
