@@ -24,7 +24,7 @@ public class Board {
 		} 
 
 		public void resetBoard() {
-			// initialize white pieces 
+			// initialize black pieces 
 			boxes[0][0] = new Field(0, 0, new Rook(false));
 			boxes[0][1] = new Field(0, 1, new Knight(false));
 			boxes[0][2] = new Field(0, 2, new Bishop(false));
@@ -33,17 +33,25 @@ public class Board {
 			boxes[0][5] = new Field(0, 5, new Bishop(false));
 			boxes[0][6] = new Field(0, 6, new Knight(false));
 			boxes[0][7] = new Field(0, 7, new Rook(false));
-			boxes[1][0] = new Field(1, 0, new Pawn(false));
+		/*	boxes[1][0] = new Field(1, 0, new Pawn(false));
 			boxes[1][1] = new Field(1, 1, new Pawn(false));
 			boxes[1][2] = new Field(1, 2, new Pawn(false));
 			boxes[1][3] = new Field(1, 3, new Pawn(false));
 			boxes[1][4] = new Field(1, 4, new Pawn(false));
 			boxes[1][5] = new Field(1, 5, new Pawn(false));
 			boxes[1][6] = new Field(1, 6, new Pawn(false));
-			boxes[1][7] = new Field(1, 7, new Pawn(false));
+			boxes[1][7] = new Field(1, 7, new Pawn(false)); */
+			boxes[1][0] = new Field(1, 0, null);
+			boxes[1][1] = new Field(1, 1, null);
+			boxes[1][2] = new Field(1, 2, null);
+			boxes[1][3] = new Field(1, 3, null);
+			boxes[1][4] = new Field(1, 4, null);
+			boxes[1][5] = new Field(1, 5, null);
+			boxes[1][6] = new Field(1, 6, null);
+			boxes[1][7] = new Field(1, 7, null); 
 
 
-			// initialize black pieces 
+			// initialize white pieces 
 			boxes[7][0] = new Field(7, 0, new Rook(true));
 			boxes[7][1] = new Field(7, 1, new Knight(true));
 			boxes[7][2] = new Field(7, 2, new Bishop(true));
@@ -52,14 +60,22 @@ public class Board {
 			boxes[7][5] = new Field(7, 5, new Bishop(true));
 			boxes[7][6] = new Field(7, 6, new Knight(true));
 			boxes[7][7] = new Field(7, 7, new Rook(true));
-			boxes[6][0] = new Field(6, 0, new Pawn(true));
+		/*	boxes[6][0] = new Field(6, 0, new Pawn(true));
 			boxes[6][1] = new Field(6, 1, new Pawn(true));
 			boxes[6][2] = new Field(6, 2, new Pawn(true));
 			boxes[6][3] = new Field(6, 3, new Pawn(true));
 			boxes[6][4] = new Field(6, 4, new Pawn(true));
 			boxes[6][5] = new Field(6, 5, new Pawn(true));
 			boxes[6][6] = new Field(6, 6, new Pawn(true));
-			boxes[6][7] = new Field(6, 7, new Pawn(true));
+			boxes[6][7] = new Field(6, 7, new Pawn(true)); */
+			boxes[6][0] = new Field(1, 0, null);
+			boxes[6][1] = new Field(1, 1, null);
+			boxes[6][2] = new Field(1, 2, null);
+			boxes[6][3] = new Field(1, 3, null);
+			boxes[6][4] = new Field(1, 4, null);
+			boxes[6][5] = new Field(1, 5, null);
+			boxes[6][6] = new Field(1, 6, null);
+			boxes[6][7] = new Field(1, 7, null); 
 
 			// initialize remaining boxes without any piece 
 			for (int i = 2; i < 6; i++) { 
