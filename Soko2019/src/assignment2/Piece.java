@@ -40,23 +40,25 @@ public abstract class Piece {
 		int endx = end.getX();
 		int endy = end.getY();
 		boolean res = false;
-		//check if right startfield
-		if (this.currentfield == start) {
-			// checks if he can land on the field
+		
+ 
 			if(posd[endx][endy] == true) {
+				
 				// checks if he can eat someone 
 				if(canEat(board,end)) {
 					board.getBox(endx,endy).getPiece().setKilled(true);
-					board.getBox(endx,endy).getPiece().setField(null);	
+					board.getBox(endx,endy).getPiece().setField(null);
+					board.getBox(endx,endy).setPiece(null);
 				}
 				start.setPiece(null);
 				this.currentfield = end;
 				board.getBox(endx,endy).setPiece(this);
+		
 				res = true;
 			}
-		}
+		
 		//sets firstMove Pawn to false and sets count = 1 to check in pawn class for en passant
-		if (this instanceof Pawn && res == true) {
+		if (this instanceof Pawn && res == true && (this.currentfield.getX() != 1 || this.currentfield.getX() != 6)) {
 			this.SetCount(1);
 			if (this.GetFirstMove() == true) {		
 			this.SetFirstMove(false);
@@ -76,6 +78,7 @@ public abstract class Piece {
 			return false;
 		}
 	}
+
 
 	public String getName() {
 		return this.name;

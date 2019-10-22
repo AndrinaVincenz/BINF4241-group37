@@ -128,17 +128,18 @@ public class Pawn extends Piece {
 		int endy = end.getY();
 		if (board.getBox(endx,endy).getPiece() != null && this.isWhite() != board.getBox(endx,endy).getPiece().isWhite()) {
 			return true;
+			
 		} 
 			 
 		//kill en passant
 		else if(this.isWhite() && endx == 2 && board.getBox(endx,endy).getPiece() == null) {
 			board.getBox(endx+1,endy).getPiece().setKilled(true);
 			board.getBox(endx+1,endy).getPiece().setField(null);
-			
+			board.getBox(endx+1,endy).setPiece(null);
 		}else if(this.isWhite() == false && endx == 5 && board.getBox(endx,endy).getPiece() == null) {
 			board.getBox(endx-1,endy).getPiece().setKilled(true);
 			board.getBox(endx-1,endy).getPiece().setField(null);
-			
+			board.getBox(endx-1,endy).setPiece(null);
 		}return false;
     }	
 

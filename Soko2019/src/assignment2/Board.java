@@ -8,7 +8,9 @@ package assignment2;
 			this.resetBoard(); 
 		} 
 		
-	
+		public void setBox(int x, int y) {
+			
+		}
 
 		public Field getBox(int x, int y)
 		{ 
@@ -69,7 +71,7 @@ package assignment2;
 		public void getBoard(){
 			for (int i = 0; i < 8; i++) { 
 				for (int j = 0; j < 8; j++) { 
-					if (boxes[i][j].getPiece() != null && boxes[i][j].getPiece().isKilled() == false) {
+					if (boxes[i][j].getPiece() != null) {
 						if ((boxes[i][j].getPiece().isWhite())) {
 							String c = "W";
 							System.out.print("[" + c + boxes[i][j].getPiece().getName() + "]");
@@ -87,9 +89,87 @@ package assignment2;
 		 public boolean isValid(int x, int y) {
 			 if (x < 0 || x > 7 || y < 0 || y > 7) { 
 					return false;
-			} else {
-				return true;
+		} else {
+			return true;
+		}
+	}
+
+	public boolean check(boolean c) {
+		boolean color = c;
+		int currentKingX = -1;
+		int currentKingY = -1;
+		boolean check = false;
+		// find currentfield King
+		for (int i = 0; i < boxes.length; ++i) {
+			for (int j = 0; j < boxes[i].length; ++j) {
+				if (boxes[i][j].getPiece().getName() == "K" && boxes[i][j].getPiece().isWhite() == c) {
+					currentKingX = i;
+					currentKingY = j;
+				}
+
 			}
-		 }
-		 
-	} 
+		}
+		// find possibledest from other color and see if they overlapp
+		for (int i = 0; i < boxes.length; ++i) {
+			for (int j = 0; j < boxes[i].length; ++j) {
+				if (boxes[i][j].getPiece() != null && boxes[i][j].getPiece().isWhite() != c) {
+					boolean[][] possibleM = boxes[i][j].getPiece().getpossibleDestination(this);
+					if (possibleM[currentKingX][currentKingY] == true) {
+						check = true;
+					}
+				}
+
+			}
+		}
+		return check;
+	}
+
+	public boolean checkMate(boolean co) {
+		boolean color = co;
+		int currentKingX = -1;
+		int currentKingY = -1;
+		boolean checkmate = true;
+		boolean[][] possibleMovesKing = new boolean[8][8];
+		// find currentfield King
+		for (int i = 0; i < boxes.length; ++i) {
+			for (int j = 0; j < boxes[i].length; ++j) {
+				if (boxes[i][j].getPiece().getName() == "K" && boxes[i][j].getPiece().isWhite() == color) {
+					currentKingX = i;
+					currentKingY = j;
+				}
+
+			}
+		}
+		possibleMovesKing = boxes[currentKingX][currentKingY].getPiece().getpossibleDestination(this);
+		// find possibledest from other color and see if they overlapp
+		for (int i = 0; i < boxes.length; ++i) {
+			for (int j = 0; j < boxes[i].length; ++j) {
+				if (boxes[i][j].getPiece() != null && boxes[i][j].getPiece().isWhite() != color) {
+
+					boolean[][] possibleM = boxes[i][j].getPiece().getpossibleDestination(this);
+
+					for (int c = 0; i < boxes.length; ++c) {
+						for (int d = 0; j < boxes[i].length; ++d) {
+							if (possibleM[c][d] == true && possibleMovesKing[c][d] == true) {
+								possibleMovesKing[c][d] = false;
+							}
+						}
+					}
+				}
+
+			}
+		}
+		for (int i = 0; i < possibleMovesKing.length; ++i) {
+			for (int j = 0; j < possibleMovesKing[i].length; ++j) {
+				if(possibleMovesKing[i][j] == true) {
+					checkmate = false;
+				}
+
+			}
+		}
+		return checkmate;
+	}
+	
+
+
+}
