@@ -105,40 +105,12 @@ public class Main {
 		}
 
 		
-
-		
 		//6 cases
 		if (input.contains("x")){
 			return false;
 		}
-		
-		boolean validString = false;
-		boolean validPiece = false;
-		if (input.length() == 2 && (validLetters.contains(input.substring(0, 1)) && validNumbers.contains(input.substring(1, 2)))){
-			validString = true;
-		} else {
-		System.out.print("Invalid input! Try Again!");
+
 		return false;
-		}
-		int tempField[] = converted(input);
-		if (GameStatus.WHITE_TURN == game.getStatus()) {
-			if (b.getBox(tempField[0], tempField[1]).getPiece() != null && b.getBox(tempField[0], tempField[1]).getPiece().isWhite() == true){
-			System.out.println("You did choose: " + b.getBox(tempField[0], tempField[1]).getPiece());
-			validPiece = true;
-			} else {
-			System.out.println("You have to choose a white Piece! Try again!");
-			}
-		}
-		if (GameStatus.BLACK_TURN == game.getStatus()) {
-			if (b.getBox(tempField[0], tempField[1]).getPiece() != null && b.getBox(tempField[0], tempField[1]).getPiece().isWhite() == false){
-			System.out.println("You did choose: " + b.getBox(tempField[0], tempField[1]).getPiece());
-			validPiece = true;
-			}
-			else {
-			System.out.println("You have to choose a black Piece! Try again!");
-			}
-		}
-		return (validString && validPiece);
 	}
 
 
