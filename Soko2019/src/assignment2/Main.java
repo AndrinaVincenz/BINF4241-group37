@@ -42,11 +42,11 @@ public class Main {
 					input = in.next();
 				}
 				//Ausführung
-				tempStartField = converted(startField);
+				
+				
 				System.out.println("You move the figure on position:" + startField);
 				
 				
-				tempEndField = converted(endField);
 				System.out.println(endField);
 				System.out.println(b.getBox(tempStartField[0], tempStartField[1]).getPiece().canMove(b, b.getBox(tempStartField[0], tempStartField[1]), b.getBox(tempEndField[0], tempEndField[1])));
 				
@@ -82,34 +82,88 @@ public class Main {
 		System.out.println(figure + "<- Figure");
 		
 		
-		ArrayList<Field> possibleMoves = b.findInput(figure, color);
-		System.out.println(possibleMoves + "before removes");
+		ArrayList<Field> possibleMovesStartPosition = b.findInput(figure, color);
+		System.out.println(possibleMovesStartPosition + "before removes");
 		
-		for (Field f : possibleMoves){
-			boolean [][] possibleFields = b.getBox(f.getX(), f.getY()).getPiece().getpossibleDestination(b);
+		//search for possibleMoves
+		for (int i = 0; i < possibleMovesStartPosition.size(); i++){
+			boolean [][] possibleFields = b.getBox(possibleMovesStartPosition.get(i).getX(), possibleMovesStartPosition.get(i).getY()).getPiece().getpossibleDestination(b);
 			int tempField[] = converted(endPosition);
-			if (possibleFields[tempField[0]][tempField[1]] != true){
-				possibleMoves.remove(f);
+			if (!possibleFields[tempField[0]][tempField[1]]){
+				possibleMovesStartPosition.remove(possibleMovesStartPosition.get(i));
 			};
 		}
-		System.out.println(possibleMoves + "after removes");
+		System.out.println(possibleMovesStartPosition + "after removes with 3 values");
+
 		
-		if (possibleMoves.size() == 0) {
+		// take additional information if input.length is equal 4
+		if (!input.contains("x") && input.length() == 4){
+			for (int i = 0; i < possibleMovesStartPosition.size(); i++){
+			if (possibleMovesStartPosition.get(i).getY() != (converted(input.charAt(1) + "q")[1])){
+				possibleMovesStartPosition.remove(i);
+			}
+			}
+			System.out.println(possibleMovesStartPosition + "after removes with 4 values");
+		}
+			
+		// take additional information if input.length is equal 5
+		if (!input.contains("x") && input.length() == 5){
+			for (int i = 0; i < possibleMovesStartPosition.size(); i++){
+			if ((possibleMovesStartPosition.get(i).getY() != (converted(input.charAt(1) + "q")[1])) || (possibleMovesStartPosition.get(i).getX() != (converted("q" + input.charAt(2))[0]))){
+				possibleMovesStartPosition.remove(i);
+			}
+			}
+			System.out.println(possibleMovesStartPosition + "after removes with 5 values");
+		}
+		
+		// take additional information if input.length is equal 5 and contains x
+		if (input.contains("x") && input.length() == 5) {
+			for (int i = 0; i < possibleMovesStartPosition.size(); i++) {
+				if (possibleMovesStartPosition.get(i).getY() != (converted(input.charAt(1) + "q")[1])) {
+					possibleMovesStartPosition.remove(i);
+				}
+			}
+			System.out.println(possibleMovesStartPosition + "after removes with 5 values (contains x)");
+		}
+		
+		// take additional information if input.length is equal 6 and contains x
+		if (input.contains("x") && input.length() == 6) {
+			for (int i = 0; i < possibleMovesStartPosition.size(); i++) {
+				if ((possibleMovesStartPosition.get(i).getY() != (converted(input.charAt(1) + "q")[1]))
+						|| (possibleMovesStartPosition.get(i).getX() != (converted("q" + input.charAt(2))[0]))) {
+					possibleMovesStartPosition.remove(i);
+				}
+			}
+			System.out.println(possibleMovesStartPosition + "after removes with 6 values (contains x");
+		}
+		
+	
+		if (possibleMovesStartPosition.size() == 0) {
 			System.out.println("This move is invalid! Please try again!");
-		} else if (possibleMoves.size() == 1) {
-			System.out.println("This move is possible!");
-			return true;
-		} else {
-			System.out.println("Mulitple possible start position: Be more precise!");
-			return false;
+		} else if (possibleMovesStartPosition.size() == 1 && !input.contains("x")) {
+			int tempField[] = converted(endPosition);
+			if (b.getBox(tempField[0], tempField[1]).getPiece() != null) {
+				System.out.println("Occupied, if you wanna eat, insert a 'x'!");
+				return false;
+			} else {
+				System.out.println("This move is possible!");
+				return true;
+			}
+		} else if (possibleMovesStartPosition.size() == 1 && input.contains("x")) {
+			int tempField[] = converted(endPosition);
+			if (b.getBox(tempField[0], tempField[1]).getPiece() == null || b.getBox(tempField[0], tempField[1]).getPiece().isWhite() != color) {
+				System.out.println("Can't eat on that position! Please try again!");
+				return false;
+			} else {
+				System.out.println("This move is possible!");
+				return true;
+			}
+		} else if (possibleMovesStartPosition.size() > 1) {
+			if (input.length() == 3) {
+				System.out.println("Mulitple possible start position: Be more precise!");
+				return false;
+			}
 		}
-
-		
-		//6 cases
-		if (input.contains("x")){
-			return false;
-		}
-
 		return false;
 	}
 
@@ -126,10 +180,10 @@ public class Main {
 		int y = -1;
 		for (int i = 0; i < letters.length; i++) {
 			if (input.substring(0, 1).equals(letters[i])) {
-				x = i;
+				y = i;
 			}
 			if (input.substring(1, 2).equals(numbers[i])) {
-				y = i;
+				x = i;
 			}
 		}
 		result[0] = x;
