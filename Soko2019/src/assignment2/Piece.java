@@ -34,40 +34,45 @@ public abstract class Piece {
 	public Field getField() {
 		return this.currentfield;
 	}
-
+	
 	public boolean canMove(Board board, Field start, Field end) {
 		boolean[][] posd = this.getpossibleDestination(board);
 		int endx = end.getX();
 		int endy = end.getY();
 		boolean res = false;
-		
- 
 			if(posd[endx][endy] == true) {
-				
-				// checks if he can eat someone 
-				if(canEat(board,end)) {
-					board.getBox(endx,endy).getPiece().setKilled(true);
-					board.getBox(endx,endy).getPiece().setField(null);
-					board.getBox(endx,endy).setPiece(null);
-				}
-				start.setPiece(null);
-				this.currentfield = end;
-				board.getBox(endx,endy).setPiece(this);
-		
 				res = true;
 			}
+		return res;
+	}
+
+	public void Move(Board board, Field start, Field end) {
+	
+		int endx = end.getX();
+		int endy = end.getY();
 		
+		start.setPiece(null);
+		this.currentfield = end;
+		board.getBox(endx,endy).setPiece(this);
 		//sets firstMove Pawn to false and sets count = 1 to check in pawn class for en passant
-		if (this instanceof Pawn && res == true && (this.currentfield.getX() != 1 || this.currentfield.getX() != 6)) {
+		if (this instanceof Pawn) {
 			this.SetCount(1);
 			if (this.GetFirstMove() == true) {		
 			this.SetFirstMove(false);
 		}
 		}
-		return res;
-		
 	}
-
+				
+			
+				
+		
+		public void Eat(Board board, Field end) {
+			int endx = end.getX();
+			int endy = end.getY();
+			board.getBox(endx,endy).getPiece().setKilled(true);
+			board.getBox(endx,endy).getPiece().setField(null);
+			board.getBox(endx,endy).setPiece(null);
+		}
 
 	public boolean canEat(Board board, Field end) {
 		int endx = end.getX();

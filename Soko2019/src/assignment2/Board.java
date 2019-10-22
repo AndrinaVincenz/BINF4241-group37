@@ -1,6 +1,8 @@
 package assignment2;
 
-	public class Board { 
+import java.util.ArrayList;
+
+public class Board { 
 		Field[][] boxes = new Field[8][8]; 
 
 		public Board() 
@@ -170,6 +172,21 @@ package assignment2;
 		return checkmate;
 	}
 	
+	public ArrayList<Field> findInput(String name, Boolean color) {
+		
+		ArrayList<Field> fieldList = new ArrayList<Field>();
+
+		for (int i = 0; i < boxes.length; ++i) {
+			for (int j = 0; j < boxes[i].length; ++j) {
+				if(boxes[i][j].getPiece() != null && boxes[i][j].getPiece().getName() == name && boxes[i][j].getPiece().isWhite() == color ) {
+				
+					fieldList.add(boxes[i][j]);
+				}
+			}
+		}
+	
+		return fieldList;
+	}
 
 
 }
