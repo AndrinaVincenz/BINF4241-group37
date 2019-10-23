@@ -42,7 +42,15 @@ public class Main {
 					input = in.next();
 				}
 				System.out.println("You did your move");
-				Game1.setStatus(GameStatus.BLACK_TURN);
+				/*if(b.checkMate(false) == true){
+					Game1.setStatus(GameStatus.WHITE_WIN);
+				}*/
+				if(b.check(false) == true){
+					Game1.setStatus(GameStatus.BLACK_CHECK);
+				}
+				else {
+					Game1.setStatus(GameStatus.BLACK_TURN);
+				}
 			} else if (Game1.getStatus() == GameStatus.BLACK_TURN){
 				b.getBoard();
 				System.out.println("It's your turn " + playernames[1] + "! (black player), make your choice?");
@@ -52,9 +60,52 @@ public class Main {
 					input = in.next();
 				}
 				System.out.println("You did your move");
-				Game1.setStatus(GameStatus.WHITE_TURN);
+				if(b.checkMate(false) == true){
+					Game1.setStatus(GameStatus.BLACK_WIN);
+				}
+				else if(b.check(false) == true){
+					Game1.setStatus(GameStatus.WHITE_CHECK);
+				}
+				else {
+					Game1.setStatus(GameStatus.WHITE_TURN);
+				}
 			}
-			
+			else if (Game1.getStatus() == GameStatus.WHITE_CHECK) {
+				b.getBoard();
+				System.out.println("It's your turn " + playernames[0] + ",you are checked! (white player), make your choice?");
+				input = in.next();
+				while (checkValidityOfInput(input, Game1, b, true) == false) {
+					//Validity
+					input = in.next();
+				}
+				System.out.println("You did your move");
+				/*if(b.checkMate(false) == true){
+					Game1.setStatus(GameStatus.WHITE_WIN);
+				}*/
+				if (b.check(false) == true) {
+					Game1.setStatus(GameStatus.BLACK_CHECK);
+				} else {
+					Game1.setStatus(GameStatus.BLACK_TURN);
+				}
+			}
+			else if (Game1.getStatus() == GameStatus.BLACK_CHECK) {
+				b.getBoard();
+				System.out.println("It's your turn " + playernames[0] + ",you are checked! (white player), make your choice?");
+				input = in.next();
+				while (checkValidityOfInput(input, Game1, b, true) == false) {
+					//Validity
+					input = in.next();
+				}
+				System.out.println("You did your move");
+				/*if(b.checkMate(false) == true){
+					Game1.setStatus(GameStatus.WHITE_WIN);
+				}*/
+				if (b.check(false) == true) {
+					Game1.setStatus(GameStatus.BLACK_CHECK);
+				} else {
+					Game1.setStatus(GameStatus.BLACK_TURN);
+				}
+			}
 		}
 		System.out.println(Game1.getStatus());		
 	}	
