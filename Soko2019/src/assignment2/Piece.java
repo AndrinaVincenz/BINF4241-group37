@@ -3,7 +3,7 @@ package assignment2;
 public abstract class Piece {
 	String name = "";
 	private boolean killed = false;
-	private boolean white = false;
+	private boolean white;
 	protected Field currentfield;
 
 	public Piece(boolean white) {
@@ -12,7 +12,7 @@ public abstract class Piece {
 	}
 
 	public boolean isWhite() {
-		return this.white == true;
+		return this.white;
 	}
 
 	public void setWhite(boolean white) {

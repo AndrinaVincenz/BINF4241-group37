@@ -33,14 +33,14 @@ public class Board {
 			boxes[0][5] = new Field(0, 5, new Bishop(false));
 			boxes[0][6] = new Field(0, 6, new Knight(false));
 			boxes[0][7] = new Field(0, 7, new Rook(false));
-		/*	boxes[1][0] = new Field(1, 0, new Pawn(false));
+			boxes[1][0] = new Field(1, 0, new Pawn(false));
 			boxes[1][1] = new Field(1, 1, new Pawn(false));
 			boxes[1][2] = new Field(1, 2, new Pawn(false));
 			boxes[1][3] = new Field(1, 3, new Pawn(false));
 			boxes[1][4] = new Field(1, 4, new Pawn(false));
 			boxes[1][5] = new Field(1, 5, new Pawn(false));
 			boxes[1][6] = new Field(1, 6, new Pawn(false));
-			boxes[1][7] = new Field(1, 7, new Pawn(false)); */
+			boxes[1][7] = new Field(1, 7, new Pawn(false)); 
 			boxes[1][0] = new Field(1, 0, null);
 			boxes[1][1] = new Field(1, 1, null);
 			boxes[1][2] = new Field(1, 2, null);

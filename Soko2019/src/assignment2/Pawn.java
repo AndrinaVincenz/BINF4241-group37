@@ -8,6 +8,8 @@ public class Pawn extends Piece {
 
 	public Pawn(boolean white) {
 		super(white);
+		this.firstMove = true;
+		this.c = 0;
 	}
 
 	@Override
@@ -43,20 +45,18 @@ public class Pawn extends Piece {
 				possibleM[i][j] = false;
 			}
 		}
+		possibleM[currentfield.getX()][currentfield.getY()] = true;
 
-		if (this.isWhite() == false) {
-			int[][] possibledirections = { { 1, -1 }, { 1, 1 }, { 1, 0 } };
+		if (!(this.isWhite())) {
+			int[][] possibledirections = { { 1, 0 }, { 1, 1 }, { 1, -1 } };
 
 			for (int i = 0; i < possibledirections.length; i++) {
-				int x = currentfield.getX();
-				int y = currentfield.getY();
-				x = x + (possibledirections[i][0]);
-				y = y + possibledirections[i][1];
-
+				int x = currentfield.getX() + (possibledirections[i][0]);
+				int y = currentfield.getY() + possibledirections[i][1];
 				if (b.isValid(x, y)) {
-					possibleM[x][y] = true;
-					if (i == 0 && (checkIfSameColor(b, x, y) == 1 || checkIfSameColor(b, x, y) == 2)) {
-						possibleM[x][y] = false;
+					
+					if (i == 0 && b.getBox(x,y).getPiece() == null) {
+						possibleM[x][y] = true;
 					} else if (i > 0 && b.getBox(x, y).getPiece() != null && checkIfSameColor(b, x, y) == 2) {
 						possibleM[x][y] = true;
 					} else if (i > 0 && currentfield.getX() == 4) {
@@ -73,28 +73,27 @@ public class Pawn extends Piece {
 				int x = currentfield.getX() + 2;
 				int y = currentfield.getY();
 				if (b.isValid(x, y)) {
-					possibleM[x][y] = true;
-					if (checkIfSameColor(b, x, y) == 1 || checkIfSameColor(b, x, y) == 2) {
-						possibleM[x][y] = false;
+					
+					if (b.getBox(x,y).getPiece() == null) {
+						possibleM[x][y] = true;
 					}
 				}
 
 			}
 
 		}
-		if (this.isWhite() == true) {
+		if (this.isWhite()) {
 			int[][] possibledirections = { { -1, 0 }, { -1, -1 }, { -1, 1 } };
 
 			for (int i = 0; i < possibledirections.length; i++) {
-				int x = currentfield.getX();
-				int y = currentfield.getY();
-				x = x + (possibledirections[i][0]);
-				y = y + possibledirections[i][1];
+			
+				int x = currentfield.getX() + (possibledirections[i][0]);
+				int y = currentfield.getY() + possibledirections[i][1];
 
 				if (b.isValid(x, y)) {
-					possibleM[x][y] = true;
-					if ((checkIfSameColor(b, x, y) == 1 || checkIfSameColor(b, x, y) == 2)) {
-						possibleM[x][y] = false;
+					
+					if (i == 0 && b.getBox(x,y).getPiece() == null) {
+						possibleM[x][y] = true;
 					} else if (i > 0 && b.getBox(x, y).getPiece() != null && checkIfSameColor(b, x, y) == 2) {
 						possibleM[x][y] = true;
 						// check if there is en passant possible
@@ -113,16 +112,22 @@ public class Pawn extends Piece {
 				int x = currentfield.getX() - 2;
 				int y = currentfield.getY();
 				if (b.isValid(x, y)) {
-					possibleM[x][y] = true;
-					if (checkIfSameColor(b, x, y) == 1 || checkIfSameColor(b, x, y) == 2) {
-						possibleM[x][y] = false;
+					
+					if (b.getBox(x,y).getPiece() == null) {
+						possibleM[x][y] = true;
 					}
 				}
 
 			}
 
 		}
-		possibleM[currentfield.getX()][currentfield.getY()] = true;
+		for (int i = 0; i < possibleM.length; ++i) {
+			for (int j = 0; j < possibleM[i].length; ++j) {
+				System.out.print(possibleM[i][j]);
+			}
+			System.out.print("\n");
+		}
+	
 		return possibleM;
 	}
 
