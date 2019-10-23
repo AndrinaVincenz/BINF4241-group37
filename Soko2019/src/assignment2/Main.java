@@ -41,21 +41,17 @@ public class Main {
 					//Validity
 					input = in.next();
 				}
-				//Ausführung
-				
-				
-				System.out.println("You move the figure on position:" + startField);
-				
-				
-				System.out.println(endField);
-				System.out.println(b.getBox(tempStartField[0], tempStartField[1]).getPiece().canMove(b, b.getBox(tempStartField[0], tempStartField[1]), b.getBox(tempEndField[0], tempEndField[1])));
-				
-				// TODO: here comes a check if the game is over, if not status is set to Black_Turn
+				System.out.println("You did your move");
 				Game1.setStatus(GameStatus.BLACK_TURN);
 			} else if (Game1.getStatus() == GameStatus.BLACK_TURN){
 				b.getBoard();
-				
-				// TODO: here comes a check if the game is over, if not status is set to White_Turn
+				System.out.println("It's your turn " + playernames[1] + "! (black player), make your choice?");
+				input = in.next();
+				while (checkValidityOfInput(input, Game1, b, false) == false){
+					//Validity
+					input = in.next();
+				}
+				System.out.println("You did your move");
 				Game1.setStatus(GameStatus.WHITE_TURN);
 			}
 			
@@ -153,6 +149,7 @@ public class Main {
 				return false;
 			} else {
 				System.out.println("This move is possible!");
+				possibleMovesStartPosition.get(0).getPiece().Move(b,possibleMovesStartPosition.get(0),b.getBox(tempEndField[0], tempEndField[1]));
 				return true;
 			}
 		} else if (possibleMovesStartPosition.size() == 1 && input.contains("x")) {
@@ -161,6 +158,7 @@ public class Main {
 				return false;
 			} else {
 				System.out.println("This move is possible!");
+				possibleMovesStartPosition.get(0).getPiece().Move(b,possibleMovesStartPosition.get(0),b.getBox(tempEndField[0], tempEndField[1]));
 				return true;
 			}
 		} else if (possibleMovesStartPosition.size() > 1) {
