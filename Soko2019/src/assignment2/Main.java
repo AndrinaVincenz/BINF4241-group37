@@ -42,9 +42,9 @@ public class Main {
 					input = in.next();
 				}
 				System.out.println("You did your move");
-				/*if(b.checkMate(false) == true){
+				if(b.checkMate(false) == true){
 					Game1.setStatus(GameStatus.WHITE_WIN);
-				}*/
+				}
 				if(b.check(false) == true){
 					Game1.setStatus(GameStatus.BLACK_CHECK);
 				}
@@ -60,10 +60,10 @@ public class Main {
 					input = in.next();
 				}
 				System.out.println("You did your move");
-				if(b.checkMate(false) == true){
+				if(b.checkMate(true) == true){
 					Game1.setStatus(GameStatus.BLACK_WIN);
 				}
-				else if(b.check(false) == true){
+				else if(b.check(true) == true){
 					Game1.setStatus(GameStatus.WHITE_CHECK);
 				}
 				else {
@@ -79,9 +79,9 @@ public class Main {
 					input = in.next();
 				}
 				System.out.println("You did your move");
-				/*if(b.checkMate(false) == true){
+				if(b.checkMate(false) == true){
 					Game1.setStatus(GameStatus.WHITE_WIN);
-				}*/
+				}
 				if (b.check(false) == true) {
 					Game1.setStatus(GameStatus.BLACK_CHECK);
 				} else {
@@ -97,14 +97,18 @@ public class Main {
 					input = in.next();
 				}
 				System.out.println("You did your move");
-				/*if(b.checkMate(false) == true){
+				if(b.checkMate(false) == true){
 					Game1.setStatus(GameStatus.WHITE_WIN);
-				}*/
+				}
 				if (b.check(false) == true) {
 					Game1.setStatus(GameStatus.BLACK_CHECK);
 				} else {
 					Game1.setStatus(GameStatus.BLACK_TURN);
 				}
+			}
+			else if (Game1.getStatus() == GameStatus.BLACK_WIN) {
+				System.out.println("b wins");
+				break;
 			}
 		}
 		System.out.println(Game1.getStatus());		
@@ -115,59 +119,62 @@ public class Main {
 	 * @param input from the player e. g. "b1"
 	 * @return true if the input is valid, and false if the input is invalid
 	 */
-	static boolean checkValidityOfInput(String input, Game game, Board b, boolean color){
+	static boolean checkValidityOfInput(String input, Game game, Board b, boolean color) {
 		List<String> validLetters = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h");
 		List<String> validNumbers = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8");
-		
-		if (input.length() < 3){
+
+		if (input.length() < 3) {
 			System.out.println("Not valid input: Too short!");
 			return false;
 		}
-		String endPosition = input.substring(input.length()-2, input.length());
+		String endPosition = input.substring(input.length() - 2, input.length());
 		System.out.println(endPosition + "<- endposition");
-		String figure = input.substring(0,1);
+		String figure = input.substring(0, 1);
 		System.out.println(figure + "<- Figure");
 		int tempEndField[] = converted(endPosition);
-		
+
 		ArrayList<Field> possibleMovesStartPosition = b.findInput(figure, color);
 		ArrayList<Field> tempCopy = new ArrayList<Field>();
 		tempCopy.addAll(possibleMovesStartPosition);
 		System.out.println(possibleMovesStartPosition + "before removes");
-		
-		//search for possibleMoves
 
-		for (int i = 0; i < possibleMovesStartPosition.size(); i++){
-			boolean [][] possibleFields = b.getBox(possibleMovesStartPosition.get(i).getX(), possibleMovesStartPosition.get(i).getY()).getPiece().getpossibleDestination(b);
-			if (!possibleFields[tempEndField[0]][tempEndField[1]]){
+		// search for possibleMoves
+
+		for (int i = 0; i < possibleMovesStartPosition.size(); i++) {
+			boolean[][] possibleFields = b
+					.getBox(possibleMovesStartPosition.get(i).getX(), possibleMovesStartPosition.get(i).getY())
+					.getPiece().getpossibleDestination(b);
+			if (!possibleFields[tempEndField[0]][tempEndField[1]]) {
 				tempCopy.remove(possibleMovesStartPosition.get(i));
-			};
+			}
+			;
 		}
 		possibleMovesStartPosition = tempCopy;
 		System.out.println(possibleMovesStartPosition + " after removes with 3 values");
 
-		
 		// take additional information if input.length is equal 4
-		if (!input.contains("x") && input.length() == 4){
-			for (int i = 0; i < possibleMovesStartPosition.size(); i++){
-			if (possibleMovesStartPosition.get(i).getY() != (converted(input.charAt(1) + "q")[1])){
-				tempCopy.remove(i);
-			}
+		if (!input.contains("x") && input.length() == 4) {
+			for (int i = 0; i < possibleMovesStartPosition.size(); i++) {
+				if (possibleMovesStartPosition.get(i).getY() != (converted(input.charAt(1) + "q")[1])) {
+					tempCopy.remove(i);
+				}
 			}
 			possibleMovesStartPosition = tempCopy;
 			System.out.println(possibleMovesStartPosition + "after removes with 4 values");
 		}
-			
+
 		// take additional information if input.length is equal 5
-		if (!input.contains("x") && input.length() == 5){
-			for (int i = 0; i < possibleMovesStartPosition.size(); i++){
-			if ((possibleMovesStartPosition.get(i).getY() != (converted(input.charAt(1) + "q")[1])) || (possibleMovesStartPosition.get(i).getX() != (converted("q" + input.charAt(2))[0]))){
-				tempCopy.remove(i);
-			}
+		if (!input.contains("x") && input.length() == 5) {
+			for (int i = 0; i < possibleMovesStartPosition.size(); i++) {
+				if ((possibleMovesStartPosition.get(i).getY() != (converted(input.charAt(1) + "q")[1]))
+						|| (possibleMovesStartPosition.get(i).getX() != (converted("q" + input.charAt(2))[0]))) {
+					tempCopy.remove(i);
+				}
 			}
 			possibleMovesStartPosition = tempCopy;
 			System.out.println(possibleMovesStartPosition + "after removes with 5 values");
 		}
-		
+
 		// take additional information if input.length is equal 5 and contains x
 		if (input.contains("x") && input.length() == 5) {
 			for (int i = 0; i < possibleMovesStartPosition.size(); i++) {
@@ -178,7 +185,7 @@ public class Main {
 			possibleMovesStartPosition = tempCopy;
 			System.out.println(possibleMovesStartPosition + "after removes with 5 values (contains x)");
 		}
-		
+
 		// take additional information if input.length is equal 6 and contains x
 		if (input.contains("x") && input.length() == 6) {
 			for (int i = 0; i < possibleMovesStartPosition.size(); i++) {
@@ -190,26 +197,49 @@ public class Main {
 			possibleMovesStartPosition = tempCopy;
 			System.out.println(possibleMovesStartPosition + "after removes with 6 values (contains x");
 		}
-		
-	
+
 		if (possibleMovesStartPosition.size() == 0) {
 			System.out.println("This move is invalid! Please try again!");
 		} else if (possibleMovesStartPosition.size() == 1 && !input.contains("x")) {
 			if (b.getBox(tempEndField[0], tempEndField[1]).getPiece() != null) {
 				System.out.println("Occupied, if you wanna eat, insert a 'x'!");
 				return false;
-			} else {
-				System.out.println("This move is possible!");
-				possibleMovesStartPosition.get(0).getPiece().Move(b,possibleMovesStartPosition.get(0),b.getBox(tempEndField[0], tempEndField[1]));
-				return true;
-			}
-		} else if (possibleMovesStartPosition.size() == 1 && input.contains("x")) {
-			if (b.getBox(tempEndField[0], tempEndField[1]).getPiece() == null || b.getBox(tempEndField[0], tempEndField[1]).getPiece().isWhite() == color) {
-				System.out.println("Can't eat on that position! Please try again!");
+			} else if (b.getBox(tempEndField[0], tempEndField[1]).getPiece() == null
+					&& possibleMovesStartPosition.get(0).getPiece() instanceof Pawn
+					&& possibleMovesStartPosition.get(0).getPiece().getField().getY() != tempEndField[1]) {
+				System.out.println("En passant, if you wanna eat, insert a 'x'!");
 				return false;
 			} else {
 				System.out.println("This move is possible!");
-				possibleMovesStartPosition.get(0).getPiece().Move(b,possibleMovesStartPosition.get(0),b.getBox(tempEndField[0], tempEndField[1]));
+				possibleMovesStartPosition.get(0).getPiece().Move(b, possibleMovesStartPosition.get(0),
+						b.getBox(tempEndField[0], tempEndField[1]));
+				return true;
+			}
+		} else if (possibleMovesStartPosition.size() == 1 && input.contains("x")) {
+			if (b.getBox(tempEndField[0], tempEndField[1]).getPiece() == null
+					&& possibleMovesStartPosition.get(0).getPiece() instanceof Pawn
+					&& possibleMovesStartPosition.get(0).getPiece().getField().getY() != tempEndField[1]) {
+				System.out.println("This move is possible!");
+				possibleMovesStartPosition.get(0).getPiece().Eat(b,
+						b.getBox(tempEndField[0], tempEndField[1]));
+				possibleMovesStartPosition.get(0).getPiece().Move(b, possibleMovesStartPosition.get(0),
+						b.getBox(tempEndField[0], tempEndField[1]));
+				
+				return true;
+
+			} else if (b.getBox(tempEndField[0], tempEndField[1]).getPiece() == null
+					|| b.getBox(tempEndField[0], tempEndField[1]).getPiece().isWhite() == color) {
+				System.out.println("Can't eat on that position! Please try again!");
+				return false;
+			}
+
+			else {
+				System.out.println("This move is possible!");
+				possibleMovesStartPosition.get(0).getPiece().Eat(b,
+						b.getBox(tempEndField[0], tempEndField[1]));
+				possibleMovesStartPosition.get(0).getPiece().Move(b, possibleMovesStartPosition.get(0),
+						b.getBox(tempEndField[0], tempEndField[1]));
+	
 				return true;
 			}
 		} else if (possibleMovesStartPosition.size() > 1) {

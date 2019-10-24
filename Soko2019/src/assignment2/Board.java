@@ -28,27 +28,20 @@ public class Board {
 			boxes[0][0] = new Field(0, 0, new Rook(false));
 			boxes[0][1] = new Field(0, 1, new Knight(false));
 			boxes[0][2] = new Field(0, 2, new Bishop(false));
-			boxes[0][4] = new Field(0, 3, new Queen(false));
-			boxes[0][3] = new Field(0, 4, new King(false));
+			boxes[0][3] = new Field(0, 3, new Queen(false));
+			boxes[0][4] = new Field(0, 4, new King(false));
 			boxes[0][5] = new Field(0, 5, new Bishop(false));
 			boxes[0][6] = new Field(0, 6, new Knight(false));
 			boxes[0][7] = new Field(0, 7, new Rook(false));
-			/*boxes[1][0] = new Field(1, 0, new Pawn(false));
+			boxes[1][0] = new Field(1, 0, new Pawn(false));
 			boxes[1][1] = new Field(1, 1, new Pawn(false));
 			boxes[1][2] = new Field(1, 2, new Pawn(false));
 			boxes[1][3] = new Field(1, 3, new Pawn(false));
 			boxes[1][4] = new Field(1, 4, new Pawn(false));
 			boxes[1][5] = new Field(1, 5, new Pawn(false));
 			boxes[1][6] = new Field(1, 6, new Pawn(false));
-			boxes[1][7] = new Field(1, 7, new Pawn(false)); */
-			boxes[1][0] = new Field(1, 0, null);
-			boxes[1][1] = new Field(1, 1, null);
-			boxes[1][2] = new Field(1, 2, null);
-			boxes[1][3] = new Field(1, 3, null);
-			boxes[1][4] = new Field(1, 4, null);
-			boxes[1][5] = new Field(1, 5, null);
-			boxes[1][6] = new Field(1, 6, null);
-			boxes[1][7] = new Field(1, 7, null);
+			boxes[1][7] = new Field(1, 7, new Pawn(false)); 
+		
 
 
 			// initialize white pieces 
@@ -60,22 +53,15 @@ public class Board {
 			boxes[7][5] = new Field(7, 5, new Bishop(true));
 			boxes[7][6] = new Field(7, 6, new Knight(true));
 			boxes[7][7] = new Field(7, 7, new Rook(true));
-		/*	boxes[6][0] = new Field(6, 0, new Pawn(true));
+			boxes[6][0] = new Field(6, 0, new Pawn(true));
 			boxes[6][1] = new Field(6, 1, new Pawn(true));
 			boxes[6][2] = new Field(6, 2, new Pawn(true));
 			boxes[6][3] = new Field(6, 3, new Pawn(true));
 			boxes[6][4] = new Field(6, 4, new Pawn(true));
 			boxes[6][5] = new Field(6, 5, new Pawn(true));
 			boxes[6][6] = new Field(6, 6, new Pawn(true));
-			boxes[6][7] = new Field(6, 7, new Pawn(true)); */
-			boxes[6][0] = new Field(1, 0, null);
-			boxes[6][1] = new Field(1, 1, null);
-			boxes[6][2] = new Field(1, 2, null);
-			boxes[6][3] = new Field(1, 3, null);
-			boxes[6][4] = new Field(1, 4, null);
-			boxes[6][5] = new Field(1, 5, null);
-			boxes[6][6] = new Field(1, 6, null);
-			boxes[6][7] = new Field(1, 7, null); 
+			boxes[6][7] = new Field(6, 7, new Pawn(true)); 
+
 
 			// initialize remaining boxes without any piece 
 			for (int i = 2; i < 6; i++) { 
@@ -132,7 +118,7 @@ public class Board {
 			for (int j = 0; j < boxes[i].length; ++j) {
 				if (boxes[i][j].getPiece() != null && boxes[i][j].getPiece().isWhite() != c) {
 					boolean[][] possibleM = boxes[i][j].getPiece().getpossibleDestination(this);
-					if (possibleM[currentKingX][currentKingY] == true) {
+					if (possibleM[currentKingX][currentKingY]) {
 						check = true;
 					}
 				}
@@ -148,6 +134,7 @@ public class Board {
 		int currentKingY = -1;
 		boolean checkmate = true;
 		boolean[][] possibleMovesKing = new boolean[8][8];
+		
 		// find currentfield King
 		for (int i = 0; i < boxes.length; ++i) {
 			for (int j = 0; j < boxes[i].length; ++j) {
@@ -166,9 +153,9 @@ public class Board {
 
 					boolean[][] possibleM = boxes[i][j].getPiece().getpossibleDestination(this);
 
-					for (int c = 0; i < boxes.length; ++c) {
-						for (int d = 0; j < boxes[i].length; ++d) {
-							if (possibleM[c][d] == true && possibleMovesKing[c][d] == true) {
+					for (int c = 0; c < boxes.length; ++c) {
+						for (int d = 0; d < boxes[c].length; ++d) {
+							if (possibleMovesKing[c][d] == true &&  possibleM[c][d] == true) {
 								possibleMovesKing[c][d] = false;
 							}
 						}
@@ -177,6 +164,7 @@ public class Board {
 
 			}
 		}
+		possibleMovesKing [currentKingX][currentKingY] = false;
 		for (int i = 0; i < possibleMovesKing.length; ++i) {
 			for (int j = 0; j < possibleMovesKing[i].length; ++j) {
 				if(possibleMovesKing[i][j] == true) {

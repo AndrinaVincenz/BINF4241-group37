@@ -121,12 +121,7 @@ public class Pawn extends Piece {
 			}
 
 		}
-		for (int i = 0; i < possibleM.length; ++i) {
-			for (int j = 0; j < possibleM[i].length; ++j) {
-				System.out.print(possibleM[i][j]);
-			}
-			System.out.print("\n");
-		}
+	
 	
 		return possibleM;
 	}
