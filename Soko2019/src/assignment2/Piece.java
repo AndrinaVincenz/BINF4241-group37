@@ -5,6 +5,7 @@ public abstract class Piece {
 	private boolean killed = false;
 	private boolean white;
 	protected Field currentfield;
+	private boolean isFirstMoveDone = false;
 
 	public Piece(boolean white) {
 		this.setWhite(white);
@@ -54,6 +55,7 @@ public abstract class Piece {
 		start.setPiece(null);
 		this.currentfield = end;
 		board.getBox(endx,endy).setPiece(this);
+		this.isFirstMoveDone = true;
 		//sets firstMove Pawn to false and sets count = 1 to check in pawn class for en passant
 		if (this instanceof Pawn) {
 			this.SetCount(1);
@@ -113,6 +115,10 @@ public abstract class Piece {
 	public boolean GetFirstMove() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	public boolean isFirstMoveDone() {
+		return isFirstMoveDone;
 	}
 
 	public void SetCount(int b) {

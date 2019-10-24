@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
 public class Main {
 	
 	public static void main(String[] args){
@@ -42,15 +43,7 @@ public class Main {
 					input = in.next();
 				}
 				System.out.println("You did your move");
-				if(b.checkMate(false) == true){
-					Game1.setStatus(GameStatus.WHITE_WIN);
-				}
-				if(b.check(false) == true){
-					Game1.setStatus(GameStatus.BLACK_CHECK);
-				}
-				else {
-					Game1.setStatus(GameStatus.BLACK_TURN);
-				}
+				Game1.setStatus(GameStatus.BLACK_TURN);
 			} else if (Game1.getStatus() == GameStatus.BLACK_TURN){
 				b.getBoard();
 				System.out.println("It's your turn " + playernames[1] + "! (black player), make your choice?");
@@ -60,15 +53,7 @@ public class Main {
 					input = in.next();
 				}
 				System.out.println("You did your move");
-				if(b.checkMate(true) == true){
-					Game1.setStatus(GameStatus.BLACK_WIN);
-				}
-				else if(b.check(true) == true){
-					Game1.setStatus(GameStatus.WHITE_CHECK);
-				}
-				else {
 					Game1.setStatus(GameStatus.WHITE_TURN);
-				}
 			}
 			else if (Game1.getStatus() == GameStatus.WHITE_CHECK) {
 				b.getBoard();
@@ -106,10 +91,6 @@ public class Main {
 					Game1.setStatus(GameStatus.BLACK_TURN);
 				}
 			}
-			else if (Game1.getStatus() == GameStatus.BLACK_WIN) {
-				System.out.println("b wins");
-				break;
-			}
 		}
 		System.out.println(Game1.getStatus());		
 	}	
@@ -122,7 +103,52 @@ public class Main {
 	static boolean checkValidityOfInput(String input, Game game, Board b, boolean color) {
 		List<String> validLetters = Arrays.asList("a", "b", "c", "d", "e", "f", "g", "h");
 		List<String> validNumbers = Arrays.asList("1", "2", "3", "4", "5", "6", "7", "8");
-
+		SpecialRules castling = new SpecialRules();
+		Promotion promo = new Promotion();
+		
+		if (input.equals("0-0-0")){
+			if (castling.castlingLong(game, b, color)){
+				System.out.println("Long castle!");
+				//execute move
+				return true;
+			} else {
+				System.out.println("Long-Castling not possible! Invalid move!");
+				return false;
+			}
+			
+		}
+		
+		if (input.equals("0-0")){
+			if (castling.castlingShort(game, b, color)){
+				System.out.println("Short castle!");
+				//execute move
+				
+				return true;
+			} else {
+				System.out.println("Shot-Castling not possible! Invalid move!");
+				return false;
+			}
+		}
+		
+		String s = input.substring(0, 1);
+		if (!isUpper(s)){
+			input = "P" + input;
+		}
+		
+		if (input.contains("=")){
+			if (input.length() != 5) {
+				System.out.println("Invalid input for a promotion! See readme file for help.");
+				return false;
+			}
+			if (promo.tryPromotion(input, game, b, color)){
+				System.out.println("Promotion successful!");
+				return true;
+			} else {
+				System.out.println("Promotion didn't work! Try other move!");
+				return false;
+			}
+		}
+		
 		if (input.length() < 3) {
 			System.out.println("Not valid input: Too short!");
 			return false;
@@ -235,8 +261,6 @@ public class Main {
 
 			else {
 				System.out.println("This move is possible!");
-				possibleMovesStartPosition.get(0).getPiece().Eat(b,
-						b.getBox(tempEndField[0], tempEndField[1]));
 				possibleMovesStartPosition.get(0).getPiece().Move(b, possibleMovesStartPosition.get(0),
 						b.getBox(tempEndField[0], tempEndField[1]));
 	
@@ -274,5 +298,15 @@ public class Main {
 		result[1] = y;
 		return result;
 	}
+	
+	private static boolean isUpper(String s)
+	{
+	    for(char c : s.toCharArray())
+	    {
+	        if(! Character.isUpperCase(c))
+	            return false;
+	    }
 
+	    return true;
+	}
 }
