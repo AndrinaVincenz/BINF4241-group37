@@ -35,7 +35,13 @@ public abstract class Piece {
 	public Field getField() {
 		return this.currentfield;
 	}
-	
+
+	public void return_to_old_position (Field field){
+		this.getField().setPiece(null);
+		field.setPiece(this);
+		this.currentfield = field;
+	}
+
 	public boolean canMove(Board board, Field start, Field end) {
 		boolean[][] posd = this.getpossibleDestination(board);
 		int endx = end.getX();

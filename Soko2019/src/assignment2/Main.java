@@ -34,6 +34,7 @@ public class Main {
 			String input = null;
 			int[] tempStartField = new int[2];
 			int[] tempEndField = new int[2];
+			System.out.println(Game1.getStatus());
 			if (Game1.getStatus() == GameStatus.WHITE_TURN){
 				b.getBoard();
 				System.out.println("It's your turn " + playernames[0] + "! (white player), make your choice?");
@@ -43,7 +44,14 @@ public class Main {
 					input = in.next();
 				}
 				System.out.println("You did your move");
-				Game1.setStatus(GameStatus.BLACK_TURN);
+				if(b.checkMate(false, b) == true){
+					Game1.setStatus(GameStatus.WHITE_WIN);
+				}
+				if (b.check(false) == true) {
+					Game1.setStatus(GameStatus.BLACK_CHECK);
+				} else {
+					Game1.setStatus(GameStatus.BLACK_TURN);
+				}
 			} else if (Game1.getStatus() == GameStatus.BLACK_TURN){
 				b.getBoard();
 				System.out.println("It's your turn " + playernames[1] + "! (black player), make your choice?");
@@ -53,7 +61,14 @@ public class Main {
 					input = in.next();
 				}
 				System.out.println("You did your move");
+				if(b.checkMate(true, b) == true){
+					Game1.setStatus(GameStatus.BLACK_WIN);
+				}
+				if (b.check(true) == true) {
+					Game1.setStatus(GameStatus.WHITE_CHECK);
+				} else {
 					Game1.setStatus(GameStatus.WHITE_TURN);
+				}
 			}
 			else if (Game1.getStatus() == GameStatus.WHITE_CHECK) {
 				b.getBoard();
@@ -64,7 +79,7 @@ public class Main {
 					input = in.next();
 				}
 				System.out.println("You did your move");
-				if(b.checkMate(false) == true){
+				if(b.checkMate(false, b) == true){
 					Game1.setStatus(GameStatus.WHITE_WIN);
 				}
 				if (b.check(false) == true) {
@@ -75,20 +90,20 @@ public class Main {
 			}
 			else if (Game1.getStatus() == GameStatus.BLACK_CHECK) {
 				b.getBoard();
-				System.out.println("It's your turn " + playernames[0] + ",you are checked! (white player), make your choice?");
+				System.out.println("It's your turn " + playernames[1] + ",you are checked! (black player), make your choice?");
 				input = in.next();
-				while (checkValidityOfInput(input, Game1, b, true) == false) {
+				while (checkValidityOfInput(input, Game1, b, false) == false) {
 					//Validity
 					input = in.next();
 				}
 				System.out.println("You did your move");
-				if(b.checkMate(false) == true){
-					Game1.setStatus(GameStatus.WHITE_WIN);
+				if(b.checkMate(true, b) == true){
+					Game1.setStatus(GameStatus.BLACK_WIN);
 				}
-				if (b.check(false) == true) {
-					Game1.setStatus(GameStatus.BLACK_CHECK);
+				if (b.check(true) == true) {
+					Game1.setStatus(GameStatus.WHITE_CHECK);
 				} else {
-					Game1.setStatus(GameStatus.BLACK_TURN);
+					Game1.setStatus(GameStatus.WHITE_TURN);
 				}
 			}
 		}
@@ -154,15 +169,15 @@ public class Main {
 			return false;
 		}
 		String endPosition = input.substring(input.length() - 2, input.length());
-		System.out.println(endPosition + "<- endposition");
+		//System.out.println(endPosition + "<- endposition");
 		String figure = input.substring(0, 1);
-		System.out.println(figure + "<- Figure");
+		//System.out.println(figure + "<- Figure");
 		int tempEndField[] = converted(endPosition);
 
 		ArrayList<Field> possibleMovesStartPosition = b.findInput(figure, color);
 		ArrayList<Field> tempCopy = new ArrayList<Field>();
 		tempCopy.addAll(possibleMovesStartPosition);
-		System.out.println(possibleMovesStartPosition + "before removes");
+		//System.out.println(possibleMovesStartPosition + "before removes");
 
 		// search for possibleMoves
 
@@ -176,7 +191,7 @@ public class Main {
 			;
 		}
 		possibleMovesStartPosition = tempCopy;
-		System.out.println(possibleMovesStartPosition + " after removes with 3 values");
+		//System.out.println(possibleMovesStartPosition + " after removes with 3 values");
 
 		// take additional information if input.length is equal 4
 		if (!input.contains("x") && input.length() == 4) {
@@ -186,7 +201,7 @@ public class Main {
 				}
 			}
 			possibleMovesStartPosition = tempCopy;
-			System.out.println(possibleMovesStartPosition + "after removes with 4 values");
+			//System.out.println(possibleMovesStartPosition + "after removes with 4 values");
 		}
 
 		// take additional information if input.length is equal 5
@@ -198,7 +213,7 @@ public class Main {
 				}
 			}
 			possibleMovesStartPosition = tempCopy;
-			System.out.println(possibleMovesStartPosition + "after removes with 5 values");
+			//System.out.println(possibleMovesStartPosition + "after removes with 5 values");
 		}
 
 		// take additional information if input.length is equal 5 and contains x
@@ -209,7 +224,7 @@ public class Main {
 				}
 			}
 			possibleMovesStartPosition = tempCopy;
-			System.out.println(possibleMovesStartPosition + "after removes with 5 values (contains x)");
+			//System.out.println(possibleMovesStartPosition + "after removes with 5 values (contains x)");
 		}
 
 		// take additional information if input.length is equal 6 and contains x
@@ -221,7 +236,7 @@ public class Main {
 				}
 			}
 			possibleMovesStartPosition = tempCopy;
-			System.out.println(possibleMovesStartPosition + "after removes with 6 values (contains x");
+			//System.out.println(possibleMovesStartPosition + "after removes with 6 values (contains x");
 		}
 
 		if (possibleMovesStartPosition.size() == 0) {

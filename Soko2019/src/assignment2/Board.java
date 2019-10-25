@@ -28,8 +28,8 @@ public class Board {
 			boxes[0][0] = new Field(0, 0, new Rook(false));
 			boxes[0][1] = new Field(0, 1, new Knight(false));
 			boxes[0][2] = new Field(0, 2, new Bishop(false));
-			boxes[0][3] = new Field(0, 3, new Queen(false));
-			boxes[0][4] = new Field(0, 4, new King(false));
+			boxes[0][4] = new Field(0, 4, new Queen(false));
+			boxes[0][3] = new Field(0, 3, new King(false));
 			boxes[0][5] = new Field(0, 5, new Bishop(false));
 			boxes[0][6] = new Field(0, 6, new Knight(false));
 			boxes[0][7] = new Field(0, 7, new Rook(false));
@@ -128,7 +128,7 @@ public class Board {
 		return check;
 	}
 
-	public boolean checkMate(boolean co) {
+	public boolean checkMate(boolean co, Board board) {
 		boolean color = co;
 		int currentKingX = -1;
 		int currentKingY = -1;
@@ -171,6 +171,39 @@ public class Board {
 					checkmate = false;
 				}
 
+			}
+		}
+		for (int i = 0; i < 8; i++){
+			for(int j = 0; j < 8; j++){
+				if (board.getBox(i,j).getPiece() != null && board.getBox(i,j).getPiece().isWhite() == co ){
+					boolean[][] figuremovestocheck = new boolean[8][8];
+					figuremovestocheck = board.getBox(i,j).getPiece().getpossibleDestination(board);
+					for (int c = 0; c < 8; c++){
+						for (int d = 0; d < 8; d++){
+							if(figuremovestocheck[c][d] == true){
+								Piece an = null;
+								boolean bc =board.getBox(i,j).getPiece().isFirstMoveDone();
+								if(board.getBox(c,d).getPiece() != null){
+									an = board.getBox(c,d).getPiece();
+								}
+								board.getBox(i,j).getPiece().Move(board, board.getBox(i,j), board.getBox(c,d));
+								if(board.check(co)!= true){
+									checkmate = false;
+								}
+								if(an != null){
+									board.getBox(c,d).getPiece().return_to_old_position(board.getBox(i,j));
+									an.return_to_old_position(board.getBox(c,d));
+									board.getBox(i,j).getPiece().SetFirstMove(bc);
+									an.setKilled(false);
+								}
+								else {
+									board.getBox(c, d).getPiece().return_to_old_position(board.getBox(i, j));
+									board.getBox(i,j).getPiece().SetFirstMove(bc);
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 		return checkmate;
