@@ -11,7 +11,13 @@ public abstract class Piece {
 		this.setWhite(white);
 
 	}
-
+	public boolean getIsFirstMoveDone() {
+		return this.isFirstMoveDone;
+	} 
+	public void setIsFirstMoveDone(boolean b) {
+		this.isFirstMoveDone = b;
+	}
+	
 	public boolean isWhite() {
 		return this.white;
 	}

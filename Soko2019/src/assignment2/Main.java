@@ -253,8 +253,24 @@ public class Main {
 			} else {
 
 				System.out.println("This move is possible!");
-				possibleMovesStartPosition.get(0).getPiece().Move(b, possibleMovesStartPosition.get(0),
+				boolean isFirstM = possibleMovesStartPosition.get(0).getPiece().getIsFirstMoveDone();
+				Piece MoveP = possibleMovesStartPosition.get(0).getPiece();
+				MoveP.Move(b, possibleMovesStartPosition.get(0),
 						b.getBox(tempEndField[0], tempEndField[1]));
+				if(b.check(MoveP.isWhite())) {
+					System.out.println("Your King is beeing checked, you cant move!");
+					MoveP.Move(b, b.getBox(tempEndField[0], tempEndField[1]),possibleMovesStartPosition.get(0));
+					MoveP.setIsFirstMoveDone(isFirstM);
+					if (MoveP instanceof Pawn) {
+						if (MoveP.getCount() < 3){
+							MoveP.SetCount(-possibleMovesStartPosition.get(0).getPiece().getCount());
+							MoveP.SetFirstMove(true);
+						}
+					}
+					
+					
+					return false;
+				}
 				return true;
 			}
 		} else if (possibleMovesStartPosition.size() == 1 && input.contains("x")) {
@@ -262,10 +278,32 @@ public class Main {
 					&& possibleMovesStartPosition.get(0).getPiece() instanceof Pawn
 					&& possibleMovesStartPosition.get(0).getPiece().getField().getY() != tempEndField[1]) {
 				System.out.println("This move is possible!");
+				boolean isFirstM = possibleMovesStartPosition.get(0).getPiece().getIsFirstMoveDone();
+				Piece Piecedead = b.getBox(tempEndField[0], tempEndField[1]).getPiece();
+				Piece MoveP = possibleMovesStartPosition.get(0).getPiece();
 				possibleMovesStartPosition.get(0).getPiece().Eat(b,
 						b.getBox(tempEndField[0], tempEndField[1]));
 				possibleMovesStartPosition.get(0).getPiece().Move(b, possibleMovesStartPosition.get(0),
 						b.getBox(tempEndField[0], tempEndField[1]));
+				
+				if(b.check(MoveP.isWhite())) {
+					System.out.println("Your King is beeing checked, you cant move!");
+					MoveP.Move(b, b.getBox(tempEndField[0], tempEndField[1]),possibleMovesStartPosition.get(0));
+					MoveP.setIsFirstMoveDone(isFirstM);
+					
+					if (MoveP.getCount() < 3) {
+						MoveP.SetCount(-possibleMovesStartPosition.get(0).getPiece().getCount());
+						MoveP.SetFirstMove(true);
+					}
+					
+					Piecedead.setField(b.getBox(tempEndField[0], tempEndField[1]));
+					b.getBox(tempEndField[0], tempEndField[1]).setPiece(Piecedead);
+					Piecedead.setKilled(false);					
+					return false;
+				}
+				
+				
+				
 				
 				return true;
 
@@ -277,9 +315,28 @@ public class Main {
 
 			else {
 				System.out.println("This move is possible!");
+				boolean isFirstM = possibleMovesStartPosition.get(0).getPiece().getIsFirstMoveDone();
+				Piece Piecedead = b.getBox(tempEndField[0], tempEndField[1]).getPiece();
+				Piece MoveP = possibleMovesStartPosition.get(0).getPiece();
+				/*possibleMovesStartPosition.get(0).getPiece().Eat(b,
+						b.getBox(tempEndField[0], tempEndField[1]));*/
 				possibleMovesStartPosition.get(0).getPiece().Move(b, possibleMovesStartPosition.get(0),
 						b.getBox(tempEndField[0], tempEndField[1]));
-	
+				if(b.check(MoveP.isWhite())) {
+					System.out.println("Your King is beeing checked, you cant move!");
+					MoveP.Move(b, b.getBox(tempEndField[0], tempEndField[1]),possibleMovesStartPosition.get(0));
+					MoveP.setIsFirstMoveDone(isFirstM);
+					if (MoveP instanceof Pawn) {
+						if (MoveP.getCount() < 3){
+							MoveP.SetCount(-possibleMovesStartPosition.get(0).getPiece().getCount());
+							MoveP.SetFirstMove(true);
+						}
+					}
+					Piecedead.setField(b.getBox(tempEndField[0], tempEndField[1]));
+					b.getBox(tempEndField[0], tempEndField[1]).setPiece(Piecedead);
+					Piecedead.setKilled(false);					
+					return false;
+				}
 				return true;
 			}
 		} else if (possibleMovesStartPosition.size() > 1) {

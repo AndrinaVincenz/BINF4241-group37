@@ -14,7 +14,7 @@ public class Pawn extends Piece {
 
 	@Override
 	public void SetCount(int b) {
-		this.c += b;
+		this.c = b;
 	}
 
 	@Override
