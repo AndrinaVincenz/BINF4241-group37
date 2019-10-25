@@ -28,8 +28,8 @@ public class Board {
 			boxes[0][0] = new Field(0, 0, new Rook(false));
 			boxes[0][1] = new Field(0, 1, new Knight(false));
 			boxes[0][2] = new Field(0, 2, new Bishop(false));
-			boxes[0][3] = new Field(0, 3, new Queen(false));
-			boxes[0][4] = new Field(0, 4, new King(false));
+			boxes[0][3] = new Field(0, 3, new King(false));
+			boxes[0][4] = new Field(0, 4, new Queen(false));
 			boxes[0][5] = new Field(0, 5, new Bishop(false));
 			boxes[0][6] = new Field(0, 6, new Knight(false));
 			boxes[0][7] = new Field(0, 7, new Rook(false));
