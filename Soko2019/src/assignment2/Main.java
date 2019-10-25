@@ -251,6 +251,7 @@ public class Main {
 				System.out.println("En passant, if you wanna eat, insert a 'x'!");
 				return false;
 			} else {
+
 				System.out.println("This move is possible!");
 				possibleMovesStartPosition.get(0).getPiece().Move(b, possibleMovesStartPosition.get(0),
 						b.getBox(tempEndField[0], tempEndField[1]));

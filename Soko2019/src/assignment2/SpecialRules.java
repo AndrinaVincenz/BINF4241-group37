@@ -6,7 +6,7 @@ public class SpecialRules {
 		if (color == true){
 			if (b.getBox(7, 4).getPiece() != null && b.getBox(7, 0).getPiece() != null){
 			if (b.getBox(7, 4).getPiece().isFirstMoveDone() == true || b.getBox(7, 0).getPiece().isFirstMoveDone() == true){
-				System.out.println("Already moved King or Rook, castling not allowed anymore!");
+				System.out.println("Requirement for castling not met");
 				return false;
 			}	
 			}
