@@ -12,6 +12,12 @@ public class SuperQueen extends Piece implements SuperQueenPiece {
     	return this.name;
     }
 	
+	/* 
+	 * Used for teleport of the Superqueen, also used to locate all eatable pieces
+	 * @input Board b
+	 * @return boolean with all Fields that can be access either by teleport or normal with a kill
+	 * @see assignment3.SuperQueenPiece#getpossibleDestinationTeleport(assignment3.Board)
+	 */
 	@Override
 	public boolean[][] getpossibleDestinationTeleport(Board b) {
 		boolean[][] possibleM = new boolean[8][8];
@@ -28,6 +34,7 @@ public class SuperQueen extends Piece implements SuperQueenPiece {
    			}
    		}
 
+   		//these implementation is needed to check if the queen can to eat a figure.
    		for (int i = 1; i <= 8; i++) {	
    			if (b.isValid(currentfield.getX()+i,currentfield.getY()+i)) {
    				possibleM[currentfield.getX()+i][currentfield.getY()+i] = true;

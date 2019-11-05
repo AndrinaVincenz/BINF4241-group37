@@ -9,11 +9,6 @@ public class SuperQueenAdapter extends Piece implements QueenPiece {
 		super(superqueen.isWhite());
 		this.name = superqueen.getName();
 		this.superqueen = superqueen;
-		if (!superqueen.isWhite()){
-		this.setField(board.getBox(0, 4));
-		} else {
-			this.setField(board.getBox(7, 3));
-		}
 		}
 	
 
