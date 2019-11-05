@@ -1,28 +1,33 @@
 package assignment3;
 
-public class Queen extends Piece implements QueenPiece {
+public class SuperQueen extends Piece implements SuperQueenPiece {
 	private String name = "Q";
 	
-    public Queen(boolean white) {
-    	super(white);
-    }
-
-
-    @Override
+	public SuperQueen(boolean white){
+		super(white);
+	}
+	
+	@Override
     public String getName() {
     	return this.name;
     }
-    
-    @Override
-   	public boolean[][] getpossibleDestination(Board b) {
-   		boolean[][] possibleM = new boolean[8][8];
+	
+	@Override
+	public boolean[][] getpossibleDestinationTeleport(Board b) {
+		boolean[][] possibleM = new boolean[8][8];
    		for (int i = 0; i < possibleM.length; ++i) {
    			for (int j = 0; j < possibleM[i].length; ++j) {
    				possibleM[i][j] = false;
+   				if (b.getBox(i, j).getPiece() instanceof SuperQueenAdapter){
+   					if (b.getBox(i, j).getPiece().isWhite() && this.isWhite()){
+   						this.currentfield =  b.getBox(i, j).getPiece().getField();
+   					} else if (!b.getBox(i, j).getPiece().isWhite() && !this.isWhite()){
+   						this.currentfield =  b.getBox(i, j).getPiece().getField();
+   					}
+   				}
    			}
    		}
 
-   		
    		for (int i = 1; i <= 8; i++) {	
    			if (b.isValid(currentfield.getX()+i,currentfield.getY()+i)) {
    				possibleM[currentfield.getX()+i][currentfield.getY()+i] = true;
@@ -120,6 +125,19 @@ public class Queen extends Piece implements QueenPiece {
 
 		}}
    		possibleM[currentfield.getX()][currentfield.getY()] = true;
-   		return possibleM;
+   		
+   		//set all empty fields to true --> SuperQueen
+   			for (int i = 0; i < possibleM.length; ++i) {
+   				for (int j = 0; j < possibleM[i].length; ++j) {
+   					if (b.getBox(i, j).getPiece() == null){
+   						possibleM[i][j] = true;
+   					}
+   					
+   				}
+   			} 
+   		
+   		return possibleM;	
    	}
+	
+		
 }

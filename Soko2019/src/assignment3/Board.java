@@ -22,14 +22,14 @@ public class Board {
 
 			return boxes[x][y]; 
 		} 
-
+			
 		public void resetBoard() {
 			// initialize black pieces 
 			boxes[0][0] = new Field(0, 0, new Rook(false));
 			boxes[0][1] = new Field(0, 1, new Knight(false));
 			boxes[0][2] = new Field(0, 2, new Bishop(false));
 			boxes[0][3] = new Field(0, 3, new King(false));
-			boxes[0][4] = new Field(0, 4, new Queen(false));
+			boxes[0][4] = new Field(0, 4, null);
 			boxes[0][5] = new Field(0, 5, new Bishop(false));
 			boxes[0][6] = new Field(0, 6, new Knight(false));
 			boxes[0][7] = new Field(0, 7, new Rook(false));
@@ -48,7 +48,7 @@ public class Board {
 			boxes[7][0] = new Field(7, 0, new Rook(true));
 			boxes[7][1] = new Field(7, 1, new Knight(true));
 			boxes[7][2] = new Field(7, 2, new Bishop(true));
-			boxes[7][3] = new Field(7, 3, new Queen(true));
+			boxes[7][3] = new Field(7, 3, null);
 			boxes[7][4] = new Field(7, 4, new King(true));
 			boxes[7][5] = new Field(7, 5, new Bishop(true));
 			boxes[7][6] = new Field(7, 6, new Knight(true));
@@ -62,6 +62,15 @@ public class Board {
 			boxes[6][6] = new Field(6, 6, new Pawn(true));
 			boxes[6][7] = new Field(6, 7, new Pawn(true)); 
 
+			//idee: replace after :)
+			
+			SuperQueen queenBlack = new SuperQueen(false);
+			SuperQueen queenWhite = new SuperQueen(true);
+			QueenPiece superQueenBlack = new SuperQueenAdapter(queenBlack, this);
+			QueenPiece superQueenWhite = new SuperQueenAdapter(queenWhite, this);
+			boxes[0][4].setPiece((Piece)superQueenBlack);
+			boxes[7][3].setPiece((Piece)superQueenWhite);
+			
 
 			// initialize remaining boxes without any piece 
 			for (int i = 2; i < 6; i++) { 
@@ -69,8 +78,9 @@ public class Board {
 					boxes[i][j] = new Field(i, j, null); 
 				} 
 			} 
+			
 		}
-
+		
 
 		public void getBoard(){
 			for (int i = 0; i < 8; i++) { 
