@@ -19,7 +19,7 @@ public class Main {
 		playernames[i] = (in.next());
 		System.out.println("The name of Player " + (i+1) + " is " + playernames[i] + ".");
 		}
-		Board b = new Board();
+		Board b =  Board.getInstance();
 		
 		//Initialize players, second parameter set the color to white:true/black:false
 		Player player1 = new Player(playernames[0], true);

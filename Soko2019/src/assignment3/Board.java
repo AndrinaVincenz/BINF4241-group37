@@ -3,12 +3,14 @@ package assignment3;
 import java.util.ArrayList;
 
 public class Board { 
-		Field[][] boxes = new Field[8][8]; 
+		Field[][] boxes = new Field[8][8];
+		private Board()
+	{
+		this.resetBoard();
+	}
+		private static final Board instance = new Board();
+		public static Board getInstance(){return instance;};
 
-		public Board() 
-		{ 
-			this.resetBoard(); 
-		} 
 		
 		public void setBox(int x, int y) {
 			
