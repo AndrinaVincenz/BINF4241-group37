@@ -26,15 +26,22 @@ public class Board {
 		public void resetBoard() {
 			
 			//Initialization for SuperQueen
-			SuperQueen queenBlack = new SuperQueen(false);
-			SuperQueen queenWhite = new SuperQueen(true);
-			QueenPiece superQueenBlack = new SuperQueenAdapter(queenBlack, this);
-			QueenPiece superQueenWhite = new SuperQueenAdapter(queenWhite, this);
+			SuperQueen superQueenBlack = new SuperQueen(false);
+			SuperQueen superQueenWhite = new SuperQueen(true);
+			QueenPiece superQueenAdapterBlack = new SuperQueenAdapter(superQueenBlack, this);
+			QueenPiece superQueenAdapterWhite = new SuperQueenAdapter(superQueenWhite, this);
+			
+			//Initialization for ArchBishop
+			ArchBishop archBishopBlack = new ArchBishop(false);
+			ArchBishop archBishopWhite = new ArchBishop(true);
+			BishopPiece archBishopAdapterBlack = new ArchBishopAdapter(archBishopBlack, this);
+			BishopPiece archBishopAdapterWhite = new ArchBishopAdapter(archBishopWhite, this);
+
 			
 			// initialize black pieces 
 			boxes[0][0] = new Field(0, 0, new Rook(false));
 			boxes[0][1] = new Field(0, 1, new Knight(false));
-			boxes[0][2] = new Field(0, 2, new Bishop(false));
+			boxes[0][2] = new Field(0, 2, null /*new Bishop(false)*/);
 			boxes[0][3] = new Field(0, 3, new King(false));
 			boxes[0][4] = new Field(0, 4, null /*new Queen(false)*/); //Currently playing with SuperQueen
 			boxes[0][5] = new Field(0, 5, new Bishop(false));
@@ -54,7 +61,7 @@ public class Board {
 			// initialize white pieces 
 			boxes[7][0] = new Field(7, 0, new Rook(true));
 			boxes[7][1] = new Field(7, 1, new Knight(true));
-			boxes[7][2] = new Field(7, 2, new Bishop(true));
+			boxes[7][2] = new Field(7, 2, null /*new Bishop(false)*/);
 			boxes[7][3] = new Field(7, 3, null /*new Queen(true)*/); //Currently playing with SuperQueen
 			boxes[7][4] = new Field(7, 4, new King(true));
 			boxes[7][5] = new Field(7, 5, new Bishop(true));
@@ -70,10 +77,16 @@ public class Board {
 			boxes[6][7] = new Field(6, 7, new Pawn(true)); 
 
 			//Place Queen for SuperQueenMode!!!
-			boxes[0][4].setPiece((Piece)superQueenBlack);
-			boxes[7][3].setPiece((Piece)superQueenWhite);
-			((Piece)superQueenBlack).setField(this.getBox(0, 4));
-			((Piece)superQueenWhite).setField(this.getBox(7, 3));
+			boxes[0][4].setPiece((Piece)superQueenAdapterBlack);
+			boxes[7][3].setPiece((Piece)superQueenAdapterWhite);
+			((Piece)superQueenAdapterBlack).setField(this.getBox(0, 4));
+			((Piece)superQueenAdapterWhite).setField(this.getBox(7, 3));
+			
+			//Place Queen for ArchBishopMode!!!
+			boxes[0][2].setPiece((Piece)archBishopAdapterBlack);
+			boxes[7][2].setPiece((Piece)archBishopAdapterWhite);
+			((Piece)archBishopAdapterBlack).setField(this.getBox(0, 2));
+			((Piece)archBishopAdapterWhite).setField(this.getBox(7, 2));
 
 			// initialize remaining boxes without any piece 
 			for (int i = 2; i < 6; i++) { 

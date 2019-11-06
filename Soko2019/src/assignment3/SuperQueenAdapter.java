@@ -21,10 +21,5 @@ public class SuperQueenAdapter extends Piece implements QueenPiece {
 	public boolean[][] getpossibleDestination(Board b) {
 		return superqueen.getpossibleDestinationTeleport(b);
 	}
-	
-	@Override
-	public Field getField(){
-		return this.currentfield;
-	}
 
 }
