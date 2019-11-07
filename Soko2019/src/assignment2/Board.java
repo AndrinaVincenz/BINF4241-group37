@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class Board { 
 		Field[][] boxes = new Field[8][8]; 
 
-		public Board() 
+		private Board()
 		{ 
 			this.resetBoard(); 
-		} 
+		}
+		private static final Board instance = new Board();
+		public static Board getInstance(){return instance;};
 		
 		public void setBox(int x, int y) {
 			
