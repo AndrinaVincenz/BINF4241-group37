@@ -6,7 +6,7 @@ import java.util.List;
 
 public class InputHandling {
 
-    public static int[] inputhandle(String input) {
+    public static int[] convert(String input) {
         int[] result = new int[2];
         String[] letters = {"a", "b", "c", "d", "e", "f", "g", "h"};
         String[] numbers = {"8", "7", "6", "5", "4", "3", "2", "1"};
