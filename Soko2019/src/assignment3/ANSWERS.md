@@ -1,4 +1,18 @@
 --- Part 1 ---
+We decided to use the singleton and the adapter pattern
+
+the applied the singleton pattern on the board class. At the moment you can only play one game at the same time
+and so it only needs one board object.If we want to create more games at the same time, this pattern would be a problem.
+But at the moment we find it useful, than we had the problem in the implementation that we created a second board with
+new figures and then we swapped the figures accidentally between the different boards. With the singleton
+pattern applied on the board, we avoid that problem. And you can only create on board object
+
+Then we used the adapter pattern to handle the conversion between our numeration for the fields,
+and the algebraic notation. At the moment it is only one conversion but it makes our project reusable, so it 
+easier to implement an other notation, and it has no affects on the board and pieces classes and structure.
+You have only to handle your input, do an other adaption and use the classes as they are.
+
+You can see the diagrams as separate png files.
 
 --- Part 2 ---
 
