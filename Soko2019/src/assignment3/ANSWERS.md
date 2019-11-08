@@ -1,7 +1,9 @@
 --- Part 1 ---
 
 --- Part 2 ---
+
 For this part the game class from assignment 2 was used. Main class is interpreted as Game Class. The Sequenze Diagramm is saved as Assignment 3 Part 2
+
 --- Part 3 ---
 
 For Part 3, we decided to implement the adapter pattern.
