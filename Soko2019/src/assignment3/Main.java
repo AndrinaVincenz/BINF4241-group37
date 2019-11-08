@@ -172,7 +172,7 @@ public class Main {
 		//System.out.println(endPosition + "<- endposition");
 		String figure = input.substring(0, 1);
 		//System.out.println(figure + "<- Figure");
-		int tempEndField[] = converted(endPosition);
+		int tempEndField[] = Converter.convert(endPosition);
 
 		ArrayList<Field> possibleMovesStartPosition = b.findInput(figure, color);
 		ArrayList<Field> tempCopy = new ArrayList<Field>();

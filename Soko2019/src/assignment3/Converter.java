@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class InputHandling {
+public class Converter {
 
     public static int[] convert(String input) {
         int[] result = new int[2];

@@ -1,6 +1,6 @@
 package assignment3;
 
-public interface InputHandler {
+public interface InputConverter {
     public int[] converter(String endPosition);
 
 }
