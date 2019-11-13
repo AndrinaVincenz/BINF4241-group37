@@ -1,23 +1,50 @@
 package assignment4;
 
-public class Oven implements ElectronicDevice {
+public class Oven {
+    private boolean IsOn = false;
+    private long timer;
+    private int temperature;
+    private boolean IsCooking = false;
+    private Program Program = null;
 
-	int temperatur;
-	
-	@Override
-	public void switchOn() {
-		System.out.println("Oven is switched ON!");	
-	}
+    public boolean isOn() {
+        return IsOn;
+    }
 
-	@Override
-	public void switchOff() {
-		System.out.println("Oven is switched OFF!");	
-	}
+    public long getTimer() {
+        return timer;
+    }
 
-	@Override
-	public void setTemperatur(int temperatur) {
-		this.temperatur = temperatur;
-		System.out.println("The temperatur is set at " + temperatur);
-	}
+    public void setTemperature(int temperature) {
+        this.temperature = temperature;
+    }
 
+    public void setTimer(long timer) {
+        this.timer = timer;
+    }
+
+    public void setOn(boolean on) {
+        this.IsOn = on;
+    }
+    public void setProgram(Program Program){
+        this.Program = Program;
+    }
+
+    //incomplete --> the timer should start here
+    public void setCooking(boolean cooking) {
+        if(this.timer != 0 && this.temperature != 0 && this.Program != null ) {
+            this.IsCooking = cooking;
+        }
+        else{
+            System.out.println("Setup for oven incomplete");
+        }
+    }
+    public void interruptCooking(){
+        if (this.IsCooking == true){
+            setCooking(false);
+        }
+        else{
+            System.out.println("Oven is not cooking");
+        }
+    }
 }
