@@ -1,12 +1,18 @@
 package assignment4;
 
-public class SetTemperatur implements Command {
+public class OvenSetTemperaturCommand implements Command {
 
-	ElectronicDevice theDevice;
+	private Oven oven;
+	private int temp;
+	
+	public OvenSetTemperaturCommand(Oven oven, int temp){
+		this.oven = oven;
+		this.temp = temp;
+	}
 	
 	@Override
 	public void execute() {
-		theDevice.setTemperatur(180);
+		oven.setTemperature(temp);
 	}
 
 }

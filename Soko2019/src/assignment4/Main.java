@@ -7,8 +7,20 @@ public class Main {
 	
 	public static void main(String args[]){
 		
+		// TEST COMMANDS
+		Oven newOven = new Oven();
+		Smartphone smartphone  = new Smartphone();
+		
+		smartphone.setCommand(new OvenSwitchOnCommand(newOven));
+		smartphone.displayPressed();
+		
+		smartphone.setCommand(new OvenSetTemperaturCommand(newOven, 120));
+		smartphone.displayPressed();
+	
+		
+		//TODO: logic for later...
 		Scanner scanner = new Scanner(System.in);
-		ElectronicDevice pickedDevice = null;
+		ArrayList<Object> pickedDevice = null;
 		ArrayList<String> devices = new ArrayList<String>();
 		devices.add("Oven");
 		devices.add("Microwave");
@@ -27,21 +39,7 @@ public class Main {
 		}
 		
 		
-		ElectronicDevice newOven = new Oven();
-		
-		SwitchOn onCommand = new SwitchOn(newOven);
-		
-		Smartphone smartphone  = new Smartphone(onCommand);
-		
-		smartphone.press();
-		
-		//---------
-		
-		SwitchOff offCommand = new SwitchOff(newOven);
-		
-		smartphone  = new Smartphone(offCommand);
-		
-		smartphone.press();
 		
 	}
+	
 }

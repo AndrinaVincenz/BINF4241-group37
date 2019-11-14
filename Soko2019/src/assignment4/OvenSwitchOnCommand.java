@@ -1,16 +1,16 @@
 package assignment4;
 
-public class SwitchOn implements Command {
+public class OvenSwitchOnCommand implements Command {
 
-	ElectronicDevice theDevice;
+	Oven oven;
 	
-	SwitchOn(ElectronicDevice newDevice){
-		theDevice = newDevice;
+	OvenSwitchOnCommand(Oven oven){
+		this.oven = oven;
 	}
 	
 	@Override
 	public void execute() {
-		theDevice.switchOn();
+		oven.switchOn();
 	}
 
 }

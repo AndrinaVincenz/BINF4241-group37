@@ -4,11 +4,12 @@ public class Smartphone {
 
 	Command theCommand;
 	
-	public Smartphone(Command newCommand){
-		theCommand = newCommand;
-	}
 	
-	public void press(){
+    public void setCommand(Command theCommand) {
+        this.theCommand = theCommand;
+    }
+	
+	public void displayPressed(){
 		theCommand.execute();
 	}
 	

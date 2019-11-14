@@ -2,20 +2,17 @@ package assignment4;
 
 public class Oven {
     private boolean IsOn = false;
-    private long timer;
-    private int temperature;
+    private long timer = 0;
+    private int temperature = 0;
     private boolean IsCooking = false;
-    private Program Program = null;
-
-    public boolean isOn() {
-        return IsOn;
-    }
+    private Program program;
 
     public long getTimer() {
         return timer;
     }
 
     public void setTemperature(int temperature) {
+    	System.out.println("Temperatur is set to " + temperature);
         this.temperature = temperature;
     }
 
@@ -23,28 +20,36 @@ public class Oven {
         this.timer = timer;
     }
 
-    public void setOn(boolean on) {
-        this.IsOn = on;
+    public void setProgram(Program program){
+    	System.out.println("Programm set to " + program.toString());
+        this.program = program;
     }
-    public void setProgram(Program Program){
-        this.Program = Program;
+    
+    void switchOff(){
+    	System.out.println("Oven is switched OFF!");	
+    	IsOn = false;
     }
-
-    //incomplete --> the timer should start here
-    public void setCooking(boolean cooking) {
-        if(this.timer != 0 && this.temperature != 0 && this.Program != null ) {
-            this.IsCooking = cooking;
-        }
-        else{
-            System.out.println("Setup for oven incomplete");
-        }
+    
+    void switchOn(){
+    	System.out.println("Oven is switched ON!");	
+    	IsOn = true;
     }
-    public void interruptCooking(){
-        if (this.IsCooking == true){
-            setCooking(false);
-        }
-        else{
-            System.out.println("Oven is not cooking");
-        }
+    
+    void startCooking(){
+    	if ((temperature > 0) && (timer > 0) && (program != null)){
+    		this.IsCooking = true;
+    		System.out.println("Start Cooking if true bla bla");
+    	} else {
+    		System.out.println("Setup for oven incomplete");
+    	}
     }
+    
+//    public void interruptCooking(){
+//        if (this.IsCooking == true){
+//            setCooking(false);
+//        }
+//        else{
+//            System.out.println("Oven is not cooking");
+//        }
+//    }
 }
