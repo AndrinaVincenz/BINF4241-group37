@@ -1,12 +1,20 @@
 package assignment4;
 
-public class Oven {
+import java.util.ArrayList;
+
+public class Oven extends Device implements Switchable {
+	private String name = "Oven";
     private boolean IsOn = false;
     private long timer = 0;
     private int temperature = 0;
     private boolean IsCooking = false;
     private Program program;
 
+    @Override
+    public String getName(){
+    	return name;
+    }
+    
     public long getTimer() {
         return timer;
     }
@@ -25,12 +33,12 @@ public class Oven {
         this.program = program;
     }
     
-    void switchOff(){
+    public void switchOff(){
     	System.out.println("Oven is switched OFF!");	
     	IsOn = false;
     }
     
-    void switchOn(){
+    public void switchOn(){
     	System.out.println("Oven is switched ON!");	
     	IsOn = true;
     }
@@ -42,6 +50,15 @@ public class Oven {
     	} else {
     		System.out.println("Setup for oven incomplete");
     	}
+    }
+    
+    public ArrayList<Command> showAvailableCommands(){
+		ArrayList<Command> result = new ArrayList<Command>();
+		result.add(new OvenSetTemperaturCommand(this, 0));
+		result.add(new OvenSetUpProgrammCommand(this, Program.GLASSES));
+		result.add(new SwitchOnCommand(this));
+		result.add(new SwitchOffCommand(this));
+    	return result;
     }
     
 //    public void interruptCooking(){

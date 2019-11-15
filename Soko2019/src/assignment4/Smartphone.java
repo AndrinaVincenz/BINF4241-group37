@@ -13,4 +13,8 @@ public class Smartphone {
 		theCommand.execute();
 	}
 	
+	
+	
+	
+	
 }

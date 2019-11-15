@@ -2,6 +2,7 @@ package assignment4;
 
 public class OvenSetTemperaturCommand implements Command {
 
+	private String name = "SetTemperatur";
 	private Oven oven;
 	private int temp;
 	
@@ -13,6 +14,11 @@ public class OvenSetTemperaturCommand implements Command {
 	@Override
 	public void execute() {
 		oven.setTemperature(temp);
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 
 }
