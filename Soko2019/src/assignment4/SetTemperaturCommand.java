@@ -2,14 +2,14 @@ package assignment4;
 
 import java.util.Scanner;
 
-public class OvenSetTemperaturCommand implements Command {
+public class SetTemperaturCommand implements Command {
 
 	private String name = "SetTemperatur";
-	private Oven oven;
+	private Heatable heatbleObject;
 	private int temp;
 	
-	public OvenSetTemperaturCommand(Oven oven){
-		this.oven = oven;
+	public SetTemperaturCommand(Heatable heatbleObject){
+		this.heatbleObject = heatbleObject;
 	}
 	
 	@Override
@@ -17,7 +17,7 @@ public class OvenSetTemperaturCommand implements Command {
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Which temperatur?");
 		int tempInput = scanner.nextInt(); 
-		oven.setTemperature(tempInput);
+		heatbleObject.setTemperature(tempInput);
 	}
 
 	@Override

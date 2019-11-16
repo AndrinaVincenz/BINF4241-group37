@@ -2,8 +2,9 @@ package assignment4;
 
 import java.util.ArrayList;
 
-public class Oven extends Device implements Switchable {
+public class Oven extends Device implements Switchable, Heatable, Timeable {
 	private String name = "Oven";
+	
     private boolean IsOn = false;
     private long timer = 0;
     private int temperature = 0;
@@ -19,13 +20,18 @@ public class Oven extends Device implements Switchable {
         return timer;
     }
 
+    //heatable
+    @Override
     public void setTemperature(int temperature) {
+    	this.temperature = temperature;
     	System.out.println(name + ": Temperatur is set to " + temperature);
-        this.temperature = temperature;
     }
 
+    //Timeable
+    @Override
     public void setTimer(long timer) {
-        this.timer = timer;
+    	this.timer = timer;
+    	System.out.println(name + ": Timer is set to " + timer);
     }
 
     public void setProgram(Program program){
@@ -33,11 +39,14 @@ public class Oven extends Device implements Switchable {
         this.program = program;
     }
     
+    //Switchable
+    @Override
     public void switchOff(){
     	System.out.println(name + ": Switched OFF!");	
     	IsOn = false;
     }
     
+    @Override
     public void switchOn(){
     	System.out.println(name + ": Switched ON!");	
     	IsOn = true;
@@ -52,15 +61,17 @@ public class Oven extends Device implements Switchable {
     	}
     }
     
+    @Override
     public ArrayList<Command> showAvailableCommands(){
 		ArrayList<Command> result = new ArrayList<Command>();
-		result.add(new OvenSetTemperaturCommand(this));
-		result.add(new OvenSetUpProgrammCommand(this, Program.GLASSES));
 		result.add(new SwitchOnCommand(this));
+		result.add(new SetTemperaturCommand(this));
+		result.add(new SetTimerCommand(this));
+		result.add(new OvenSetUpProgrammCommand(this, Program.GLASSES));
 		result.add(new SwitchOffCommand(this));
     	return result;
     }
-    
+
 //    public void interruptCooking(){
 //        if (this.IsCooking == true){
 //            setCooking(false);

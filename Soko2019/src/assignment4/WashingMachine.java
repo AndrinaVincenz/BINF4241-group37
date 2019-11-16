@@ -1,7 +1,9 @@
 package assignment4;
 
-public class WashingMachine {
-    private boolean IsOn = false;
+public class WashingMachine extends Device implements Switchable {
+	private String name = "WashingMachine";
+	
+	private boolean IsOn = false;
     private long timer;
     private int temperature;
     private  Program Program = null;
@@ -54,5 +56,17 @@ public class WashingMachine {
             System.out.println("Setup for washing machine incomplete");
         }
     }
+
+	@Override
+	public void switchOff() {
+    	System.out.println(name + ": Switched OFF!");	
+    	IsOn = false;
+	}
+
+	@Override
+	public void switchOn() {
+    	System.out.println(name + ": Switched ON!");	
+    	IsOn = true;
+	}
 
 }

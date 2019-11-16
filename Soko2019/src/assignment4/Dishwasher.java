@@ -1,14 +1,12 @@
 package assignment4;
 
-public class Dishwasher {
-    private boolean IsOn = false;
-    private long timer;
+public class Dishwasher extends Device implements Switchable {
+	private String name = "Dishwasher";
+
+    private boolean IsOn = false; 
+    long timer;
     private Program Program = null;
     private boolean IsWashing = false;
-
-    public boolean isOn() {
-        return IsOn;
-    }
 
     public long getTimer() {
         return timer;
@@ -18,9 +16,6 @@ public class Dishwasher {
         this.timer = timer;
     }
 
-    public void setOn(boolean on) {
-        this.IsOn = on;
-    }
     public void setProgram(Program newProgram){
         if(newProgram == assignment4.Program.GLASSES){
             this.Program = assignment4.Program.GLASSES;
@@ -57,5 +52,17 @@ public class Dishwasher {
         else{
             System.out.println("Dishwasher is not washing");
         }
+    }
+
+    @Override
+    public void switchOff(){
+    	System.out.println(name + ": Switched OFF!");	
+    	IsOn = false;
+    }
+    
+    @Override
+    public void switchOn(){
+    	System.out.println(name + ": Switched ON!");	
+    	IsOn = true;
     }
 }

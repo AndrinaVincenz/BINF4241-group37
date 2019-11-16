@@ -2,7 +2,7 @@ package assignment4;
 
 import java.util.ArrayList;
 
-public class Microwave extends Device implements Switchable {
+public class Microwave extends Device implements Switchable, Heatable, Timeable {
 	private String name = "Microwave";
 	private boolean IsOn = false;
     private long timer;
@@ -14,24 +14,37 @@ public class Microwave extends Device implements Switchable {
     	return name;
     }
 
-    public boolean isOn() {
-        return IsOn;
-    }
-
     public long getTimer() {
         return timer;
     }
+    
+    //Switchable
+	@Override
+	public void switchOff() {
+		System.out.println("Microwave is switched OFF!");	
+    	IsOn = false;
+		
+	}
 
+	//Switchable
+	@Override
+	public void switchOn() {
+		System.out.println("Microwave is switched ON!");	
+    	IsOn = true;
+	}
+
+    //Heatable
+    @Override
     public void setTemperature(int temperature) {
         this.temperature = temperature;
+    	System.out.println(name + ": Temperatur is set to " + temperature);
     }
 
+    //Timeable
+    @Override
     public void setTimer(long timer) {
         this.timer = timer;
-    }
-
-    public void setOn(boolean on) {
-        this.IsOn = on;
+    	System.out.println(name + ": Timer is set to " + timer);
     }
 
     //incomplete --> the timer should start here
@@ -52,23 +65,12 @@ public class Microwave extends Device implements Switchable {
             System.out.println("Microwave is not baking");
         }
     }
-
-	@Override
-	public void switchOff() {
-		System.out.println("Microwave is switched OFF!");	
-    	IsOn = false;
-		
-	}
-
-	@Override
-	public void switchOn() {
-		System.out.println("Microwave is switched ON!");	
-    	IsOn = true;
-	}
 	
     public ArrayList<Command> showAvailableCommands(){
 		ArrayList<Command> result = new ArrayList<Command>();
 		result.add(new SwitchOnCommand(this));
+		result.add(new SetTimerCommand(this));
+		result.add(new SetTemperaturCommand(this));
 		result.add(new SwitchOffCommand(this));
     	return result;
     }
