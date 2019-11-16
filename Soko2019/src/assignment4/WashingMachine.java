@@ -10,11 +10,11 @@ public class WashingMachine extends Device implements Switchable, Programmable {
 	private int temperature;
 	private String program = null;
 	private boolean IsWashing = false;
-	
-    @Override
-    public String getName(){
-    	return name;
-    }
+
+	@Override
+	public String getName() {
+		return name;
+	}
 
 	// Switchable
 	@Override
@@ -33,12 +33,12 @@ public class WashingMachine extends Device implements Switchable, Programmable {
 	// Programmable
 	@Override
 	public void setProgram(String program) {
-		if (getPrograms().contains(program)){
-			System.out.println("Programm chosen: " + program );
+		if (getPrograms().contains(program)) {
+			System.out.println("Programm chosen: " + program);
 			this.program = program;
 			setTimer(program);
 		} else {
-    		System.out.println("Program doesn't exist!");
+			System.out.println("Program doesn't exist!");
 		}
 	}
 
@@ -79,6 +79,7 @@ public class WashingMachine extends Device implements Switchable, Programmable {
 	public ArrayList<Command> showAvailableCommands() {
 		ArrayList<Command> result = new ArrayList<Command>();
 		result.add(new SwitchOnCommand(this));
+		// TODO: select Degrees command
 		result.add(new SetUpProgrammCommand(this));
 		result.add(new SwitchOffCommand(this));
 		return result;
