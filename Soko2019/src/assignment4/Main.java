@@ -63,10 +63,10 @@ public class Main {
 				}
 				for (Command tempCommand : tempCommands) {
 					if (tempCommand.getName().equals(commandInput)) {
-						System.out.println("You have chosen " + commandInput);
 						pickedCommand = tempCommand;
 						commandFound = true;
 						pickedCommand.execute();
+						System.out.println();
 						pickedCommand = null;
 						break;
 					}

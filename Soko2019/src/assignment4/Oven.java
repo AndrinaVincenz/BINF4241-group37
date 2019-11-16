@@ -20,7 +20,7 @@ public class Oven extends Device implements Switchable {
     }
 
     public void setTemperature(int temperature) {
-    	System.out.println("Temperatur is set to " + temperature);
+    	System.out.println(name + ": Temperatur is set to " + temperature);
         this.temperature = temperature;
     }
 
@@ -29,21 +29,21 @@ public class Oven extends Device implements Switchable {
     }
 
     public void setProgram(Program program){
-    	System.out.println("Programm set to " + program.toString());
+    	System.out.println(name + ": Programm set to " + program.toString());
         this.program = program;
     }
     
     public void switchOff(){
-    	System.out.println("Oven is switched OFF!");	
+    	System.out.println(name + ": Switched OFF!");	
     	IsOn = false;
     }
     
     public void switchOn(){
-    	System.out.println("Oven is switched ON!");	
+    	System.out.println(name + ": Switched ON!");	
     	IsOn = true;
     }
     
-    void startCooking(){
+    public void startCooking(){
     	if ((temperature > 0) && (timer > 0) && (program != null)){
     		this.IsCooking = true;
     		System.out.println("Start Cooking if true bla bla");
@@ -54,7 +54,7 @@ public class Oven extends Device implements Switchable {
     
     public ArrayList<Command> showAvailableCommands(){
 		ArrayList<Command> result = new ArrayList<Command>();
-		result.add(new OvenSetTemperaturCommand(this, 0));
+		result.add(new OvenSetTemperaturCommand(this));
 		result.add(new OvenSetUpProgrammCommand(this, Program.GLASSES));
 		result.add(new SwitchOnCommand(this));
 		result.add(new SwitchOffCommand(this));
