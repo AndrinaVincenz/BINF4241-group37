@@ -1,10 +1,18 @@
 package assignment4;
 
-public class Microwave {
-    private boolean IsOn = false;
+import java.util.ArrayList;
+
+public class Microwave extends Device implements Switchable {
+	private String name = "Microwave";
+	private boolean IsOn = false;
     private long timer;
     private int temperature;
     private boolean IsBaking = false;
+    
+    @Override
+    public String getName(){
+    	return name;
+    }
 
     public boolean isOn() {
         return IsOn;
@@ -43,5 +51,25 @@ public class Microwave {
         else{
             System.out.println("Microwave is not baking");
         }
+    }
+
+	@Override
+	public void switchOff() {
+		System.out.println("Microwave is switched OFF!");	
+    	IsOn = false;
+		
+	}
+
+	@Override
+	public void switchOn() {
+		System.out.println("Microwave is switched ON!");	
+    	IsOn = true;
+	}
+	
+    public ArrayList<Command> showAvailableCommands(){
+		ArrayList<Command> result = new ArrayList<Command>();
+		result.add(new SwitchOnCommand(this));
+		result.add(new SwitchOffCommand(this));
+    	return result;
     }
 }
