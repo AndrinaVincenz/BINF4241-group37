@@ -2,45 +2,60 @@ package assignment4;
 
 import java.util.ArrayList;
 
-public class Dishwasher extends Device implements Switchable, Bootable {
-	private String name = "Dishwasher";
+public class Dishwasher extends Device implements Switchable, Bootable, Programmable {
+	private String name = "DishWasher";
 
     private boolean IsOn = false; 
-    long timer;
-    private Program program = null;
+    private long timer = 0;
+    private String program = null;
     private boolean IsWashing = false;
-
-    public long getTimer() {
-        return timer;
+    
+    @Override
+    public String getName(){
+    	return name;
     }
 
-    private void setTimer(long timer) {
-        this.timer = timer;
+    private void setTimer(String program) {
+    	if(program.equals("Glasses")){
+    		 this.timer = 10000;
+    	}
+    	if(program.equals("Plates")){
+   		 this.timer = 5000;
+    	}
+    	if(program.equals("Pans")){
+      		 this.timer = 7000;
+       	}
+    	if(program.equals("Mixed")){
+     		 this.timer = 8000;
+      	}
+    	if(program.equals("None")){
+    		 this.timer = 0;
+     	}
+    	System.out.println("Timer set to: " + timer);
     }
 
-//    public void setProgram(Program newProgram){
-//        if(newProgram == assignment4.Program.GLASSES){
-//            this.program = assignment4.Program.GLASSES;
-//            this.timer = 120; // give the timer length
-//        }
-//        else if(newProgram == assignment4.Program.MIXED){
-//            this.program = assignment4.Program.MIXED;
-//            this.timer = 150; // give the timer length
-//        }
-//        else if(newProgram == assignment4.Program.PANS){
-//            this.program = assignment4.Program.PANS;
-//            this.timer = 180; // give the timer length
-//        }
-//        else if(newProgram == assignment4.Program.PLATES){
-//            this.program = assignment4.Program.MIXED;
-//            this.timer = 200; // give the timer length
-//        }
-//    }
+	@Override
+	public void setProgram(String program) {
+		if (getPrograms().contains(program)){
+			System.out.println("Programm chosen: " + program );
+			this.program = program;
+			setTimer(program);
+		} else {
+    		System.out.println("Program doesn't exist!");
+		}
+	}
 
-    //incomplete --> the timer should start here
-    public void setWashing(boolean washing) {
-
-    }
+	@Override
+	public ArrayList<String> getPrograms() {
+		ArrayList<String> programs = new ArrayList<String>(); {
+		programs.add("Glasses");
+		programs.add("Plates");
+		programs.add("Pans");
+		programs.add("Mixed");
+		programs.add("None");
+		return programs;
+	}
+	}
 
 //    public void interruptWashing(){
 //        if (this.IsWashing == true){
@@ -68,6 +83,9 @@ public class Dishwasher extends Device implements Switchable, Bootable {
 	@Override
 	public void start() {
         if(IsOn && this.program != null) {
+        	System.out.println(name + "Started washing");
+    		System.out.println("Timer:" + timer);
+    		System.out.println("Program" + program);
             this.IsWashing = true;
         }
         else{
@@ -83,9 +101,12 @@ public class Dishwasher extends Device implements Switchable, Bootable {
 	
     public ArrayList<Command> showAvailableCommands(){
 		ArrayList<Command> result = new ArrayList<Command>();
+		//No setTimerCommand according it is set automatically depending on the program
 		result.add(new SwitchOnCommand(this));
 		result.add(new StartCommand(this));
+		result.add(new SetUpProgrammCommand(this));
 		result.add(new SwitchOffCommand(this));
     	return result;
     }
+
 }

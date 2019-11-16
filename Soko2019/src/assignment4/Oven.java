@@ -2,22 +2,32 @@ package assignment4;
 
 import java.util.ArrayList;
 
-public class Oven extends Device implements Switchable, Heatable, Timeable, Bootable {
+public class Oven extends Device implements Switchable, Heatable, Timeable, Bootable, Programmable {
 	private String name = "Oven";
 	
     private boolean IsOn = false;
     private long timer = 0;
     private int temperature = 0;
     private boolean IsCooking = false;
-    private Program program;
+    private String program;
 
     @Override
     public String getName(){
     	return name;
     }
     
-    public long getTimer() {
-        return timer;
+    //Switchable
+    @Override
+    public void switchOff(){
+    	System.out.println(name + ": Switched OFF!");	
+    	IsOn = false;
+    }
+    
+    //Switchable
+    @Override
+    public void switchOn(){
+    	System.out.println(name + ": Switched ON!");	
+    	IsOn = true;
     }
 
     //heatable
@@ -34,11 +44,27 @@ public class Oven extends Device implements Switchable, Heatable, Timeable, Boot
     	System.out.println(name + ": Timer is set to " + timer);
     }
 
-    //not defined yet
-    public void setProgram(Program program){
-    	System.out.println(name + ": Programm set to " + program.toString());
-        this.program = program;
-    }
+    //Programmable
+	@Override
+	public void setProgram(String program) {
+		if (getPrograms().contains(program)){
+			System.out.println("Programm chosen: " + program );
+			this.program = program;
+		} else {
+    		System.out.println("Program doesn't exist!");
+		}
+	}
+	
+	//Programmable
+	@Override
+	public ArrayList<String> getPrograms(){
+		ArrayList<String> programs = new ArrayList<String>(); {
+		programs.add("Ventilated");
+		programs.add("Grill");
+		programs.add("None");
+		return programs;
+	}
+	}
     
     //bootable
 	@Override
@@ -68,30 +94,18 @@ public class Oven extends Device implements Switchable, Heatable, Timeable, Boot
     	}
 	}
     
-    //Switchable
-    @Override
-    public void switchOff(){
-    	System.out.println(name + ": Switched OFF!");	
-    	IsOn = false;
-    }
-    
-    @Override
-    public void switchOn(){
-    	System.out.println(name + ": Switched ON!");	
-    	IsOn = true;
-    }
-    
     @Override
     public ArrayList<Command> showAvailableCommands(){
 		ArrayList<Command> result = new ArrayList<Command>();
 		result.add(new SwitchOnCommand(this));
 		result.add(new SetTemperaturCommand(this));
 		result.add(new SetTimerCommand(this));
-		result.add(new OvenSetUpProgrammCommand(this, Program.GLASSES));
+		result.add(new SetUpProgrammCommand(this));
 		result.add(new StartCommand(this));
 		result.add(new SwitchOffCommand(this));
     	return result;
     }
+
 
 
 //    public void interruptCooking(){
@@ -101,5 +115,6 @@ public class Oven extends Device implements Switchable, Heatable, Timeable, Boot
 //        else{
 //            System.out.println("Oven is not cooking");
 //        }
-//    }
-}
+//    
+	}
+

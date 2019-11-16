@@ -14,6 +14,8 @@ public class Main {
 		ArrayList<Device> devices = new ArrayList<Device>();
 		devices.add(new Oven());
 		devices.add(new Microwave());
+		devices.add(new Dishwasher());
+		devices.add(new WashingMachine());
 		devices.add(new CleaningRobot());
 
 		while (!end) {

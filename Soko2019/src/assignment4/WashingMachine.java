@@ -1,72 +1,87 @@
 package assignment4;
 
-public class WashingMachine extends Device implements Switchable {
+import java.util.ArrayList;
+
+public class WashingMachine extends Device implements Switchable, Programmable {
 	private String name = "WashingMachine";
-	
+
 	private boolean IsOn = false;
-    private long timer;
-    private int temperature;
-    private  Program Program = null;
-    private boolean IsWashing = false;
-
-    public boolean isOn() {
-        return IsOn;
+	private long timer = 0;
+	private int temperature;
+	private String program = null;
+	private boolean IsWashing = false;
+	
+    @Override
+    public String getName(){
+    	return name;
     }
 
-    public long getTimer() {
-        return timer;
-    }
-
-    public void setTemperature(int temperature) {
-        this.temperature = temperature;
-    }
-
-    private void setTimer(long timer) {
-        this.timer = timer;
-    }
-
-    public void setOn(boolean on) {
-        this.IsOn = on;
-    }
-    public void setProgram(Program newProgram){
-        if(newProgram == assignment4.Program.DOUBLE_RINSE){
-            this.Program = assignment4.Program.DOUBLE_RINSE;
-            this.timer = 120; // give the timer length
-        }
-        else if(newProgram == assignment4.Program.INTENSE){
-            this.Program = assignment4.Program.INTENSE;
-            this.timer = 150; // give the timer length
-        }
-        else if(newProgram == assignment4.Program.QUICK){
-            this.Program = assignment4.Program.QUICK;
-            this.timer = 180; // give the timer length
-        }
-        else if(newProgram == assignment4.Program.SPIN){
-            this.Program = assignment4.Program.SPIN;
-            this.timer = 200; // give the timer length
-        }
-    }
-
-    //incomplete --> the timer should start here
-    public void setWashing(boolean washing) {
-        if(this.Program != null && this.temperature != 0) {
-            this.IsWashing = washing;
-        }
-        else{
-            System.out.println("Setup for washing machine incomplete");
-        }
-    }
-
+	// Switchable
 	@Override
 	public void switchOff() {
-    	System.out.println(name + ": Switched OFF!");	
-    	IsOn = false;
+		System.out.println(name + ": Switched OFF!");
+		IsOn = false;
+	}
+
+	// Switchable
+	@Override
+	public void switchOn() {
+		System.out.println(name + ": Switched ON!");
+		IsOn = true;
+	}
+
+	// Programmable
+	@Override
+	public void setProgram(String program) {
+		if (getPrograms().contains(program)){
+			System.out.println("Programm chosen: " + program );
+			this.program = program;
+			setTimer(program);
+		} else {
+    		System.out.println("Program doesn't exist!");
+		}
+	}
+
+	// Programmable
+	@Override
+	public ArrayList<String> getPrograms() {
+		ArrayList<String> programs = new ArrayList<String>();
+		{
+			programs.add("DoubleRinse");
+			programs.add("Intense");
+			programs.add("Quick");
+			programs.add("Spin");
+			programs.add("None");
+			return programs;
+		}
+	}
+
+	private void setTimer(String program) {
+		if (program.equals("DoubleRinse")) {
+			this.timer = 10000;
+		}
+		if (program.equals("Intense")) {
+			this.timer = 5000;
+		}
+		if (program.equals("Quick")) {
+			this.timer = 7000;
+		}
+		if (program.equals("Spin")) {
+			this.timer = 8000;
+		}
+		if (program.equals("None")) {
+			this.timer = 0;
+		}
+		System.out.println("Timer set to: " + timer);
 	}
 
 	@Override
-	public void switchOn() {
-    	System.out.println(name + ": Switched ON!");	
-    	IsOn = true;
+	public ArrayList<Command> showAvailableCommands() {
+		ArrayList<Command> result = new ArrayList<Command>();
+		result.add(new SwitchOnCommand(this));
+		result.add(new SetUpProgrammCommand(this));
+		result.add(new SwitchOffCommand(this));
+		return result;
 	}
 
 }
