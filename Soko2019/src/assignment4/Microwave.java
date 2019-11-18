@@ -2,12 +2,17 @@ package assignment4;
 
 import java.util.ArrayList;
 
-public class Microwave extends Device implements Switchable, Heatable, Timeable, Bootable {
+public class Microwave extends Device implements Switchable, Heatable, Timeable, Bootable, Interrupitble {
 	private String name = "Microwave";
 	private boolean IsOn = false;
-	private long timer;
+	private int timer;
 	private int temperature;
-	private boolean IsBaking = false;
+	private boolean IsRunning = false;
+	private Thread MicrowaveTimerThread;
+
+	public void setRunning(boolean running) {
+		this.IsRunning = running;
+	}
 
 	@Override
 	public String getName() {
@@ -38,7 +43,7 @@ public class Microwave extends Device implements Switchable, Heatable, Timeable,
 
 	// Timeable
 	@Override
-	public void setTimer(long timer) {
+	public void setTimer(int timer) {
 		this.timer = timer;
 		System.out.println(name + ": Timer is set to " + timer);
 	}
@@ -46,13 +51,13 @@ public class Microwave extends Device implements Switchable, Heatable, Timeable,
 	// Bootable
 	@Override
 	public void start() {
-		// TODO: thread things, IsCooking to false after timer goes down to 0
-		if (IsOn && this.timer != 0 && this.temperature != 0) {
-			this.IsBaking = true;
+		if (IsOn && this.timer != 0 && this.temperature != 0 && IsRunning == false){
+			this.IsRunning = true;
 			System.out.println(name + ": Start Baking!");
 			System.out.println("Temperatur:" + temperature);
 			System.out.println("Timer:" + timer);
-			// TODO thread things idk
+			MicrowaveTimerThread = new Thread(new DeviceThread(this,"MicrowaveTimer", this.timer));
+			MicrowaveTimerThread.start();
 		} else {
 			System.out.println("Setup for microwave incomplete!");
 			if (!IsOn) {
@@ -64,19 +69,37 @@ public class Microwave extends Device implements Switchable, Heatable, Timeable,
 			if (!(timer > 0)) {
 				System.out.println("Timer must be set!");
 			}
+			if(IsRunning == true){
+				System.out.println("Device still running!");
+			}
 		}
 	}
 
 	public ArrayList<Command> showAvailableCommands() {
 		ArrayList<Command> result = new ArrayList<Command>();
-		result.add(new SwitchOnCommand(this));
-		result.add(new SetTimerCommand(this));
-		result.add(new SetTemperaturCommand(this));
-		result.add(new StartCommand(this));
-		//TODO: Check Timer
-		//TODO: Interrupt Program
-		result.add(new SwitchOffCommand(this));
+		if(IsOn == true) {
+			result.add(new SwitchOnCommand(this));
+			result.add(new SetTimerCommand(this));
+			result.add(new SetTemperaturCommand(this));
+			result.add(new StartCommand(this));
+			//TODO: Check Timer
+			result.add(new InterruptCommand(this));
+			result.add(new SwitchOffCommand(this));
+		}
+		else{
+			result.add(new SwitchOnCommand(this));
+		}
 		return result;
 	}
 
+	@Override
+	public void interrupt() {
+		if(IsRunning == true){
+			this.MicrowaveTimerThread.interrupt();
+			this.IsRunning = false;
+		}
+		else{
+			System.out.println("Microwave is not running");
+		}
+	}
 }

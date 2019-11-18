@@ -2,14 +2,20 @@ package assignment4;
 
 import java.util.ArrayList;
 
-public class WashingMachine extends Device implements Switchable, Programmable {
+public class WashingMachine extends Device implements Switchable, Programmable, Bootable, Heatable{
 	private String name = "WashingMachine";
 
 	private boolean IsOn = false;
-	private long timer = 0;
+	private int timer = 0;
 	private int temperature;
 	private String program = null;
-	private boolean IsWashing = false;
+	private boolean IsRunning = false;
+	private Thread WashingMachineTimerThread;
+
+	@Override
+	public void setIsRunning(boolean running) {
+		this.IsRunning = running;
+	}
 
 	@Override
 	public String getName() {
@@ -78,11 +84,49 @@ public class WashingMachine extends Device implements Switchable, Programmable {
 	@Override
 	public ArrayList<Command> showAvailableCommands() {
 		ArrayList<Command> result = new ArrayList<Command>();
-		result.add(new SwitchOnCommand(this));
-		// TODO: select Degrees command
-		result.add(new SetUpProgrammCommand(this));
-		result.add(new SwitchOffCommand(this));
+		if(IsOn == true) {
+			result.add(new SetTemperaturCommand(this));
+			result.add(new SetUpProgrammCommand(this));
+			result.add(new StartCommand(this));
+			result.add(new SwitchOffCommand(this));
+		}
+		else{
+			result.add(new SwitchOnCommand(this));
+		}
 		return result;
 	}
 
+	@Override
+	public void start() {
+		if (IsOn && this.timer != 0 && this.temperature != 0 && this.program != null && IsRunning == false){
+			this.IsRunning = true;
+			System.out.println(name + ": Start Washing!");
+			System.out.println("Temperatur: " + temperature);
+			System.out.println("Program: " + this.program);
+			System.out.println("Timer: " + timer);
+
+			WashingMachineTimerThread = new Thread(new DeviceThread(this,"MicrowaveTimer", this.timer));
+			WashingMachineTimerThread.start();
+		} else {
+			System.out.println("Setup for microwave incomplete!");
+			if (!IsOn) {
+				System.out.println("Not switched On!");
+			}
+			if (!(temperature > 0)) {
+				System.out.println("Temperatur not set!");
+			}
+			if (!(timer > 0)) {
+				System.out.println("Timer must be set!");
+			}
+			if(IsRunning == true){
+				System.out.println("Device still running!");
+			}
+		}
+	}
+
+	@Override
+	public void setTemperature(int temperature) {
+		this.temperature = temperature;
+		System.out.println(name + ": Temperatur is set to " + temperature + "!");
+	}
 }

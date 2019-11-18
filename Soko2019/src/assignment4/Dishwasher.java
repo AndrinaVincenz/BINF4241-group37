@@ -2,13 +2,19 @@ package assignment4;
 
 import java.util.ArrayList;
 
-public class Dishwasher extends Device implements Switchable, Bootable, Programmable {
+public class Dishwasher extends Device implements Switchable, Bootable, Programmable, Interrupitble {
 	private String name = "DishWasher";
 
 	private boolean IsOn = false;
-	private long timer = 0;
+	private int timer = 0;
 	private String program = "None";
-	private boolean IsWashing = false;
+	private boolean IsRunning;
+	private Thread DishwasherTimerThread;
+
+	@Override
+	public void setIsRunning(boolean running) {
+		this.IsRunning = running;
+	}
 
 	@Override
 	public String getName() {
@@ -75,11 +81,13 @@ public class Dishwasher extends Device implements Switchable, Bootable, Programm
 	// Bootable
 	@Override
 	public void start() {
-		if (IsOn && (!program.equals("None"))) {
+		if (IsOn && (!program.equals("None")) && IsRunning == false) {
 			System.out.println(name + "Started washing");
 			System.out.println("Timer:" + timer);
 			System.out.println("Program" + program);
-			this.IsWashing = true;
+			this.IsRunning = true;
+			DishwasherTimerThread = new Thread(new DeviceThread(this, "DishwasherTimer", this.timer));
+			DishwasherTimerThread.start();
 		} else {
 			System.out.println("Setup for dishwasher incomplete");
 			if (!IsOn) {
@@ -88,18 +96,35 @@ public class Dishwasher extends Device implements Switchable, Bootable, Programm
 			if (program.equals("None")) {
 				System.out.println("Program must be set!");
 			}
+			if(IsRunning == true){
+				System.out.println("Device still running!");
+			}
 		}
 	}
 
 	public ArrayList<Command> showAvailableCommands() {
 		ArrayList<Command> result = new ArrayList<Command>();
-		result.add(new SwitchOnCommand(this));
-		result.add(new StartCommand(this));
-		result.add(new SetUpProgrammCommand(this));
-		//TODO: Check timer
-		//TODO: Stop Dishwasher
-		result.add(new SwitchOffCommand(this));
+		if (IsOn == true) {
+			result.add(new StartCommand(this));
+			result.add(new SetUpProgrammCommand(this));
+			//TODO: Check timer
+			result.add(new InterruptCommand(this));
+			result.add(new SwitchOffCommand(this));
+		}
+		else{
+			result.add(new SwitchOnCommand(this));
+		}
 		return result;
 	}
 
+	@Override
+	public void interrupt() {
+		if(IsRunning == true){
+			this.DishwasherTimerThread.interrupt();
+			this.IsRunning = false;
+		}
+		else{
+			System.out.println("Dishwasher is not running");
+		}
+	}
 }

@@ -2,14 +2,21 @@ package assignment4;
 
 import java.util.ArrayList;
 
-public class Oven extends Device implements Switchable, Heatable, Timeable, Bootable, Programmable {
+public class Oven extends Device implements Switchable, Heatable, Timeable, Bootable, Programmable, Interrupitble{
 	private String name = "Oven";
 
 	private boolean IsOn = false;
-	private long timer = 0;
+	private int timer = 0;
 	private int temperature = 0;
-	private boolean IsCooking = false;
+	private boolean IsRunning = false;
 	private String program = "None";
+	private Thread OvenTimerThread;
+
+
+	@Override
+	public void setIsRunning(boolean running) {
+		this.IsRunning = running;
+	}
 
 	@Override
 	public String getName() {
@@ -39,7 +46,7 @@ public class Oven extends Device implements Switchable, Heatable, Timeable, Boot
 
 	// Timeable
 	@Override
-	public void setTimer(long timer) {
+	public void setTimer(int timer) {
 		this.timer = timer;
 		System.out.println(name + ": Timer is set to " + timer);
 	}
@@ -71,13 +78,14 @@ public class Oven extends Device implements Switchable, Heatable, Timeable, Boot
 	@Override
 	public void start() {
 		// TODO: thread things, IsCooking to false after timer goes down to 0
-		if (IsOn && (temperature > 0) && (timer > 0) && (!program.equals("None"))) {
-			this.IsCooking = true;
+		if (IsOn && (temperature > 0) && (timer > 0) && (!program.equals("None"))&& IsRunning == false) {
 			System.out.println(name + ": Start Cooking!");
-			System.out.println("Temperatur: " + temperature);
+			System.out.println("Temperature: " + temperature);
 			System.out.println("Timer: " + timer);
 			System.out.println("Program: " + program);
-			// TODO thread things idk
+			this.IsRunning = true;
+			OvenTimerThread = new Thread(new DeviceThread(this, "OvenTimer", this.timer));
+			OvenTimerThread.start();
 		} else {
 			System.out.println("Setup for oven incomplete!");
 			if (!IsOn) {
@@ -92,20 +100,40 @@ public class Oven extends Device implements Switchable, Heatable, Timeable, Boot
 			if (program.equals("None")) {
 				System.out.println("Program must be set!");
 			}
+			if(IsRunning == true){
+				System.out.println("Device still running!");
+			}
 		}
 	}
 
 	@Override
 	public ArrayList<Command> showAvailableCommands() {
 		ArrayList<Command> result = new ArrayList<Command>();
-		result.add(new SwitchOnCommand(this));
-		result.add(new SetTimerCommand(this));
-		result.add(new SetTemperaturCommand(this));
-		result.add(new SetUpProgrammCommand(this));
-		result.add(new StartCommand(this));
-		//TODO: Check Timer
-		//TODO: Interrupt Program
-		result.add(new SwitchOffCommand(this));
+		if(IsOn == true) {
+			result.add(new SetTimerCommand(this));
+			result.add(new SetTemperaturCommand(this));
+			result.add(new SetUpProgrammCommand(this));
+			result.add(new StartCommand(this));
+			result.add(new InterruptCommand(this));
+			//TODO: Check Timer
+			result.add(new SwitchOffCommand(this));
+		}
+		else{
+			result.add(new SwitchOnCommand(this));
+		}
 		return result;
 	}
+
+	@Override
+	public void interrupt() {
+		if(IsRunning == true){
+			this.OvenTimerThread.interrupt();
+			this.IsRunning = false;
+		}
+		else{
+			System.out.println("Oven is not cooking");
+		}
+	}
+
+
 }

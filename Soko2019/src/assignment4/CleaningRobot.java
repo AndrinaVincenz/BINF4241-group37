@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class CleaningRobot extends Device implements Timeable {
 	private String name = "CleaningRobot";
 
-	private long timer = 0;
+	private int timer = 0;
 
 	@Override
 	public String getName() {
@@ -14,7 +14,7 @@ public class CleaningRobot extends Device implements Timeable {
 
 	// Timeable
 	@Override
-	public void setTimer(long timer) {
+	public void setTimer(int timer) {
 		this.timer = timer;
 		System.out.println(name + ": Timer is set to " + timer);
 	}
