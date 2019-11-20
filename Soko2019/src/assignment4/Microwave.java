@@ -9,7 +9,8 @@ public class Microwave extends Device implements Switchable, Heatable, Timeable,
 	private int temperature;
 	private boolean IsRunning = false;
 	private Thread MicrowaveTimerThread;
-
+	private long startTimer;
+	
 	public void setRunning(boolean running) {
 		this.IsRunning = running;
 	}
@@ -46,7 +47,20 @@ public class Microwave extends Device implements Switchable, Heatable, Timeable,
 	public void setTimer(int timer) {
 		this.timer = timer;
 		System.out.println(name + ": Timer is set to " + timer);
+		this.startTimer = System.currentTimeMillis(); 
+		
 	}
+	public void getTimer() {
+			if (IsRunning == true) {
+				long currentTime = System.currentTimeMillis();
+				long remainingTime = currentTime - startTimer;
+				System.out.println("Remaining time: " + remainingTime +"s" );
+			} else {
+				System.out.println("Last set timer: " + timer +"s" );
+			}
+			
+		}
+	
 
 	// Bootable
 	@Override
@@ -82,7 +96,7 @@ public class Microwave extends Device implements Switchable, Heatable, Timeable,
 			result.add(new SetTimerCommand(this));
 			result.add(new SetTemperaturCommand(this));
 			result.add(new StartCommand(this));
-			//TODO: Check Timer
+			result.add(new GetTimerCommand(this));
 			result.add(new InterruptCommand(this));
 			result.add(new SwitchOffCommand(this));
 		}
@@ -97,6 +111,7 @@ public class Microwave extends Device implements Switchable, Heatable, Timeable,
 		if(IsRunning == true){
 			this.MicrowaveTimerThread.interrupt();
 			this.IsRunning = false;
+			this.startTimer = 0;
 		}
 		else{
 			System.out.println("Microwave is not running");

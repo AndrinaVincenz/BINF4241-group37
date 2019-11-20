@@ -2,7 +2,7 @@ package assignment4;
 
 import java.util.ArrayList;
 
-public class Dishwasher extends Device implements Switchable, Bootable, Programmable, Interrupitble {
+public class Dishwasher extends Device implements Switchable, Bootable, Programmable, Interrupitble, Timeable {
 	private String name = "DishWasher";
 
 	private boolean IsOn = false;
@@ -10,10 +10,11 @@ public class Dishwasher extends Device implements Switchable, Bootable, Programm
 	private String program = "None";
 	private boolean IsRunning;
 	private Thread DishwasherTimerThread;
-
+	private long startTimer;
 	@Override
 	public void setIsRunning(boolean running) {
 		this.IsRunning = running;
+	
 	}
 
 	@Override
@@ -40,29 +41,44 @@ public class Dishwasher extends Device implements Switchable, Bootable, Programm
 		if (getPrograms().contains(program)) {
 			System.out.println("Programm chosen: " + program);
 			this.program = program;
-			setTimer(program);
+			if (program.equals("Glasses")) {
+				setTimer(10000);
+			}
+			if (program.equals("Plates")) {
+				setTimer(5000);
+			}
+			if (program.equals("Pans")) {
+				setTimer(7000);
+			}
+			if (program.equals("Mixed")) {
+				setTimer(8000);
+			}
+			if (program.equals("None")) {
+				setTimer(0);
+			}
+			
 		} else {
 			System.out.println("Program doesn't exist!");
 		}
 	}
-
-	private void setTimer(String program) {
-		if (program.equals("Glasses")) {
-			this.timer = 10000;
-		}
-		if (program.equals("Plates")) {
-			this.timer = 5000;
-		}
-		if (program.equals("Pans")) {
-			this.timer = 7000;
-		}
-		if (program.equals("Mixed")) {
-			this.timer = 8000;
-		}
-		if (program.equals("None")) {
-			this.timer = 0;
-		}
+	
+	public void setTimer(int timer) {
+		this.timer = timer;
 		System.out.println("Timer set to: " + timer);
+		
+	}
+	
+	public void getTimer() {
+		if (IsRunning == true) {
+			long currentTime = System.currentTimeMillis();
+			long remainingTime = currentTime - startTimer;
+			System.out.println("Remaining time: " + remainingTime +"s" );
+		} else if (IsOn) {
+			System.out.println("Time required: " + timer +"s" );
+		} else {
+			System.out.println("Dishwascher is not running nor setup" );
+		}
+		
 	}
 
 	@Override
@@ -88,6 +104,7 @@ public class Dishwasher extends Device implements Switchable, Bootable, Programm
 			this.IsRunning = true;
 			DishwasherTimerThread = new Thread(new DeviceThread(this, "DishwasherTimer", this.timer));
 			DishwasherTimerThread.start();
+			this.startTimer = System.currentTimeMillis();
 		} else {
 			System.out.println("Setup for dishwasher incomplete");
 			if (!IsOn) {
@@ -107,7 +124,7 @@ public class Dishwasher extends Device implements Switchable, Bootable, Programm
 		if (IsOn == true) {
 			result.add(new StartCommand(this));
 			result.add(new SetUpProgrammCommand(this));
-			//TODO: Check timer
+			result.add(new GetTimerCommand(this));
 			result.add(new InterruptCommand(this));
 			result.add(new SwitchOffCommand(this));
 		}
@@ -122,6 +139,7 @@ public class Dishwasher extends Device implements Switchable, Bootable, Programm
 		if(IsRunning == true){
 			this.DishwasherTimerThread.interrupt();
 			this.IsRunning = false;
+			this.startTimer = 0;
 		}
 		else{
 			System.out.println("Dishwasher is not running");

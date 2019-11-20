@@ -15,10 +15,14 @@ public class SetTimerCommand implements Command {
 	@Override
 	public void execute() {
 		Scanner scanner = new Scanner(System.in);
+		if(this.timeableObject instanceof Dishwasher) {
+			System.out.println("Timer was set at start Programm");
+			
+		} else {
 		System.out.println("How many seconds?");
 		int tempInput = scanner.nextInt(); 
 		timeableObject.setTimer(tempInput);
-	}
+	}}
 
 	@Override
 	public String getName() {

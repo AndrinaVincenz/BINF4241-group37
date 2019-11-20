@@ -11,7 +11,7 @@ public class Oven extends Device implements Switchable, Heatable, Timeable, Boot
 	private boolean IsRunning = false;
 	private String program = "None";
 	private Thread OvenTimerThread;
-
+	private long startTimer;
 
 	@Override
 	public void setIsRunning(boolean running) {
@@ -49,6 +49,16 @@ public class Oven extends Device implements Switchable, Heatable, Timeable, Boot
 	public void setTimer(int timer) {
 		this.timer = timer;
 		System.out.println(name + ": Timer is set to " + timer);
+		this.startTimer = System.currentTimeMillis();
+	}
+	public void getTimer() {
+		if (IsRunning == true) {
+			long currentTime = System.currentTimeMillis();
+			long remainingTime = currentTime - startTimer;
+			System.out.println("Remaining time: " + remainingTime +"s" );
+		} else {
+			System.out.println("Last set timer: " + timer +"s" );
+		}
 	}
 
 	// Programmable
@@ -115,7 +125,7 @@ public class Oven extends Device implements Switchable, Heatable, Timeable, Boot
 			result.add(new SetUpProgrammCommand(this));
 			result.add(new StartCommand(this));
 			result.add(new InterruptCommand(this));
-			//TODO: Check Timer
+			result.add(new SetTimerCommand(this));
 			result.add(new SwitchOffCommand(this));
 		}
 		else{
