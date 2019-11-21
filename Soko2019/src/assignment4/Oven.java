@@ -54,7 +54,7 @@ public class Oven extends Device implements Switchable, Heatable, Timeable, Boot
 	public void getTimer() {
 		if (IsRunning == true) {
 			long currentTime = System.currentTimeMillis();
-			long remainingTime = currentTime - startTimer;
+			long remainingTime = (currentTime - startTimer) / 1000;
 			System.out.println("Remaining time: " + remainingTime +"s" );
 		} else {
 			System.out.println("Last set timer: " + timer +"s" );

@@ -71,7 +71,7 @@ public class Dishwasher extends Device implements Switchable, Bootable, Programm
 	public void getTimer() {
 		if (IsRunning == true) {
 			long currentTime = System.currentTimeMillis();
-			long remainingTime = currentTime - startTimer;
+			long remainingTime = (currentTime - startTimer) / 1000;
 			System.out.println("Remaining time: " + remainingTime +"s" );
 		} else if (IsOn) {
 			System.out.println("Time required: " + timer +"s" );
