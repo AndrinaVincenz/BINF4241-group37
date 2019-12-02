@@ -133,6 +133,30 @@ public class Board {
 				return result;
 		}
 	
+	public void printBoard(){
+		// 1st Square
+		System.out.print("[1");
+		for (int y = 0; y < ((FirstSquare)this.getSquares().get(0)).getPlayers().size(); y++){
+			if (((FirstSquare)this.getSquares().get(0)).getPlayers().get(y) != null){
+			System.out.print("<" + ((FirstSquare)this.getSquares().get(0)).getPlayers().get(y).getName() + ">");
+			}
+		}
+		System.out.print("]");
+		//Rest
+		for (int i = 2; i < this.getNumOfSquares(); i++){
+			String currentPlayer = "";
+			if (this.findSquare(i).getPlayer() != null){
+				currentPlayer = ("<" + this.findSquare(i).getPlayer().getName() + ">");
+			}
+			if (this.findSquare(i) instanceof Ladder){
+				System.out.print("[" + ((Ladder)this.findSquare(i)).getPosition() + "->" + ((Ladder)this.findSquare(i)).endPosition  + "]");
+			} else if (this.findSquare(i) instanceof Snake){
+				System.out.print("[" + ((Snake)this.findSquare(i)).getPosition() + "->" + ((Snake)this.findSquare(i)).endPosition  + "]");
+			} else {
+				System.out.print("[" + this.findSquare(i).getPosition() + currentPlayer + "]");
+			}
+		}
+	}
 	
 	public Square findSquare(int position) {
 		return squaresList.get(position - 1);

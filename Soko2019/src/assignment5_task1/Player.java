@@ -14,7 +14,15 @@ public class Player {
 	
 	public void moveForward(int moves) {
 		square.leave(this);
+		/*for (int y = 0; y < square.board.getNumOfSquares(); y++){
+			if (square.board.getSquares().get(0).getPlayer().equals(this)){
+			square.board.getSquares().get(y).leave(this);
+			}
+		}*/
+		System.out.print(this.name + " rolls :" + moves + " ");
 		square = square.moveAndLand(moves, this);
+		myBoard.printBoard();
+		System.out.println();
 		square.enter(this);
 	}
 
@@ -30,5 +38,9 @@ public class Player {
 	}
 	public void setSquare(Square s) {
 		this.square = s;
+	}
+	
+	public void setBoard(Board board){
+		this.myBoard = board;
 	}
 }

@@ -35,8 +35,7 @@ public class Square implements ISquare {
 	}
 
 	public void leave(Player player) {
-		player = null;
-		
+		player = null;		
 	}
 
 
@@ -71,16 +70,13 @@ public class Square implements ISquare {
 				if (board.findSquare(currentposition + roll) instanceof Ladder){
 					Ladder tempLadder;
 					tempLadder = (Ladder) board.findSquare(currentposition + roll);
-					System.out.println("Player: " + player.getName() + ", current:"+ currentposition + " ...you rolled: "+ roll +"...LADDER!!! new Position: " + tempLadder.getEndPosition());
 					return board.findSquare(tempLadder.getEndPosition());
 				} else if (board.findSquare(currentposition + roll) instanceof Snake) {
 					Snake tempSnake;
 					tempSnake = (Snake) board.findSquare(currentposition + roll);
-					System.out.println("Player: " + player.getName() + ", current:"+ currentposition + " ...you rolled: "+ roll   + "...SNAKE!!! new Position: " + tempSnake.getEndPosition());
 					return board.findSquare(tempSnake.getEndPosition());
 				} else {
 					int newField2 = currentposition + roll;
-					System.out.println("Player: " + player.getName() + ", current:"+ currentposition + " ...you rolled: "+ roll  + " -> " + newField2);
 					return board.findSquare(currentposition + roll);
 				}
 				

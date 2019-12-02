@@ -39,6 +39,7 @@ public class Main {
 		
 		Game game = new Game(playernames, board);
 		
+		
 		game.play();	
 		
 	}

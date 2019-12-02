@@ -9,8 +9,10 @@ public class FirstSquare extends Square {
 	public FirstSquare(int position, Board b) {
 		super(position,b);	
 	}
-
-
+	
+	public ArrayList<Player> getPlayers(){
+		return p;
+	}
 
 	@Override
 	public void enter(Player player){

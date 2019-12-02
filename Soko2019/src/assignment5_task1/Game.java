@@ -16,6 +16,7 @@ public class Game {
 		for(String s: playernames) {
 			Player p = new Player(s);
 			numberOfSquares = board.getNumOfSquares();
+			p.setBoard(board);
 			players.add(p);
 			this.board = board;
 		}
@@ -23,10 +24,12 @@ public class Game {
 	}
 	 public void startGame() {
 		 for (Player p: players) {
-			 System.out.println("Player " + p.getName() + "is set to " + board.findSquare(1));
 			 board.firstSquare().enter(p);
-		 } winner = null;
-
+		 } 
+		 winner = null;
+		 System.out.print("Initial state: ");
+		 board.printBoard();
+		 System.out.println();
 	 }
 	
 	Player currentPlayer(){
@@ -59,11 +62,10 @@ public class Game {
 		Die die = new Die();
 		startGame();
 		
-	//	System.out.println("State: " + this);
 		while (notOver() == false) {
 			int roll = die.roll();
 			movePlayer(roll);
-		//	System.out.println("State: " + this);
+		
 		}
 		System.out.println("Winner: " + winner.getName());
 	}
