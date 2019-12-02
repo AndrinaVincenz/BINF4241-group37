@@ -2,7 +2,6 @@ package assignment5_task1;
 public class Player {
 	Square square;
 	private String name;
-	Board myBoard;
 	
 	public Player(String name) {
 		this.name = name;
@@ -12,7 +11,7 @@ public class Player {
 		return name;
 	}
 	
-	public void moveForward(int moves) {
+	public void moveForward(int moves, Board myBoard) {
 		square.leave(this);
 		/*for (int y = 0; y < square.board.getNumOfSquares(); y++){
 			if (square.board.getSquares().get(0).getPlayer().equals(this)){
@@ -39,8 +38,5 @@ public class Player {
 	public void setSquare(Square s) {
 		this.square = s;
 	}
-	
-	public void setBoard(Board board){
-		this.myBoard = board;
-	}
+
 }

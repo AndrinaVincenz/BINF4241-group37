@@ -16,7 +16,6 @@ public class Game {
 		for(String s: playernames) {
 			Player p = new Player(s);
 			numberOfSquares = board.getNumOfSquares();
-			p.setBoard(board);
 			players.add(p);
 			this.board = board;
 		}
@@ -50,7 +49,7 @@ public class Game {
 	private void movePlayer(int roll) {
 		// player is removed from the head, he plays one round and put to the tail
 		Player currentp = players.remove();
-		currentp.moveForward(roll);
+		currentp.moveForward(roll, board);
 		players.add(currentp);
 		if (currentp.wins()) {
 			winner = currentp;
