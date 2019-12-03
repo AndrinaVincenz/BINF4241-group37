@@ -10,7 +10,7 @@ public class Board {
 	
 	public Board(int numOfSquares){
 		this.numOfSquares = numOfSquares;
-		this.squaresList = createBoard(numOfSquares);
+		this.squaresList = createBoard();
 	}
 	
 	public int getNumOfSquares(){
@@ -23,7 +23,7 @@ public class Board {
 	
 	
 	
-	int createRandomPosition(int numOfSquares){		
+	public int createRandomPosition(){		
 		// We don't wanna have a random Number in the List as First or Last Square.
 		int position = 0;	
 		while (position == 0 || position > numOfSquares - 1){			
@@ -32,36 +32,32 @@ public class Board {
 		return position;
 	}
 	
-	public ArrayList<Square> createLadderList(int numOfSquares){
+	public ArrayList<Square> createLadderList(){
 		ArrayList<Square> ladders = new ArrayList<>();
 		int numberOfLadders = (int)(numOfSquares*0.20);
-		int i = numberOfLadders;
-		while(i > 0){
-			int startPosition = createRandomPosition(numOfSquares);
-			int endPosition = createRandomPosition(numOfSquares);
+		while(ladders.size() < numberOfLadders){
+			int startPosition = createRandomPosition();
+			int endPosition = createRandomPosition();
 			while (endPosition <= startPosition){
-				startPosition = createRandomPosition(numOfSquares);
-				endPosition = createRandomPosition(numOfSquares);
+				startPosition = createRandomPosition();
+				endPosition = createRandomPosition();
 			}
 			ladders.add(new Ladder(startPosition, endPosition, this));
-			i--;
 		}
 	return ladders;
 	}
 	
-	public ArrayList<Square> createSnakeList(int numOfSquares){
+	public ArrayList<Square> createSnakeList(){
 		ArrayList<Square> snakes = new ArrayList<>();
 		int numberOfSnakes = (int)(numOfSquares*0.20);
-		int i = numberOfSnakes;
-		while(i > 0){
-			int startPosition = createRandomPosition(numOfSquares);
-			int endPosition = createRandomPosition(numOfSquares);
+		while(snakes.size() < numberOfSnakes){
+			int startPosition = createRandomPosition();
+			int endPosition = createRandomPosition();
 			while (endPosition >= startPosition){
-				startPosition = createRandomPosition(numOfSquares);
-				endPosition = createRandomPosition(numOfSquares);
+				startPosition = createRandomPosition();
+				endPosition = createRandomPosition();
 			}
 			snakes.add(new Snake(startPosition, endPosition, this));
-			i--;
 		}
 		return snakes;
 	}
@@ -92,9 +88,9 @@ public class Board {
 		return result;
 	} 
 
-	public ArrayList<Square> createBoard(int numOfSquares){
-		ArrayList<Square> snakes = createSnakeList(numOfSquares);
-		ArrayList<Square> ladders = createLadderList(numOfSquares);
+	public ArrayList<Square> createBoard(){
+		ArrayList<Square> snakes = createSnakeList();
+		ArrayList<Square> ladders = createLadderList();
 		ArrayList<Square> mergedList = mergeLaddersAndSnakes(snakes, ladders);
 		ArrayList<Square> result = new ArrayList();
 		
@@ -102,7 +98,7 @@ public class Board {
 		result.add(new FirstSquare(1,this));
 		i++;
 		while (i < numOfSquares-1){
-			if (mergedList.size() != 0 && mergedList.get(0).getPosition() == i+1){
+			if (mergedList.size() != 0 && mergedList.get(0).getPosition() == i){
 				result.add(mergedList.get(0));
 				mergedList.remove(0);
 			} else {
@@ -112,6 +108,7 @@ public class Board {
 			}
 				result.add(new LastSquare(numOfSquares, this));
 				
+				/*
 				for (int z = 0; z < result.size(); z++){
 					if (result.get(z) instanceof FirstSquare){
 						System.out.println("Position " + result.get(z).getPosition() + " is the First Square.");
@@ -128,8 +125,7 @@ public class Board {
 					if (result.get(z) instanceof LastSquare){
 						System.out.println("Position " + result.get(z).getPosition() + " is the Last Square.");
 						} 
-				}
-				
+				}*/
 				return result;
 		}
 	
