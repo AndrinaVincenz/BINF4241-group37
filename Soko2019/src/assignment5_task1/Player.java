@@ -20,9 +20,10 @@ public class Player {
 		}*/
 		System.out.print(this.name + " rolls :" + moves + " ");
 		square = square.moveAndLand(moves, this);
+		square.enter(this);
 		myBoard.printBoard();
 		System.out.println();
-		square.enter(this);
+		
 	}
 
 	public int position() {

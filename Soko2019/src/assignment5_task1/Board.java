@@ -10,7 +10,7 @@ public class Board {
 	
 	public Board(int numOfSquares){
 		this.numOfSquares = numOfSquares;
-		squaresList = createBoard();
+		this.squaresList = createBoard(numOfSquares);
 	}
 	
 	public int getNumOfSquares(){
@@ -32,7 +32,7 @@ public class Board {
 		return position;
 	}
 	
-	public ArrayList<Square> createLadderList(){
+	public ArrayList<Square> createLadderList(int numOfSquares){
 		ArrayList<Square> ladders = new ArrayList<>();
 		int numberOfLadders = (int)(numOfSquares*0.20);
 		int i = numberOfLadders;
@@ -49,7 +49,7 @@ public class Board {
 	return ladders;
 	}
 	
-	public ArrayList<Square> createSnakeList(){
+	public ArrayList<Square> createSnakeList(int numOfSquares){
 		ArrayList<Square> snakes = new ArrayList<>();
 		int numberOfSnakes = (int)(numOfSquares*0.20);
 		int i = numberOfSnakes;
@@ -92,9 +92,9 @@ public class Board {
 		return result;
 	} 
 
-	public ArrayList<Square> createBoard(){
-		ArrayList<Square> snakes = createSnakeList();
-		ArrayList<Square> ladders = createLadderList();
+	public ArrayList<Square> createBoard(int numOfSquares){
+		ArrayList<Square> snakes = createSnakeList(numOfSquares);
+		ArrayList<Square> ladders = createLadderList(numOfSquares);
 		ArrayList<Square> mergedList = mergeLaddersAndSnakes(snakes, ladders);
 		ArrayList<Square> result = new ArrayList();
 		
@@ -162,9 +162,11 @@ public class Board {
 		return squaresList.get(position - 1);
 	
 	}
+	
 	public Square firstSquare() {
 		return squaresList.get(0);
 	}
+	
 	public Square lastSquare() {
 		return squaresList.get(squaresList.size()-1);
 	}
