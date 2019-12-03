@@ -23,7 +23,7 @@ public class Board {
 	
 	
 	
-	int createRandomPosition(){		
+	int createRandomPosition(int numOfSquares){		
 		// We don't wanna have a random Number in the List as First or Last Square.
 		int position = 0;	
 		while (position == 0 || position > numOfSquares - 1){			
@@ -37,11 +37,11 @@ public class Board {
 		int numberOfLadders = (int)(numOfSquares*0.20);
 		int i = numberOfLadders;
 		while(i > 0){
-			int startPosition = createRandomPosition();
-			int endPosition = createRandomPosition();
+			int startPosition = createRandomPosition(numOfSquares);
+			int endPosition = createRandomPosition(numOfSquares);
 			while (endPosition <= startPosition){
-				startPosition = createRandomPosition();
-				endPosition = createRandomPosition();
+				startPosition = createRandomPosition(numOfSquares);
+				endPosition = createRandomPosition(numOfSquares);
 			}
 			ladders.add(new Ladder(startPosition, endPosition, this));
 			i--;
@@ -54,11 +54,11 @@ public class Board {
 		int numberOfSnakes = (int)(numOfSquares*0.20);
 		int i = numberOfSnakes;
 		while(i > 0){
-			int startPosition = createRandomPosition();
-			int endPosition = createRandomPosition();
+			int startPosition = createRandomPosition(numOfSquares);
+			int endPosition = createRandomPosition(numOfSquares);
 			while (endPosition >= startPosition){
-				startPosition = createRandomPosition();
-				endPosition = createRandomPosition();
+				startPosition = createRandomPosition(numOfSquares);
+				endPosition = createRandomPosition(numOfSquares);
 			}
 			snakes.add(new Snake(startPosition, endPosition, this));
 			i--;
