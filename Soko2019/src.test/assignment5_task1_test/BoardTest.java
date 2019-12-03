@@ -88,15 +88,14 @@ public class BoardTest {
 	}
 	
 	@Test public void testCreateRandomPosition(){
+	
 		Board board = new Board(20);
-		
 		for (int i = 0; i < 100; i++){
 		int position = board.createRandomPosition();
 		assertTrue("CreatedRandomPosition not in allowed Range!!!", position < board.getNumOfSquares() && position > 0);
 		}
 		
 		Board board2 = new Board(1000);
-		
 		for (int i = 0; i < 100; i++){
 		int position = board2.createRandomPosition();
 		assertTrue("CreatedRandomPosition not in allowed Range!!!", position < board2.getNumOfSquares() && position > 0);
