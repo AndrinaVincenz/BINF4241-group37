@@ -35,14 +35,13 @@ public class Square implements ISquare {
 	}
 
 	public void leave(Player player) {
-		player = null;		
+		this.player = null; //forgot keyword this lead to bug!!!
 	}
 
 
 	public boolean isOccupied(int position) {
 		if (board.findSquare(position).getPlayer() != null){
-			//TODO: regading a forum post in OLAT this is not necessary, therefore it needs to be tested before final implementation
-		return false;
+		return true;
 		} else {
 			return false;
 		}
@@ -64,7 +63,7 @@ public class Square implements ISquare {
 			return board.findSquare(newposition);
 		} else {
 			if (isOccupied(currentposition + roll)) {
-				System.out.println("Player: " + player.getName() + ", current:"+ currentposition  + " ...you rolled: "+ roll  + "... already Occupied!!! new Position: " + board.firstSquare().getPosition());
+				System.out.println("... already Occupied, back to start!");
 				return board.firstSquare();
 			} else {
 				if (board.findSquare(currentposition + roll) instanceof Ladder){

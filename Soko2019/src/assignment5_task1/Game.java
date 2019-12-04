@@ -8,19 +8,18 @@ import java.util.LinkedList;
 public class Game {
 	private LinkedList<Player> players = new LinkedList <Player>();
 	private Board board;
-	private int numberOfSquares;
 	private Player winner;
 	
 	
 	public Game(List<String>playernames,  Board board){
 		for(String s: playernames) {
 			Player p = new Player(s);
-			numberOfSquares = board.getNumOfSquares();
 			players.add(p);
-			this.board = board;
+			
 		}
-		numberOfSquares = board.getNumOfSquares();		
+		this.board = board;
 	}
+	
 	 public void startGame() {
 		 for (Player p: players) {
 			 board.firstSquare().enter(p);

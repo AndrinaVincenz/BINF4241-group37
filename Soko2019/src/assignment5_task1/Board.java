@@ -44,6 +44,9 @@ public class Board {
 			}
 			ladders.add(new Ladder(startPosition, endPosition, this));
 		}
+		if (ladders.get(0).getPosition() == 1) {
+			ladders.remove(0);
+		}
 	return ladders;
 	}
 	
@@ -59,6 +62,7 @@ public class Board {
 			}
 			snakes.add(new Snake(startPosition, endPosition, this));
 		}
+
 		return snakes;
 	}
 	
@@ -85,6 +89,9 @@ public class Board {
 		 if (result.get(result.size()-1).getPosition() == result.get(result.size()-2).getPosition()){
 			 result.remove(result.size()-1);
 		 }
+		if (result.get(0).getPosition() == 1) {
+			result.remove(0);
+		}
 		return result;
 	} 
 
@@ -98,7 +105,7 @@ public class Board {
 		result.add(new FirstSquare(1,this));
 		i++;
 		while (i < numOfSquares-1){
-			if (mergedList.size() != 0 && mergedList.get(0).getPosition() == i){
+			if (mergedList.size() != 0 && mergedList.get(0).getPosition() == i+1){
 				result.add(mergedList.get(0));
 				mergedList.remove(0);
 			} else {
@@ -145,13 +152,14 @@ public class Board {
 				currentPlayer = ("<" + this.findSquare(i).getPlayer().getName() + ">");
 			}
 			if (this.findSquare(i) instanceof Ladder){
-				System.out.print("[" + ((Ladder)this.findSquare(i)).getPosition() + "->" + ((Ladder)this.findSquare(i)).endPosition  + "]");
+				System.out.print("[" + currentPlayer + ((Ladder)this.findSquare(i)).getPosition() + "->" + ((Ladder)this.findSquare(i)).endPosition  + "]");
 			} else if (this.findSquare(i) instanceof Snake){
-				System.out.print("[" + ((Snake)this.findSquare(i)).getPosition() + "->" + ((Snake)this.findSquare(i)).endPosition  + "]");
+				System.out.print("[" + currentPlayer + ((Snake)this.findSquare(i)).getPosition() + "->" + ((Snake)this.findSquare(i)).endPosition  + "]");
 			} else {
 				System.out.print("[" + this.findSquare(i).getPosition() + currentPlayer + "]");
 			}
 		}
+		System.out.print("[" + (this.getNumOfSquares()) + "]");
 	}
 	
 	public Square findSquare(int position) {

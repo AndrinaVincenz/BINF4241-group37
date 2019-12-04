@@ -28,13 +28,12 @@ public class BoardTest {
 		
 		assertTrue("Number of Ladders to high", testLadderList.size() < board.getNumOfSquares());
 		assertTrue("Number of Ladders to small", testLadderList.size() >= 0);
-		assertTrue("Number of Ladders not approximately " + percentage + "%", testLadderList.size() == countLadder);
+		assertTrue("Number of Ladders not approximately " + percentage + "% Size:" + testLadderList.size()  + " Should be:"+ countLadder, testLadderList.size() == countLadder);
 		for (Square temp : testLadderList){
 			assertTrue("Not a instance of ladder!", temp instanceof Ladder);
 			assertTrue("Ladder doesn't go up!", ((Ladder)temp).getPosition() < ((Ladder)temp).getEndPosition());
-			assertFalse("Ladder can't be on First Square!", ((Ladder)temp).isFirstSquare());
-			assertFalse("Ladder can't be on Last Square!", ((Ladder)temp).isLastSquare());
 		}
+
 	}
 	
 	@Test public void testCreateSnakeList(){
@@ -52,8 +51,6 @@ public class BoardTest {
 		for (Square temp : testSnakeList){
 			assertTrue("Not a instance of snake!", temp instanceof Snake);
 			assertTrue("Snake doesn't go down!", ((Snake)temp).getPosition() > ((Snake)temp).getEndPosition());
-			assertFalse("Snake can't be on First Square!", ((Snake)temp).isFirstSquare());
-			assertFalse("Snake can't be on Last Square!", ((Snake)temp).isLastSquare());
 		}
 		
 	}
@@ -68,6 +65,7 @@ public class BoardTest {
 		
 		assertTrue("First Square has to be must be of type 'FirstSquare'", board.getSquares().get(0).isFirstSquare());
 		assertTrue("Last Square has to be must be of type 'LastSquare'", board.getSquares().get(board.getNumOfSquares()-1).isLastSquare());
+		board.printBoard();
 		//to be continued...
 	}
 	
@@ -84,7 +82,8 @@ public class BoardTest {
 		ArrayList<Square> testList = board.mergeLaddersAndSnakes(testSnakeList, testLadderList);
 		
 		assertTrue("Must be smaller than NumberOfSquares", testList.size() < board.getNumOfSquares());
-		//to be continued...
+		assertTrue("Ladders and Snakes can't be on first Square!", testList.get(0).getPosition() != 1); //found bug because of this!
+		assertTrue("Ladders and Snakes can't be on last Square!", testList.get(testList.size()-1).getPosition() != board.getNumOfSquares()); 
 	}
 	
 	@Test public void testCreateRandomPosition(){
