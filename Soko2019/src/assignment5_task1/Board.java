@@ -159,7 +159,11 @@ public class Board {
 				System.out.print("[" + this.findSquare(i).getPosition() + currentPlayer + "]");
 			}
 		}
-		System.out.print("[" + (this.getNumOfSquares()) + "]");
+		String currentPlayer = "";
+		if (this.findSquare(numOfSquares).getPlayer() != null){
+			currentPlayer = ("<" + this.findSquare(numOfSquares).getPlayer().getName() + ">");
+		}
+		System.out.print("[" + currentPlayer + (this.getNumOfSquares()) + "]");
 	}
 	
 	public Square findSquare(int position) {
