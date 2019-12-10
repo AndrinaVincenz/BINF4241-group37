@@ -13,10 +13,6 @@ public class Square implements ISquare {
 		position = p;
 		board = b;
 	}
-	
-	Player getPlayer(){
-		return player;
-	}
 
 	
 
@@ -63,7 +59,7 @@ public class Square implements ISquare {
 		int currentposition = position;
 		if (currentposition + roll > lastsquare) {
 			int newposition = lastsquare - (currentposition + roll - lastsquare);
-			System.out.print("...too high! -> " + newposition + " ");
+			System.out.print("...too high! " + newposition + " ");
 			//maybe fixed, just return new position if its no ladder or snake???
 			return checkForSpecialSquares(newposition);
 		} else {
@@ -90,7 +86,11 @@ public class Square implements ISquare {
 		} 
 	}
 	
-	private Square findrelativeSquare(int move) {
+	public Player getPlayer(){
+		return player;
+	}
+	
+	public Square findrelativeSquare(int move) {
 		return board.findSquare(position + move);
 	}
 

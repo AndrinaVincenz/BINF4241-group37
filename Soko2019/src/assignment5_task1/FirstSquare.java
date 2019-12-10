@@ -29,4 +29,10 @@ public class FirstSquare extends Square {
 		return true;
 	}
 	
+	@Override
+	public Player getPlayer(){
+		System.out.println("This function is not supported for the first Square!");
+		return null;
+	}
+	
 }

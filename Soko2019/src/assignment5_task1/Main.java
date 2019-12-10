@@ -21,7 +21,7 @@ public class Main {
 			numOfPlayers = in.nextInt();
 		}
 		System.out.println(numOfPlayers + " Players are playing.");
-		List<String> playernames= new ArrayList<>();
+		ArrayList<String> playernames= new ArrayList<>();
 		// collect the names for the players
 		for (int i = 0; i < numOfPlayers; i++) {
 			System.out.println("What's the name of Player " + (i+1));
