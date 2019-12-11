@@ -23,7 +23,7 @@ public class BoardTest {
 		Board board = new Board(20);		
 
 		ArrayList<Square> testLadderList = board.createLadderList(0.2);
-		
+
 		//tests the List in general
 		assertTrue("Number of Ladders to high", testLadderList.size() < board.getNumOfSquares());
 		assertTrue("Number of Ladders to small", testLadderList.size() >= 0);
@@ -34,6 +34,12 @@ public class BoardTest {
 			assertTrue("Not a instance of ladder!", temp instanceof Ladder);
 			assertTrue("Ladder doesn't go up!", ((Ladder)temp).getPosition() < ((Ladder)temp).getEndPosition());
 		}
+		
+		//Test size in case input parameter more than 0.5 or less then 0
+		ArrayList<Square> testLadderList2 = board.createLadderList(1000);		
+		ArrayList<Square> testLadderList3 = board.createLadderList(-10);
+		assertTrue("Size  of List should be 50 %", testLadderList2.size() == 10);
+		assertTrue("Size  of List should be 0 %", testLadderList3.size() == 0);
 
 	}
 	
@@ -53,6 +59,12 @@ public class BoardTest {
 			assertTrue("Not a instance of snake!", temp instanceof Snake);
 			assertTrue("Snake doesn't go down!", ((Snake)temp).getPosition() > ((Snake)temp).getEndPosition());
 		}
+		
+		//Test size in case input parameter more than 0.5 or less then 0
+		ArrayList<Square> testSnakeList2 = board.createSnakeList(1000);		
+		ArrayList<Square> testSnakeList3 = board.createSnakeList(-10);
+		assertTrue("Size  of List should be 50 %", testSnakeList2.size() == 10);
+		assertTrue("Size  of List should be 0 %", testSnakeList3.size() == 0);
 		
 	}
 	

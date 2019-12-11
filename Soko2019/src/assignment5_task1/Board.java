@@ -34,9 +34,15 @@ public class Board {
 	
 	/**
 	 * @param percentage is how many ladders should be approximately created according to the size of the board
+	 * the percentage has to be between 0 to 50%, if below it would be taken 0, if higher it takes 50%.
 	 * @return ArrayList<Square> with randomly generated Snakes
 	 */
 	public ArrayList<Square> createLadderList(double percentage){
+		if (percentage > 0.5) {
+			percentage = 0.5;
+		} else if (percentage < 0){
+			percentage = 0;
+		}
 		ArrayList<Square> ladders = new ArrayList<>();
 		int numberOfLadders = (int)(numOfSquares*percentage);
 		while(ladders.size() < numberOfLadders){
@@ -48,17 +54,20 @@ public class Board {
 			}
 			ladders.add(new Ladder(startPosition, endPosition, this));
 		}
-		if (ladders.get(0).getPosition() == 1) {
-			ladders.remove(0);
-		}
 	return ladders;
 	}
 	
 	/**
 	 * @param percentage is how many snakes should be approximately created according to the size of the board
+	 * the percentage has to be between 0 to 50%, if below it would be taken 0, if higher it takes 50%.
 	 * @return ArrayList<Square> with randomly generated Snakes
 	 */
 	public ArrayList<Square> createSnakeList(double percentage){
+		if (percentage > 0.5) {
+			percentage = 0.5;
+		} else if (percentage < 0){
+			percentage = 0;
+		}
 		ArrayList<Square> snakes = new ArrayList<>();
 		int numberOfSnakes = (int)(numOfSquares*percentage);
 		while(snakes.size() < numberOfSnakes){
