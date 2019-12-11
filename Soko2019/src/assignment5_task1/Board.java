@@ -10,7 +10,7 @@ public class Board {
 	
 	public Board(int numOfSquares){
 		this.numOfSquares = numOfSquares;
-		this.squaresList = createBoard();
+		this.squaresList = createBoard(0.2, 0.2);
 	}
 	
 	public int getNumOfSquares(){
@@ -113,9 +113,9 @@ public class Board {
 		return result;
 	} 
 
-	public ArrayList<Square> createBoard(){
-		ArrayList<Square> snakes = createSnakeList(0.2);
-		ArrayList<Square> ladders = createLadderList(0.2);
+	public ArrayList<Square> createBoard(double percentageLadders, double percentageSnakes){
+		ArrayList<Square> snakes = createSnakeList(percentageSnakes);
+		ArrayList<Square> ladders = createLadderList(percentageLadders);
 		ArrayList<Square> mergedList = mergeLaddersAndSnakes(snakes, ladders);
 		ArrayList<Square> result = new ArrayList();
 		
@@ -132,25 +132,6 @@ public class Board {
 			i++;
 			}
 				result.add(new LastSquare(numOfSquares, this));
-				
-				/*
-				for (int z = 0; z < result.size(); z++){
-					if (result.get(z) instanceof FirstSquare){
-						System.out.println("Position " + result.get(z).getPosition() + " is the First Square.");
-						} 
-					if (result.get(z) instanceof Ladder){
-					System.out.println("Position " + result.get(z).getPosition() + " is a LADDER :D goes up to Position " + (((Ladder) result.get(z)).getEndPosition()));
-					} 
-					if (result.get(z) instanceof Square && !(result.get(z) instanceof Ladder) && !(result.get(z) instanceof Snake) && !(result.get(z) instanceof FirstSquare) && !(result.get(z) instanceof LastSquare)){
-						System.out.println("Position " + result.get(z).getPosition() + " is a normal Square.");
-					} 
-					if (result.get(z) instanceof Snake){
-						System.out.println("Position " + result.get(z).getPosition() + " is a SNAKE!!! goes down to Position " + (((Snake) result.get(z)).getEndPosition()));
-					} 
-					if (result.get(z) instanceof LastSquare){
-						System.out.println("Position " + result.get(z).getPosition() + " is the Last Square.");
-						} 
-				}*/
 				return result;
 		}
 	
