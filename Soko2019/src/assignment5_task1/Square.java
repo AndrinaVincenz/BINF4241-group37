@@ -39,8 +39,8 @@ public class Square implements ISquare {
 	}
 
 
-	public boolean isOccupied(int position) {
-		if (board.findSquare(position).getPlayer() != null){
+	public boolean isOccupied() {
+		if (board.findSquare(this.position).getPlayer() != null){
 		return true;
 		} else {
 			return false;
@@ -55,17 +55,17 @@ public class Square implements ISquare {
 
 	public Square moveAndLand(int roll, Player player) {
 		// it is checked if player is over winning field, if yes how far back he has to go
-		int lastsquare = board.lastSquare().getPosition();
+		int lastsquare = board.getLastSquare().getPosition();
 		int currentposition = position;
 		if (currentposition + roll > lastsquare) {
 			int newposition = lastsquare - (currentposition + roll - lastsquare);
-			System.out.print("...too high! " + newposition + " ");
+			System.out.print("...too high!  " + newposition + " ");
 			//maybe fixed, just return new position if its no ladder or snake???
 			return checkForSpecialSquares(newposition);
-		} else {
-			if (isOccupied(currentposition + roll)) {
+		} else {			
+			if (board.findSquare(currentposition + roll).isOccupied() && (!(board.findSquare(currentposition + roll) instanceof Ladder)) && (!(board.findSquare(currentposition + roll) instanceof Snake))) {
 				System.out.print("... already Occupied, back to start!");
-				return board.firstSquare();
+				return board.getFirstSquare();
 			} else {
 				return checkForSpecialSquares(currentposition + roll);
 			}
@@ -76,20 +76,27 @@ public class Square implements ISquare {
 		if (board.findSquare(neuePosition) instanceof Ladder){
 			Ladder tempLadder;
 			tempLadder = (Ladder) board.findSquare(neuePosition);
+			if (board.findSquare(tempLadder.getEndPosition()).isOccupied()){
+				System.out.print("... already Occupied, back to start!");
+				return board.getFirstSquare();
+			}
 			return board.findSquare(tempLadder.getEndPosition());
 		} else if (board.findSquare(neuePosition) instanceof Snake) {
 			Snake tempSnake;
 			tempSnake = (Snake) board.findSquare(neuePosition);
+			if (board.findSquare(tempSnake.getEndPosition()).isOccupied()){
+				System.out.print("... already Occupied, back to start!");
+				return board.getFirstSquare();
+			}
 			return board.findSquare(tempSnake.getEndPosition());
 		} else {
 			return board.findSquare(neuePosition);
 		} 
 	}
 	
-	public Player getPlayer(){
+	Player getPlayer(){
 		return player;
 	}
-	
 	public Square findrelativeSquare(int move) {
 		return board.findSquare(position + move);
 	}

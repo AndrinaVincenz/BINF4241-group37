@@ -28,8 +28,8 @@ public class Game {
 		
 	}
 	
-	public boolean notOver() {
-		if (board.lastSquare().getPlayer() != null){
+	public boolean isOver() {
+		if (board.getLastSquare().getPlayer() != null){
 			return true;
 		} else { 
 			return false;
@@ -51,7 +51,7 @@ public class Game {
 		Die die = new Die();
 		startGame();
 		
-		while (notOver() == false) {
+		while (isOver() == false) {
 			int roll = die.roll();
 			movePlayer(roll);
 		
@@ -61,7 +61,7 @@ public class Game {
 	
 	 public void startGame() {
 		 for (Player p: players) {
-			 board.firstSquare().enter(p);
+			 board.getFirstSquare().enter(p);
 		 } 
 		 this.currentPlayer = players.get(0);
 		 this.winner = null;

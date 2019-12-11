@@ -32,9 +32,13 @@ public class Board {
 		return position;
 	}
 	
-	public ArrayList<Square> createLadderList(){
+	/**
+	 * @param percentage is how many ladders should be approximately created according to the size of the board
+	 * @return ArrayList<Square> with randomly generated Snakes
+	 */
+	public ArrayList<Square> createLadderList(double percentage){
 		ArrayList<Square> ladders = new ArrayList<>();
-		int numberOfLadders = (int)(numOfSquares*0.20);
+		int numberOfLadders = (int)(numOfSquares*percentage);
 		while(ladders.size() < numberOfLadders){
 			int startPosition = createRandomPosition();
 			int endPosition = createRandomPosition();
@@ -50,9 +54,13 @@ public class Board {
 	return ladders;
 	}
 	
-	public ArrayList<Square> createSnakeList(){
+	/**
+	 * @param percentage is how many snakes should be approximately created according to the size of the board
+	 * @return ArrayList<Square> with randomly generated Snakes
+	 */
+	public ArrayList<Square> createSnakeList(double percentage){
 		ArrayList<Square> snakes = new ArrayList<>();
-		int numberOfSnakes = (int)(numOfSquares*0.20);
+		int numberOfSnakes = (int)(numOfSquares*percentage);
 		while(snakes.size() < numberOfSnakes){
 			int startPosition = createRandomPosition();
 			int endPosition = createRandomPosition();
@@ -60,9 +68,10 @@ public class Board {
 				startPosition = createRandomPosition();
 				endPosition = createRandomPosition();
 			}
-			snakes.add(new Snake(startPosition, endPosition, this));
+			if (endPosition > 1){
+				snakes.add(new Snake(startPosition, endPosition, this));
+			}
 		}
-
 		return snakes;
 	}
 	
@@ -96,8 +105,8 @@ public class Board {
 	} 
 
 	public ArrayList<Square> createBoard(){
-		ArrayList<Square> snakes = createSnakeList();
-		ArrayList<Square> ladders = createLadderList();
+		ArrayList<Square> snakes = createSnakeList(0.2);
+		ArrayList<Square> ladders = createLadderList(0.2);
 		ArrayList<Square> mergedList = mergeLaddersAndSnakes(snakes, ladders);
 		ArrayList<Square> result = new ArrayList();
 		
@@ -171,11 +180,11 @@ public class Board {
 	
 	}
 	
-	public Square firstSquare() {
+	public Square getFirstSquare() {
 		return squaresList.get(0);
 	}
 	
-	public Square lastSquare() {
+	public Square getLastSquare() {
 		return squaresList.get(squaresList.size()-1);
 	}
 	

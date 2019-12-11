@@ -15,20 +15,21 @@ public class BoardTest {
 	
 	
 	/**
+	 * It is tested whether @Param testLadderList creates
 	 * 
 	 */
 	@Test public void testCreateLadderList(){
-		Board board = new Board(20);
-		int numOfSquare = board.getNumOfSquares();
-		double percentage = 0.2; //according defined in the method
-		
-		int countLadder = (int) (numOfSquare * percentage); 
+		//Test setup
+		Board board = new Board(20);		
 
-		ArrayList<Square> testLadderList = board.createLadderList();
+		ArrayList<Square> testLadderList = board.createLadderList(0.2);
 		
+		//tests the List in general
 		assertTrue("Number of Ladders to high", testLadderList.size() < board.getNumOfSquares());
 		assertTrue("Number of Ladders to small", testLadderList.size() >= 0);
-		assertTrue("Number of Ladders not approximately " + percentage + "% Size:" + testLadderList.size()  + " Should be:"+ countLadder, testLadderList.size() == countLadder);
+		assertTrue("Number of Ladders not approximately 20% Size:" + testLadderList.size()  + " Should be:"+ board.getNumOfSquares(), testLadderList.size() == (int)(board.getNumOfSquares()*0.2));
+		
+		//Tests for each ladder inside the list
 		for (Square temp : testLadderList){
 			assertTrue("Not a instance of ladder!", temp instanceof Ladder);
 			assertTrue("Ladder doesn't go up!", ((Ladder)temp).getPosition() < ((Ladder)temp).getEndPosition());
@@ -43,7 +44,7 @@ public class BoardTest {
 		
 		int countSnakes = (int) (numOfSquare * percentage); 
 		
-		ArrayList<Square> testSnakeList = board.createSnakeList();
+		ArrayList<Square> testSnakeList = board.createSnakeList(0.2);
 		
 		assertTrue("Number of Snakes to high", testSnakeList.size() < board.getNumOfSquares());
 		assertTrue("Number of Snakes to small", testSnakeList.size() >= 0);
@@ -76,8 +77,8 @@ public class BoardTest {
 	@Test public void testMergeLaddersAndSnakes(){
 		Board board = new Board(20);
 
-		ArrayList<Square> testSnakeList = board.createSnakeList();
-		ArrayList<Square> testLadderList = board.createLadderList();
+		ArrayList<Square> testSnakeList = board.createSnakeList(0.2);
+		ArrayList<Square> testLadderList = board.createLadderList(0.2);
 
 		ArrayList<Square> testList = board.mergeLaddersAndSnakes(testSnakeList, testLadderList);
 		

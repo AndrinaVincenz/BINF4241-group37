@@ -17,7 +17,7 @@ public class FirstSquare extends Square {
 	@Override
 	public void enter(Player player){
 		p.add(player);
-		player.setSquare(board.firstSquare());
+		player.setSquare(board.getFirstSquare());
 	}
 
 	@Override

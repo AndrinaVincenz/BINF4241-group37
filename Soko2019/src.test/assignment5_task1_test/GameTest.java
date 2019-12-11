@@ -4,14 +4,18 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import org.junit.Test;
 
 import assignment5_task1.Board;
 import assignment5_task1.FirstSquare;
 import assignment5_task1.Game;
 import assignment5_task1.Ladder;
+import assignment5_task1.Player;
 
+/**
+ * @author Raphael Koch
+ *
+ */
 public class GameTest {
 	
 	/**
@@ -52,10 +56,31 @@ public class GameTest {
 		if (!(board.getSquares().get(1) instanceof Ladder)){
 		assertTrue("After movement of 1 the Player should be on Square on 2 (in case no ladder!)", 2 == game.getCurrentPlayer().position());
 		} else {
-			assertTrue("Player is on field that leaded from square 2", ((Ladder)(board.getSquares().get(1))).getEndPosition() == game.getCurrentPlayer().position());
+			assertTrue("Player is on field that leaded from the ladder of square 2", ((Ladder)(board.getSquares().get(1))).getEndPosition() == game.getCurrentPlayer().position());
 		}
-
 	}
+	
+	
+	/**
+	 * Test whether the isOver function returns true if the Last Square is occupied by a Player
+	 */
+	@Test public void testIsOver(){
+		//Test Setup
+		Board board = new Board(20);
+		ArrayList<String> playernames = new ArrayList<String>(Arrays.asList("Lisa", "Marco", "Jessi"));
+		Game game = new Game(playernames, board);
+		game.startGame();
+		
+		//Prerequisites
+		assertFalse("LastSquare should have no player Inside!", board.getLastSquare().isOccupied());
+		assertFalse("Game should not be finished!", game.isOver());
+		
+		//Do Testing
+		board.getLastSquare().enter(new Player("Thomas"));
+		assertTrue("In LastSquare should be a Player!", board.getLastSquare().isOccupied());
+		assertTrue("Game should be finished!", game.isOver());
+	}
+	
 	
 	
 }

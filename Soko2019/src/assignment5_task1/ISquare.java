@@ -9,7 +9,7 @@ public interface ISquare {
 	
 	void leave(Player player);
 	
-	boolean isOccupied(int position);
+	boolean isOccupied();
 	
 	int getPosition();
 	
