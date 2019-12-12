@@ -19,7 +19,7 @@ public class SquareTest {
 	/**
 	 * Tests if the occupation works correctly in case you land on a occupied field by a ladder or snake
 	 */
-	@Test public void testMoveAndLand_Occupied(){
+	@Test public void testMoveAndLandOccupied(){
 		System.out.println("testCheckForSpecialSquares Occupied:");
 		//Test Setup
 		Board board = new Board(20);
