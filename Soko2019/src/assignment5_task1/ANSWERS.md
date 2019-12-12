@@ -22,4 +22,12 @@ The testIsOver() function helped us to find a bug in the printing of the board. 
 
 4. PlayerTest.java
 
-To thest the function moveForward we had to create a new "getter", the "getPlayersLinkedList()" in the Game class, otherwhise the testing wouldn't have been possible.
+To test the function moveForward we had to create a new "getter", the "getPlayersLinkedList()" in the Game class, otherwhise the testing wouldn't have been possible.
+
+5. SquareTest.java
+
+After refactoring the output at the beginning we realised, that isOccupied doesn't work as it should: 
+In case you hit a ladder or snake, and that ladder or snakes lead you to a field that is occupied, it didn't work. Therefore we had to create a new function checkForSpecialSquares() in the Square class. There we checked also after coming from a ladder or snake, if the field is occupied. We tested these functions with testMoveAndLandOccupied() as well as  testCheckForSpecialSquaresSnake() and testCheckForSpecialSquaresLadder().
+
+
+
