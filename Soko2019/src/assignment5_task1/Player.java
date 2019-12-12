@@ -13,11 +13,6 @@ public class Player {
 	
 	public void moveForward(int moves, Board myBoard) {
 		square.leave(this);
-		/*for (int y = 0; y < square.board.getNumOfSquares(); y++){
-			if (square.board.getSquares().get(0).getPlayer().equals(this)){
-			square.board.getSquares().get(y).leave(this);
-			}
-		}*/
 		System.out.print(this.name + " rolls :" + moves + " ");
 		square = square.moveAndLand(moves, this);
 		square.enter(this);

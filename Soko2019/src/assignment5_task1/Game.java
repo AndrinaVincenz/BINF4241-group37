@@ -16,8 +16,8 @@ public class Game {
 		for(String s: playernames) {
 			Player p = new Player(s);
 			players.add(p);
-			
 		}
+		currentPlayer = players.get(0);
 		this.board = board;
 	}
 	
@@ -76,6 +76,14 @@ public class Game {
 	 */
 	public Player getCurrentPlayer(){
 		return this.currentPlayer;
+	}
+	
+	/**
+	 * @return the getPlayers
+	 * --> Used for test purposes only
+	 */
+	public LinkedList<Player> getPlayersLinkedList(){
+		return this.players;
 	}
 	
 }

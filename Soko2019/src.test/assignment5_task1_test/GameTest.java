@@ -12,10 +12,7 @@ import assignment5_task1.Game;
 import assignment5_task1.Ladder;
 import assignment5_task1.Player;
 
-/**
- * @author Raphael Koch
- *
- */
+
 public class GameTest {
 	
 	/**

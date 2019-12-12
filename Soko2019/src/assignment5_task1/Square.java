@@ -95,7 +95,7 @@ public class Square implements ISquare {
 	}
 	
 	Player getPlayer(){
-		return player;
+		return this.player;
 	}
 	public Square findrelativeSquare(int move) {
 		return board.findSquare(position + move);
