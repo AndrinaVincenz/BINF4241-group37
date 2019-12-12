@@ -15,3 +15,11 @@ Additionally the percentage has to be between 0 to 50%, if below it would be tak
 
 Found bug at mergeLaddersAndSnakes:
 We removed a additional if-statement a possibly existing Ladder on field 1. It makes no sense to have a ladder on field 1.
+
+3. GameTest.java
+
+The testIsOver() function helped us to find a bug in the printing of the board. Firstly, we forgot to print the Players name if he was on the last "winning" filed.
+
+4. PlayerTest.java
+
+To thest the function moveForward we had to create a new "getter", the "getPlayersLinkedList()" in the Game class, otherwhise the testing wouldn't have been possible.
