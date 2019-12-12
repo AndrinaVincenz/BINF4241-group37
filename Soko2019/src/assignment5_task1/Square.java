@@ -72,7 +72,7 @@ public class Square implements ISquare {
 		}
 	}
 	
-	private Square checkForSpecialSquares(int neuePosition){
+	public Square checkForSpecialSquares(int neuePosition){
 		if (board.findSquare(neuePosition) instanceof Ladder){
 			Ladder tempLadder;
 			tempLadder = (Ladder) board.findSquare(neuePosition);
@@ -97,6 +97,7 @@ public class Square implements ISquare {
 	Player getPlayer(){
 		return this.player;
 	}
+	
 	public Square findrelativeSquare(int move) {
 		return board.findSquare(position + move);
 	}
